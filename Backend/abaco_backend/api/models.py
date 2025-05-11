@@ -30,7 +30,7 @@ class Equipamento(models.Model):
     
 class Manutencoes_Computadores(models.Model):
     id = models.AutoField(primary_key=True)
-    Computador = models.ForeignKey(Computador, on_delete=models.CASCADE)
+    Computador = models.ForeignKey(Computador, related_name='manutencoes',on_delete=models.CASCADE)
     data_manutencao = models.DateField()
     descricao = models.TextField()
 
@@ -39,7 +39,7 @@ class Manutencoes_Computadores(models.Model):
     
 class Manutencoes_Equipamentos(models.Model):
     id = models.AutoField(primary_key=True)
-    Equipamento = models.ForeignKey(Equipamento, on_delete=models.CASCADE)
+    Equipamento = models.ForeignKey(Equipamento, related_name='manutencoes' ,on_delete=models.CASCADE)
     data_manutencao = models.DateField()
     descricao = models.TextField()
 

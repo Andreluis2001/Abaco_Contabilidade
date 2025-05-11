@@ -7,14 +7,14 @@ class ComputadorSerializer(serializers.ModelSerializer):
         fields = ["numero_de_patrimonio", "modelo_processador", 
                   "modelo_placa_mae", "modelo_placa_video", "memoria_ram", 
                   "armazenamento", "modelo_fonte", "modelo_gabinete", "modelo_hd", 
-                  "localizacao", "data_aquisicao", "data_ultima_atualizacao", ]
+                  "localizacao", "data_aquisicao", "data_ultima_atualizacao", "manutencoes"]
         
         
 class EquipamentoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Equipamento
         fields = ["numero_de_patrimonio", "modelo", "localizacao", 
-                  "data_aquisicao", "tipo", ]
+                  "data_aquisicao", "tipo", "manutencoes"]
 
 class ManutencaoComputadorSerializer(serializers.ModelSerializer):
     class Meta:
