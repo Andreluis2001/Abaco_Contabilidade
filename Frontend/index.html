@@ -1,62 +1,73 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <script src="https://kit.fontawesome.com/b3d7b01e46.js" crossorigin="anonymous"></script>
-    <title>Login</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://kit.fontawesome.com/b3d7b01e46.js" crossorigin="anonymous"></script>
+  <title>Login</title>
 </head>
 <body>
-    <div class="container">
-        <div class="content first-content">
-            <div class="first-column">
-                <h2 class="title title-primary">Bem-vindo de volta! </h2>
-                <p class="description description-primary">Acesse sua conta agora mesmo.</p>
-                <button class="btn btn-primary">Entrar</button>
-            </div>
-            <div class="second-column">
-                <h2 class="title title-second">Crie sua conta</h2>
-                <p class="description description-second ">Preencha seus dados</p>
-                <form action="#" class="form">
 
-                    <label class="label-input" for="">
-                        <i class="fa-regular fa-user icon-modify"></i>
-                        <input type="text" name="#" id="#" placeholder="Nome">
-                    </label>
+  <div class="login-container">
+    <div class="login-content login-first-content">
+      <div class="login-first-column">
+        <img src="logo4.png" class="login-side-image" alt="Logo Ábaco">
+        <h2 class="login-title login-title-primary">Bem-vindo de volta!</h2>
+        <p class="login-description login-description-primary">Acesse sua conta.</p>
+      </div>
+      <div class="login-second-column">
+        <h2 class="login-title login-title-second">Faça seu login!</h2>
+        <p class="login-description login-description-second">Preencha seus dados</p>
+        <form action="#" class="login-form">
+          <label class="login-label-input">
+            <i class="fa-regular fa-envelope login-icon-modify"></i>
+            <input type="email" placeholder="E-mail">
+          </label>
+          <label class="login-label-input">
+            <i class="fa-solid fa-lock login-icon-modify"></i>
+            <input type="password" placeholder="Senha">
+          </label>
+          <button class="login-btn login-btn-second"> <a href="cadastroequipamento.html"> Entrar </a></button>
+        </form>
+      </div>
+    </div>
 
-                    <label class="label-input" for="">
-                        <i class="fa-regular fa-envelope icon-modify"></i>
-                        <input type="email" name="#" id="#" placeholder="E-mail">
-                    </label>
+    <div class="login-content login-second-content">
+      <div class="login-first-column">
+        <h2 class="login-title">Olá!</h2>
+        <p class="login-description">Insira seus dados pessoais</p>
+        <p class="login-description">e comece sua jornada conosco</p>
+        <button class="login-btn">Cadastrar</button>
+      </div>
+      <div class="login-second-column">
+        <h2 class="login-title">Faça o seu login</h2>
+        <p class="login-description">Preencha seus dados</p>
+        <form action="#" class="login-form">
+          <input type="email" placeholder="E-mail">
+          <input type="password" placeholder="Senha">
+          <a href="#">Esqueceu sua senha?</a>
+          <button class="login-btn" id="btn-login">Entrar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+    <footer>
+      <p>2025 Ábaco Contadores Associados. Todos os direitos reservados.</p>
+    </footer>
+  <div id="login-cortina"></div>
 
-                    <label class="label-input" for="">
-                        <i class="fa-solid fa-lock icon-modify"></i>
-                        <input type="password" name="#" id="#" placeholder="Senha">
-                    </label>
+  <script>
+    const botaoEntrar = document.getElementById('btn-entrar');
+    const cortina = document.getElementById('login-cortina');
 
-                    <button class="btn btn-second">Cadastrar</button>
-                </form>
-            </div><!--second collun-->
-        </div> <!--first content-->
-        <div class="content second-content">
-            <div class="first-collun">
-                <h2 class="title">Olá!</h2>
-                <p class="descripition">Insira seus dados pessoais</p>
-                <p class="description">e comece sua jornada conosco</p>
-                <button class="btn">Cadastrar</button>
-            </div>
-            <div class="second-collun">
-                <h2 class="title">Faça o seu login</h2>
-                <p class="discription">Preencha seus dados</p>
-                <form action="#" class="form">
-                    <input type="email" name="#" id="#" placeholder="E-mail">
-                    <input type="password" name="#" id="#" placeholder="Senha">
-                    <a href="#">Esqueceu sua senha</a>
-                    <button class="btn">Entrar</button>
-                </form>
-            </div><!--second collun-->
-        </div><!--second content-->
-    </div> 
+    botaoEntrar.addEventListener('click', function() {
+        cortina.classList.add('ativo');
+        setTimeout(function() {
+            window.location.href = 'index.html';
+        }, 1000);
+    });
+  </script>
+  
 </body>
 </html>
