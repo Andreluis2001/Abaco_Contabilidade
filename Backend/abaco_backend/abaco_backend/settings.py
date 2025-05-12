@@ -7,7 +7,7 @@ load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-b!mpqd4a0$&hu@tt2k+6k=+0crxn_@h^)2y5c!6!q4iu&0f9mm'
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 DEBUG = True
 
@@ -73,11 +73,13 @@ WSGI_APPLICATION = 'abaco_backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'abaco_database',
-        'USER' : 'postgres',
-        'PASSWORD' : 'abaco',
-        'HOST' : 'localhost',
-        'PORT' : '5432',
+        'NAME': os.getenv("DB_NAME"),
+        'USER' : os.getenv("DB_USER"),
+        'PASSWORD' : os.getenv("DB_PASSWORD"),
+        'HOST' : os.getenv("DB_HOST"),
+        'PORT' : os.getenv("DB_PORT"),
+        
+        
     }
 }
 
