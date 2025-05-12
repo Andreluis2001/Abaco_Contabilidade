@@ -1,15 +1,17 @@
 from pathlib import Path
+from datetime import timedelta
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-
-
 
 SECRET_KEY = 'django-insecure-b!mpqd4a0$&hu@tt2k+6k=+0crxn_@h^)2y5c!6!q4iu&0f9mm'
 
 DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
-
 
 
 INSTALLED_APPS = [
@@ -22,6 +24,20 @@ INSTALLED_APPS = [
     'api',
     'rest_framework',
 ]
+
+REST_FRAMEWORKK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+}
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=30),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -93,3 +109,5 @@ STATIC_URL = 'static/'
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL = 'api.Usuario'

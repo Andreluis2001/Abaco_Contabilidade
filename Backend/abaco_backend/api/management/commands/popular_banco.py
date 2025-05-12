@@ -1,10 +1,62 @@
 from django.core.management.base import BaseCommand
-from api.models import Computador, Equipamento, Manutencoes_Computadores, Manutencoes_Equipamentos
+from api.models import Computador, Equipamento, Manutencoes_Computadores, Manutencoes_Equipamentos, Usuario
 
 class Command(BaseCommand):
     help = 'Popular a tabela de máquinas'
 
     def handle(self, *args, **kwargs):
+
+        usuarios = [
+            Usuario(
+            username="João Silva",
+            password="senha123",
+            role="tecnico",
+            email="joaosilva@exemplo.com",
+            numero_de_telefone="123456789"
+            ),
+            Usuario(
+            username="Maria Oliveira",
+            password="senha456",
+            role="admin",
+            email="mariaoliveira@exemplo.com",
+            numero_de_telefone="987654321"
+            ),
+            Usuario(
+            username="Carlos Souza",
+            password="senha789",
+            role="tecnico",
+            email="carlossouza@exemplo.com",
+            numero_de_telefone="456123789"
+            ),
+            Usuario(
+            username="Ana Costa",
+            password="senha321",
+            role="tecnico",
+            email="anacosta@exemplo.com",
+            numero_de_telefone="789456123"
+            ),
+            Usuario(
+            username="Pedro Lima",
+            password="senha654",
+            role="tecnico",
+            email="pedrolima@exemplo.com",
+            numero_de_telefone="321789456"
+            ),
+            Usuario(
+            username="Fernanda Alves",
+            password="senha987",
+            role="tecnico",
+            email="fernandaalves@exemplo.com",
+            numero_de_telefone="654321987"
+            ),
+            Usuario(
+            username="Lucas Pereira",
+            password="senha111",
+            role="tecnico",
+            email="lucaspereira@exemplo.com",
+            numero_de_telefone="111222333"
+            )
+        ]
 
         computadores = [
             Computador(
@@ -328,6 +380,7 @@ class Command(BaseCommand):
             ),
         ]
 
+        Usuario.objects.bulk_create(usuarios)
         Computador.objects.bulk_create(computadores)
         Equipamento.objects.bulk_create(equipamentos)
         Manutencoes_Equipamentos.objects.bulk_create(manutencoes_equipamentos)

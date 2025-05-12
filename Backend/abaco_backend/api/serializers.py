@@ -1,6 +1,15 @@
 from rest_framework import serializers
-from .models import Computador, Equipamento, Manutencoes_Computadores, Manutencoes_Equipamentos
+from .models import Computador, Equipamento, Manutencoes_Computadores, Manutencoes_Equipamentos, Usuario
 
+
+class UsuarioSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Usuario
+        fields = ["username", "password", "role", "email", "numero_de_telefone"]
+        extra_kwargs = {"password": {"write_only": True}}
+
+        
 class ManutencaoComputadorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Manutencoes_Computadores

@@ -1,7 +1,12 @@
 from django.urls import path
-from .views import ComputadorDetailView, ComputadorListView, EquipamentoDetailView, EquipamentoListView, ManutencaoEquipamentoDetailView, ManutencoesComputadoresDetailView, ManutencoesComputadoresListCreateView, ManutencoesEquipamentosListCreateView
+from .views import (ComputadorDetailView, ComputadorListView, EquipamentoDetailView, 
+                    EquipamentoListView, ManutencaoEquipamentoDetailView, ManutencoesComputadoresDetailView, 
+                    ManutencoesComputadoresListCreateView, ManutencoesEquipamentosListCreateView, 
+                    UsuarioDetailView, UsuarioListView, UsuariosCreateView)
 
 urlpatterns = [
+    path('usuarios/', UsuarioListView.as_view(), name='usuario-list'),
+    path('usuarios/create', UsuariosCreateView.as_view()),    path('usuarios/<str:pk>/', UsuarioDetailView.as_view(), name='usuario-detail'),
     path('computadores/', ComputadorListView.as_view(), name='computador-list-create'),
     path('computadores/<str:pk>/', ComputadorDetailView.as_view(), name='computador-detail'),
     path('equipamentos/', EquipamentoListView.as_view(), name='equipamento-list-create'),

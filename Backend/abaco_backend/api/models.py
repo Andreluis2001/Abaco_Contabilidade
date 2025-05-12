@@ -1,4 +1,24 @@
+import uuid
 from django.db import models
+from django.contrib.auth.models import AbstractUser
+
+
+class Usuario(AbstractUser):
+    class Roles(models.TextChoices):
+        ADMIN = 'admin'
+        TECNICO = 'tecnico'
+
+    role = models.CharField(max_length=100, choices=Roles.choices, default=Roles.TECNICO)
+    numero_de_telefone = models.CharField(max_length=50, blank=True, null=True)
+
+    def save(self, *args, **kwargs):
+        if not self.pk:
+            self.set_password(self.password)
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.username
+    
 
 class Computador(models.Model):
     
