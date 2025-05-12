@@ -35,7 +35,7 @@ class Manutencoes_Computadores(models.Model):
     descricao = models.TextField()
 
     def __str__(self):
-        return f"{self.Computador} - {self.data_manutencao}"
+        return f"{self.Computador} - {self.descricao}"
     
 class Manutencoes_Equipamentos(models.Model):
     id = models.AutoField(primary_key=True)

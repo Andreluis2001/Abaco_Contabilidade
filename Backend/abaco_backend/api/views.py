@@ -2,7 +2,7 @@ from rest_framework import generics
 from .models import  Computador, Equipamento, Manutencoes_Computadores, Manutencoes_Equipamentos
 from .serializers import ComputadorSerializer, EquipamentoSerializer, ManutencaoComputadorSerializer, ManutencaoEquipamentoSerializer
 
-class ComputadorListCreateView(generics.ListCreateAPIView):
+class ComputadorListView(generics.ListCreateAPIView):
     queryset = Computador.objects.all()
     serializer_class = ComputadorSerializer
 
@@ -10,7 +10,7 @@ class ComputadorDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Computador.objects.all()
     serializer_class = ComputadorSerializer
 
-class EquipamentoListCreateView(generics.ListCreateAPIView):
+class EquipamentoListView(generics.ListCreateAPIView):
     queryset = Equipamento.objects.all()
     serializer_class = EquipamentoSerializer
 
