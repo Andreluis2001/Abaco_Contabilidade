@@ -18,7 +18,6 @@ class UsuarioDetailView(generics.RetrieveUpdateDestroyAPIView):
 class ComputadorListView(generics.ListCreateAPIView):
     queryset = Computador.objects.all()
     serializer_class = ComputadorSerializer
-    permission_classes = [IsAuthenticated]
 class ComputadorDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Computador.objects.all()
     serializer_class = ComputadorSerializer
