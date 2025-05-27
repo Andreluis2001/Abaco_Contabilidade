@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/styles/style.css">
+  <script src="https://kit.fontawesome.com/b3d7b01e46.js" crossorigin="anonymous"></script>
+  <title><%= title %></title>
+</head>
+<body>
+
+  <div class="login-container">
+    <div class="login-content login-first-content">
+      <div class="login-first-column">
+        <img src="/images/logo4.png" class="login-side-image" alt="Logo Ábaco">
+        <h2 class="login-title login-title-primary">Bem-vindo de volta!</h2>
+        <p class="login-description login-description-primary">Acesse sua conta.</p>
+      </div>
+      <div class="login-second-column">
+        <h2 class="login-title login-title-second">Faça seu login!</h2>
+        <p class="login-description login-description-second">Preencha seus dados</p>
+        <form action="#" class="login-form">
+          <label class="login-label-input">
+            <i class="fa-regular fa-envelope login-icon-modify"></i>
+            <input type="email" placeholder="E-mail">
+          </label>
+          <label class="login-label-input">
+            <i class="fa-solid fa-lock login-icon-modify"></i>
+            <input type="password" placeholder="Senha">
+          </label>
+          <button type="submit" formaction="/cad" formmethod="get" class="login-btn login-btn-second">Entrar</button>
+        </form>
+      </div>
+    </div>
+
+  </div>
+    <footer>
+      <p>2025 Ábaco Contadores Associados. Todos os direitos reservados.</p>
+    </footer>
+  <div id="login-cortina"></div>
+
+  <script src="/scripts/cortina.js"></script>
+  
+</body>
+</html>
