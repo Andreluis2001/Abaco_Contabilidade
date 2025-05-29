@@ -28,46 +28,31 @@
             <i class="fa-solid fa-lock login-icon-modify"></i>
             <input type="password" placeholder="Senha">
           </label>
-          <button class="login-btn login-btn-second"> <a href="cadastroequipamento.html"> Entrar </a></button>
-        </form>
-      </div>
-    </div>
-
-    <div class="login-content login-second-content">
-      <div class="login-first-column">
-        <h2 class="login-title">Olá!</h2>
-        <p class="login-description">Insira seus dados pessoais</p>
-        <p class="login-description">e comece sua jornada conosco</p>
-        <button class="login-btn">Cadastrar</button>
-      </div>
-      <div class="login-second-column">
-        <h2 class="login-title">Faça o seu login</h2>
-        <p class="login-description">Preencha seus dados</p>
-        <form action="#" class="login-form">
-          <input type="email" placeholder="E-mail">
-          <input type="password" placeholder="Senha">
-          <a href="#">Esqueceu sua senha?</a>
-          <button class="login-btn" id="btn-login">Entrar</button>
+          <button class="login-btn login-btn-second" id="btn-entrar">Entrar</button>
         </form>
       </div>
     </div>
   </div>
-    <footer>
-      <p>2025 Ábaco Contadores Associados. Todos os direitos reservados.</p>
-    </footer>
+
+  <footer>
+    <p>2025 Ábaco Contadores Associados. Todos os direitos reservados.</p>
+  </footer>
+
+  <!-- Cortina -->
   <div id="login-cortina"></div>
 
   <script>
     const botaoEntrar = document.getElementById('btn-entrar');
     const cortina = document.getElementById('login-cortina');
 
-    botaoEntrar.addEventListener('click', function() {
-        cortina.classList.add('ativo');
-        setTimeout(function() {
-            window.location.href = 'index.html';
-        }, 1000);
+    botaoEntrar.addEventListener('click', function(event) {
+      event.preventDefault(); // previne envio imediato do formulário
+      cortina.classList.add('ativo'); // ativa a cortina
+      setTimeout(function() {
+        window.location.href = 'home.html'; // redireciona após 1s
+      }, 1000);
     });
   </script>
-  
+
 </body>
 </html>

@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cadastro de Equipamentos</title>
-  <link rel="stylesheet" href="style.css">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Registro de Manutenção</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet" />
 </head>
 <body>
   <div class="content">
     <header class="topbar">
       <div class="topbar-left">
         <a href="home.html">
-          <img src="logo-abaco.png" alt="Logo Ábaco" class="logo-navbar">
+          <img src="logo-abaco.png" alt="Logo Ábaco" class="logo-navbar" />
         </a>
         <nav>
           <a href="listaequipamentos.html"><i class="bi bi-list"></i>Lista de Equipamentos</a>
-          <a href="usuarios"><i class="bi bi-people-fill"></i>Usuários</a>
+          <a href="usuarios.html"><i class="bi bi-people-fill"></i>Usuários</a>
           <a href="listamanutencao.html"><i class="bi bi-exclamation-triangle-fill"></i>Lista de Manutenção</a>
           <a href="registromanutencao.html"><i class="bi bi-hammer"></i>Registro de Manutenção</a>
           <a class="active" href="cadastroequipamento.html"><i class="bi bi-pencil-square"></i>Cadastro de Equipamentos</a>
@@ -27,7 +27,7 @@
 
     <div class="container">
       <main>
-        <h1>Cadastro de Equipamentos</h1>
+        <h1>Registro de Manutenção</h1>
         <form class="form" id="equipment-form">
           <div class="form-row">
             <div>
@@ -41,59 +41,28 @@
             </div>
             <div>
               <label>Modelo*</label>
-              <input type="text" id="modelo" required>
+              <input type="text" id="modelo" required />
             </div>
             <div>
               <label>Número de Patrimônio*</label>
-              <input type="text" id="patrimonio" required>
+              <input type="text" id="patrimonio" required />
             </div>
             <div>
-              <label>Data da Aquisição*</label>
-              <input type="date" id="aquisicao" required>
+              <label>Data da Manutenção*</label>
+              <input type="date" id="data" required />
             </div>
           </div>
           <div class="form-row">
             <div>
-              <label>Data da Garantia</label>
-              <input type="date" id="garantia">
-            </div>
-            <div>
-              <label>Local*</label>
-              <input type="text" id="local" required>
-            </div>
-          </div>
-
-          <div class="form-row" id="computador-campos" style="display: none;">
-            <div>
-              <label>Processador</label>
-              <input type="text" id="processador">
-            </div>
-            <div>
-              <label>Memória RAM</label>
-              <input type="text" id="ram">
-            </div>
-            <div>
-              <label>HD</label>
-              <input type="text" id="hd">
-            </div>
-            <div>
-              <label>SSD</label>
-              <input type="text" id="ssd">
-            </div>
-            <div>
-              <label>Fonte</label>
-              <input type="text" id="fonte">
-            </div>
-            <div>
-              <label>Placa Mãe</label>
-              <input type="text" id="placa-mae">
-            </div>
-            <div>
-              <label>Placa de Vídeo</label>
-              <input type="text" id="placa-video">
+              <label>Tipo de Manutenção*</label>
+              <select id="tipo" required>
+                <option value="">Selecione</option>
+                <option value="Corretiva">Corretiva</option>
+                <option value="Preventiva">Preventiva</option>
+                <option value="Preditiva">Preditiva</option>
+              </select>
             </div>
           </div>
-
           <div class="form-row">
             <div class="full-width">
               <label>Observações</label>
@@ -114,11 +83,7 @@
   <div class="side-panel" id="side-panel">
     <div class="side-panel-content">
       <h2>Usuário: Matheus</h2>
-      <button id="disconnect-btn">
-        <i class="bi bi-person-circle"></i> 
-        <a href="index.html">Desconectar</a> 
-        <i class="bi bi-box-arrow-in-right"></i>
-      </button>
+      <button id="disconnect-btn"><i class="bi bi-person-circle"></i><a href="index.html"> Desconectar </a><i class="bi bi-box-arrow-in-right"></i></button>
     </div>
   </div>
 
@@ -138,22 +103,21 @@
     const equipamentoSelect = document.getElementById('equipamento');
     const modeloInput = document.getElementById('modelo');
     const patrimonioInput = document.getElementById('patrimonio');
+    const dataInput = document.getElementById('data');
+    const tipoSelect = document.getElementById('tipo');
     const descricaoTextarea = document.getElementById('descricao');
-    const camposComputador = document.getElementById('computador-campos');
 
     equipamentoSelect.addEventListener('change', () => {
       const valorSelecionado = equipamentoSelect.value;
       if (valorSelecionado === 'Computador') {
         modeloInput.placeholder = 'Ex: Dell Inspiron 15';
         patrimonioInput.placeholder = 'Ex: 123456';
-        camposComputador.style.display = 'flex';
       } else {
         modeloInput.placeholder = '';
         patrimonioInput.placeholder = '';
-        descricaoTextarea.placeholder = 'Informe a observação caso tenha.';
-        camposComputador.style.display = 'none';
       }
-    })
+    });
+
   </script>
 </body>
 </html>

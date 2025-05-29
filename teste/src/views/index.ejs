@@ -19,16 +19,16 @@
       <div class="login-second-column">
         <h2 class="login-title login-title-second">Faça seu login!</h2>
         <p class="login-description login-description-second">Preencha seus dados</p>
-        <form action="#" class="login-form">
+        <form action='/' method='post' class="login-form">
           <label class="login-label-input">
             <i class="fa-regular fa-envelope login-icon-modify"></i>
-            <input type="email" placeholder="E-mail">
+            <input type="email" id="email" name='email' placeholder="E-mail">
           </label>
           <label class="login-label-input">
             <i class="fa-solid fa-lock login-icon-modify"></i>
-            <input type="password" placeholder="Senha">
+            <input type="password" id="password" name='password' placeholder="Senha">
           </label>
-          <button type="submit" formaction="/cad" formmethod="get" class="login-btn login-btn-second">Entrar</button>
+          <button type="submit" class="login-btn login-btn-second">Entrar</button>
         </form>
       </div>
     </div>

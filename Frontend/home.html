@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Home - Ábaco</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
+</head>
+<body>
+  <div class="content">
+    <header class="topbar">
+      <div class="topbar-left">
+          <img src="logo-abaco.png" alt="Logo Ábaco" class="logo-navbar" />
+        </a>
+      </div>
+      <div class="user" id="user-btn"><i class="bi bi-person-circle"></i> Matheus</div>
+    </header>
+
+    <div class="container home-container">
+      <main>
+        <h1>Bem-vindo ao Sistema Ábaco</h1>
+        <p>Gerencie seus equipamentos, usuários e manutenções de forma simples e eficiente.</p>
+
+        <section class="cards-home">
+          <div class="card-home">
+            <i class="bi bi-laptop" style="font-size: 2.5rem; color:#1e88e5;"></i>
+            <h2>Equipamentos</h2>
+            <p>Veja a lista completa de equipamentos cadastrados e seus detalhes.</p>
+            <a href="listaequipamentos.html" class="btn">Ir para Equipamentos</a>
+          </div>
+
+          <div class="card-home">
+            <i class="bi bi-people-fill" style="font-size: 2.5rem; color:#43a047;"></i>
+            <h2>Usuários</h2>
+            <p>Gerencie os usuários que têm acesso ao sistema.</p>
+            <a href="usuarios.html" class="btn">Ir para Usuários</a>
+          </div>
+
+          <div class="card-home">
+            <i class="bi bi-tools" style="font-size: 2.5rem; color:#f4511e;"></i>
+            <h2>Manutenção</h2>
+            <p>Controle os registros e status das manutenções dos equipamentos.</p>
+            <a href="listamanutencao.html" class="btn">Ir para Manutenção</a>
+          </div>
+
+          <div class="card-home">
+            <i class="bi bi-hammer" style="font-size: 2.5rem; color:#fb8c00;"></i>
+            <h2>Registro de Manutenção</h2>
+            <p>Faça o registro de novas manutenções nos equipamentos.</p>
+            <a href="registromanutencao.html" class="btn">Registrar Manutenção</a>
+          </div>
+
+          <div class="card-home">
+            <i class="bi bi-pencil-square" style="font-size: 2.5rem; color:#3949ab;"></i>
+            <h2>Cadastro de Equipamentos</h2>
+            <p>Cadastre novos equipamentos no sistema.</p>
+            <a href="cadastroequipamento.html" class="btn">Cadastrar Equipamento</a>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <footer>
+      <p>2025 Ábaco Contadores Associados. Todos os direitos reservados.</p>
+    </footer>
+  </div>
+
+  <div class="side-panel" id="side-panel">
+    <div class="side-panel-content">
+      <h2>Usuário: Matheus</h2>
+      <button id="disconnect-btn">
+        <i class="bi bi-person-circle"></i>
+        <a href="index.html">Desconectar</a>
+        <i class="bi bi-box-arrow-in-right"></i>
+      </button>
+    </div>
+  </div>
+
+  <script>
+    const userBtn = document.getElementById('user-btn');
+    const sidePanel = document.getElementById('side-panel');
+
+    userBtn.addEventListener('click', () => {
+      sidePanel.classList.toggle('active');
+    });
+
+    document.getElementById('disconnect-btn').addEventListener('click', () => {
+      alert('Desconectado!');
+      sidePanel.classList.remove('active');
+    });
+  </script>
+</body>
+</html>
