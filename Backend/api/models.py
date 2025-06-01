@@ -34,7 +34,7 @@ class Computador(models.Model):
     modelo_fonte = models.CharField(max_length=100, blank=True, null=True)
     modelo_placa_mae = models.CharField(max_length=100, blank=True, null=True)
     modelo_placa_video = models.CharField(max_length=100, blank=True, null=True)
-    observacao = models.TextField(blank=True, null=True)
+    descricao = models.TextField(blank=True, null=True)
 
 
     def __str__(self):

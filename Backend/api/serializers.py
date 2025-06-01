@@ -18,7 +18,7 @@ class ComputadorSerializer(serializers.ModelSerializer):
             "numero_de_patrimonio", "modelo", "data_de_aquisicao", "localizacao",
             "data_da_garantia", "modelo_processador", "memoria_ram", "modelo_hd",
             "modelo_ssd", "modelo_fonte", "modelo_placa_mae", "modelo_placa_video",
-            "observacao"
+            "descricao"
         ]
 
 class EquipamentoSerializer(serializers.ModelSerializer):
