@@ -1,10 +1,10 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Home from './pages/Home'; // Make sure ./pages/PaginaHome/Home.tsx exists
-import CadastroEquipamentos from './pages/CadastroEquipamentos'; // Make sure ./pages/CadastroEquipamentos/CadastroEquipamentos.tsx exists
-import Login from './pages/LoginPage'; // Make sure ./pages/LoginPage/LoginPage.tsx exists
-import ListaEquipamentos from './pages/ListaEquipamentos'; // Make sure ./pages/ListaEquipamentos/ListaEquipamentos.tsx exists
-import ListaManutencoes from './pages/ListaManutencoes'; // Make sure ./pages/ListaManutencoes/ListaManutencoes.tsx exists
-import RegistroManutencoes from './pages/RegistroManutencoes'; // Make sure ./pages/RegistroManutecoes/RegistroManutencoes.tsx exists
+import Home from './pages/Home';
+import CadastroEquipamentos from './pages/CadastroEquipamentos';
+import Login from './pages/LoginPage';
+import ListaEquipamentos from './pages/ListaEquipamentos';
+import ListaManutencoes from './pages/ListaManutencoes';
+import RegistroManutencoes from './pages/RegistroManutencoes';
 import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
