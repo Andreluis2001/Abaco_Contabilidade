@@ -1,0 +1,30 @@
+version: "1.0"
+
+services:
+  frontend:
+    image: teste:latest
+    build: ./teste
+    ports:
+      - 5173:5173
+    container_name: abaco_frontend
+
+  backend:
+    image: Backend:latest
+    build: ./Backend
+    ports:
+      - 8000:8000
+    container_name: abaco_backend
+    depends_on:
+      - postgres
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_PASSWORD: abaco
+    ports:
+      - 5432:5432
+    container_name: abaco_postgres
+    volumes:
+      - database:/var/lib/postgresql/data
+  volumes:
+    database:
+      driver: local
