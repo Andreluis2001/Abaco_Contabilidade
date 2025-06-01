@@ -88,7 +88,7 @@ DATABASES = {
         'NAME': 'abaco-database',
         'USER': 'postgres',
         'PASSWORD': 'abaco',
-        'HOST': 'localhost',
+        'HOST': 'database',
         'PORT': '5432',
     }
 }
