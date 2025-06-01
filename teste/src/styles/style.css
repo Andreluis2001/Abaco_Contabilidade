@@ -147,7 +147,7 @@ nav a:hover {
 }
 
 .container {
-  background-color: #ffffff;
+  background-color: #e6e6e6;
   flex: 1;
   padding: 50px 20px;
   display: flex;
@@ -453,7 +453,7 @@ body {
 }
 
 .login-label-input {
-    background-color: #ecf0f1;
+    background-color: #ffffff;
     display: flex;
     align-items: center;
     margin: 8px;
@@ -478,17 +478,190 @@ body {
     width: 100%;
 }
 
+/* Cortina animada */
 #login-cortina {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #003C8B;
-    z-index: 9999;
-    transform: translateX(-100%);
-    transition: transform 1s ease-in-out;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 1s ease-in-out;
+  z-index: 1000;
 }
+
 #login-cortina.ativo {
-    transform: translateX(0);
+  opacity: 1;
+  visibility: visible;
+}
+/* pagina 2*/
+/* Estilização da Tabela de Equipamentos */
+.tabela-equipamentos {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 30px;
+}
+
+.tabela-equipamentos th, .tabela-equipamentos td {
+  padding: 12px 15px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+.tabela-equipamentos th {
+  background-color: #003366;
+  color: #fff;
+}
+
+.tabela-equipamentos td {
+  background-color: #f9f9f9;
+}
+
+.tabela-equipamentos tr:nth-child(even) td {
+  background-color: #f1f1f1;
+}
+
+.tabela-equipamentos td i {
+  cursor: pointer;
+}
+
+.tabela-equipamentos td input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  margin: 0;
+}
+
+/* Detalhes de Equipamento */
+.detalhes-formulario {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 30px;
+}
+
+.detalhes-formulario .linha-inputs {
+  display: flex;
+  gap: 20px;
+}
+
+.detalhes-formulario .input-box {
+  flex: 1;
+}
+
+.detalhes-formulario .input-box label {
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.detalhes-formulario input,
+.detalhes-formulario textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+.detalhes-formulario textarea {
+  min-height: 150px;
+}
+
+.detalhes-formulario .botoes-acao {
+  margin-top: 20px;
+}
+
+.detalhes-formulario .botoes-acao button {
+  padding: 12px 25px;
+  background-color: #003366;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.detalhes-formulario .botoes-acao button:hover {
+  background-color: #002244;
+}
+.barra-pesquisa {
+  margin: 20px 0;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.barra-pesquisa input {
+  padding: 10px 15px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  width: 300px;
+  transition: 0.3s ease;
+  font-size: 16px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+
+.barra-pesquisa input:focus {
+  border-color: #007BFF;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0,123,255,0.2);
+}
+/* home */
+.home-container {
+  padding: 2rem;
+  text-align: center;
+}
+
+.cards-home {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+.card-home {
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 2rem 1.5rem;
+  width: calc(33.33% - 2rem); /* 3 cards por linha com espaço entre eles */
+  min-width: 250px;
+  max-width: 320px;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: box-shadow 0.3s ease;
+}
+
+.card-home:hover {
+  box-shadow: 0 4px 16px rgb(0 0 0 / 0.2);
+}
+
+.card-home h2 {
+  margin: 1rem 0 0.5rem;
+  color: #333;
+}
+
+.card-home p {
+  color: #555;
+  font-size: 0.95rem;
+  flex-grow: 1;
+}
+
+.card-home .btn {
+  margin-top: 1rem;
+  padding: 0.5rem 1.25rem;
+  background-color: #1e88e5;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.card-home .btn:hover {
+  background-color: #1565c0;
 }

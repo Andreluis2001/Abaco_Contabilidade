@@ -1,21 +1,19 @@
-const axios = require('axios');
-
-const API_URL = 'http://localhost:3000/api';
+import axios from "axios";
+import { ACCESS_TOKEN } from "./constants";
 
 const api = axios.create({
-    baseURL: API_URL,
+    baseURL: "http://localhost:8000",
 });
 
 api.interceptors.request.use(
     (config) => {
-        const token = localStorage.getItem('access');
+        const token = localStorage.getItem(ACCESS_TOKEN);
         if (token) {
             config.headers.Authorization = `Bearer ${token}`;
         }
         return config;
     },
     (error) => {
-        console.error('Request error:', error);
         return Promise.reject(error);
     }
 );
