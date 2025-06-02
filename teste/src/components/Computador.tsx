@@ -12,7 +12,7 @@ function Computador({computador}: Props) {
     const [dataAquisicao, ] = React.useState<string>(computador.data_de_aquisicao || '');
     const [dataGarantia, ] = React.useState<string>(computador.data_da_garantia || '');
     const [patrimonio, ] = React.useState<string>(computador.numero_de_patrimonio || '');
-    const [descricao, ] = React.useState<string>(computador.observacao || '');
+    const [descricao, ] = React.useState<string>(computador.descricao || '');
     const [isDetalhado, setIsDetalhado] = React.useState<boolean>(false);
 
     const detalharEquipamento = () => {

@@ -1,7 +1,7 @@
 import React from 'react';
 import "../styles/style.css";
 import api from '../api';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 type Props = {};
 
@@ -21,6 +21,8 @@ function FormaCadastroEquipamentos({}: Props) {
     const [placaMae, setPlacaMae] = React.useState('');
     const [placaVideo, setPlacaVideo] = React.useState('');
     const [descricao, setDescricao] = React.useState('');
+
+    const navigate = useNavigate();
 
     const submitToComputadores = (e: any) => {
         e.preventDefault();
@@ -43,7 +45,7 @@ function FormaCadastroEquipamentos({}: Props) {
             .then((response) => {
             if (response.status === 201) {
                 alert('Computador cadastrado com sucesso!');
-                <Navigate to="/lista/equipamentos" />;
+                navigate('/lista/equipamentos');
             } else {
                 alert('Erro ao cadastrar Computador. Tente novamente.');
             }
@@ -68,8 +70,8 @@ function FormaCadastroEquipamentos({}: Props) {
             .then((response) => {
             if (response.status === 201) {
                 alert("Equipamento cadastrado com sucesso!" );
-                <Navigate to="/lista/equipamentos" />;
-            } else {
+                navigate('/lista/equipamentos');            } 
+            else {
                 alert('Erro ao cadastrar equipamento. Tente novamente.');
             }
             })
