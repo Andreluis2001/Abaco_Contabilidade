@@ -82,6 +82,14 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'abaco_backend.wsgi.application'
 
+# Configuração padrão do banco de dados do Django (usando SQLite):
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
