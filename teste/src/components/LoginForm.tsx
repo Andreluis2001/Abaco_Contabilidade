@@ -23,11 +23,13 @@ function LoginForm({}: Props) {
                 localStorage.setItem('refresh', response.data.refresh);
                 console.log('Login bem-sucedido:', response.data);
                 navigate('/');
-            } else {
-                alert('Login falhou. Verifique suas credenciais.');
             }
-        } catch (error) {
-            console.error('Erro ao fazer login:', error);
+        } catch (error: any) {
+            if (error.response && error.response.status === 401) {
+                alert('E-mail e/ou senha incorretos. Tente novamente.');
+            } else {
+                alert('Ocorreu um erro ao tentar fazer login. Por favor, tente novamente mais tarde.');
+            }
         } finally {
             setIsLoading(false);
         }
