@@ -20,7 +20,7 @@ class Command(BaseCommand):
                 modelo_fonte="Dell 240W",
                 modelo_placa_mae="Dell Motherboard",
                 modelo_placa_video="NVIDIA GTX 1650",
-                observacao="Computador principal da sala"
+                descricao="Computador principal da sala"
             ),
             Computador(
                 numero_de_patrimonio="PC002",
@@ -35,7 +35,7 @@ class Command(BaseCommand):
                 modelo_fonte=None,
                 modelo_placa_mae=None,
                 modelo_placa_video=None,
-                observacao=""
+                descricao=""
             )
         ]
 

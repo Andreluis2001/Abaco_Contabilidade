@@ -3,27 +3,36 @@ services:
     image: abaco_frontend:latest
     build: ./teste
     ports:
-      - "5173:5173"
+      - "5174:5173"
     container_name: abaco_frontend
 
-  backend:
-    image: abaco_backend:latest
-    build: ./Backend
-    ports:
-      - "8000:8000"
-    container_name: abaco_backend
-
-  database:
+  abaco_database:
     image: postgres:latest
     restart: always
     environment:
       POSTGRES_PASSWORD: abaco
       POSTGRES_DB: abaco_database
+      POSTGRES_USER: postgres
     ports:
       - "5432:5432"
     container_name: abaco_database
     volumes:
       - postgres_data:/var/lib/postgresql/data
+
+  backend:
+    image: abaco_backend:latest
+    build: ./Backend
+    environment:
+      - DB_NAME=abaco_database
+      - DB_USER=postgres
+      - DB_PASSWORD=abaco
+      - DB_HOST=abaco_database
+      - DB_PORT=5432
+    ports:
+      - "8001:8000"
+    container_name: abaco_backend
+    depends_on:
+      - abaco_database
 
 volumes:
   postgres_data:
