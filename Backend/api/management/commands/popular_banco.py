@@ -42,7 +42,7 @@ class Command(BaseCommand):
         equipamentos = [
             Equipamento(
                 numero_de_patrimonio="EQ001",
-                equipamento="Projetor Epson",
+                equipamento="Projetor",
                 modelo="Epson EB-X41",
                 data_de_aquisicao="2021-05-10",
                 data_da_garantia="2022-05-10",
@@ -51,7 +51,7 @@ class Command(BaseCommand):
             ),
             Equipamento(
                 numero_de_patrimonio="EQ002",
-                equipamento="Impressora HP LaserJet",
+                equipamento="Impressora",
                 modelo="HP LaserJet Pro M404dn",
                 data_de_aquisicao="2021-06-15",
                 data_da_garantia="2022-06-15",
@@ -60,9 +60,19 @@ class Command(BaseCommand):
             )
         ]
 
+        usuarios = [
+            Usuario(
+                username="test1",
+                email="user@example.com",
+                password="pbkdf2_sha256$1000000$zjBK7sJSbqGsz8YIozcV71$RqfdA3cpUMmQTbQP94G7BeAf9H3BEfyfdgQtzS/HkHo=",
+                role=Usuario.Roles.ADMIN,
+                numero_de_telefone="1234567890"
+            ),
+        ]
         
 
         Computador.objects.bulk_create(computadores)
         Equipamento.objects.bulk_create(equipamentos)
+        Usuario.objects.bulk_create(usuarios)
 
         print("Banco de dados populado com sucesso!")
