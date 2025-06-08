@@ -26,4 +26,4 @@ A instalação é bem simples.
 
 5 - Espere alguns segundos, abra seu navegador e escreva http://localhost:5174/ na barra de busca. A página de login deve abrir, se tudo estiver dado certo, o unico usuário que temos por enquanto é 
  - email: test1
- - senha test1
+ - senha: test1
