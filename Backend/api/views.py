@@ -88,7 +88,7 @@ class ExportEquipamentoCSVView(View):
                 equipamento.descricao,
             ])
 
-        return response
+        return response  
 class ExportAllCSVView(View):
     def get(self, request, *args, **kwargs):
         response = HttpResponse(content_type='text/csv')
