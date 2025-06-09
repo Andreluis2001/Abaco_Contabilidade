@@ -7,10 +7,65 @@ paths:
   /api/computadores/:
     get:
       operationId: api_computadores_list
+      parameters:
+      - in: query
+        name: data_de_aquisicao
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: data_de_aquisicao__year__gt
+        schema:
+          type: number
+      - in: query
+        name: data_de_aquisicao__year__lt
+        schema:
+          type: number
+      - in: query
+        name: localizacao__icontains
+        schema:
+          type: string
+      - in: query
+        name: memoria_ram__icontains
+        schema:
+          type: string
+      - in: query
+        name: modelo__icontains
+        schema:
+          type: string
+      - in: query
+        name: modelo_fonte__icontains
+        schema:
+          type: string
+      - in: query
+        name: modelo_hd__icontains
+        schema:
+          type: string
+      - in: query
+        name: modelo_placa_mae__icontains
+        schema:
+          type: string
+      - in: query
+        name: modelo_placa_video__icontains
+        schema:
+          type: string
+      - in: query
+        name: modelo_processador__icontains
+        schema:
+          type: string
+      - in: query
+        name: modelo_ssd__icontains
+        schema:
+          type: string
+      - in: query
+        name: numero_de_patrimonio__icontains
+        schema:
+          type: string
       tags:
-      - computadores
+      - api
       security:
       - jwtAuth: []
+      - {}
       responses:
         '200':
           content:
@@ -23,7 +78,7 @@ paths:
     post:
       operationId: api_computadores_create
       tags:
-      - computadores
+      - api
       requestBody:
         content:
           application/json:
@@ -38,6 +93,7 @@ paths:
         required: true
       security:
       - jwtAuth: []
+      - {}
       responses:
         '201':
           content:
@@ -56,9 +112,10 @@ paths:
         description: A unique value identifying this computador.
         required: true
       tags:
-      - computadores
+      - api
       security:
       - jwtAuth: []
+      - {}
       responses:
         '200':
           content:
@@ -76,7 +133,7 @@ paths:
         description: A unique value identifying this computador.
         required: true
       tags:
-      - computadores
+      - api
       requestBody:
         content:
           application/json:
@@ -91,6 +148,7 @@ paths:
         required: true
       security:
       - jwtAuth: []
+      - {}
       responses:
         '200':
           content:
@@ -108,7 +166,7 @@ paths:
         description: A unique value identifying this computador.
         required: true
       tags:
-      - computadores
+      - api
       requestBody:
         content:
           application/json:
@@ -122,6 +180,7 @@ paths:
               $ref: '#/components/schemas/PatchedComputador'
       security:
       - jwtAuth: []
+      - {}
       responses:
         '200':
           content:
@@ -139,19 +198,51 @@ paths:
         description: A unique value identifying this computador.
         required: true
       tags:
-      - computadores
+      - api
       security:
       - jwtAuth: []
+      - {}
       responses:
         '204':
           description: No response body
   /api/equipamentos/:
     get:
       operationId: api_equipamentos_list
+      parameters:
+      - in: query
+        name: data_de_aquisicao
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: data_de_aquisicao__year__gt
+        schema:
+          type: number
+      - in: query
+        name: data_de_aquisicao__year__lt
+        schema:
+          type: number
+      - in: query
+        name: equipamento__icontains
+        schema:
+          type: string
+      - in: query
+        name: localizacao__icontains
+        schema:
+          type: string
+      - in: query
+        name: modelo__icontains
+        schema:
+          type: string
+      - in: query
+        name: numero_de_patrimonio__icontains
+        schema:
+          type: string
       tags:
-      - equipamentos
+      - api
       security:
       - jwtAuth: []
+      - {}
       responses:
         '200':
           content:
@@ -164,7 +255,7 @@ paths:
     post:
       operationId: api_equipamentos_create
       tags:
-      - equipamentos
+      - api
       requestBody:
         content:
           application/json:
@@ -179,6 +270,7 @@ paths:
         required: true
       security:
       - jwtAuth: []
+      - {}
       responses:
         '201':
           content:
@@ -197,9 +289,10 @@ paths:
         description: A unique value identifying this equipamento.
         required: true
       tags:
-      - equipamentos
+      - api
       security:
       - jwtAuth: []
+      - {}
       responses:
         '200':
           content:
@@ -217,7 +310,7 @@ paths:
         description: A unique value identifying this equipamento.
         required: true
       tags:
-      - equipamentos
+      - api
       requestBody:
         content:
           application/json:
@@ -232,6 +325,7 @@ paths:
         required: true
       security:
       - jwtAuth: []
+      - {}
       responses:
         '200':
           content:
@@ -249,7 +343,7 @@ paths:
         description: A unique value identifying this equipamento.
         required: true
       tags:
-      - equipamentos
+      - api
       requestBody:
         content:
           application/json:
@@ -263,6 +357,7 @@ paths:
               $ref: '#/components/schemas/PatchedEquipamento'
       security:
       - jwtAuth: []
+      - {}
       responses:
         '200':
           content:
@@ -280,286 +375,158 @@ paths:
         description: A unique value identifying this equipamento.
         required: true
       tags:
-      - equipamentos
+      - api
       security:
       - jwtAuth: []
+      - {}
       responses:
         '204':
           description: No response body
-  /api/manutencao/computadores/:
+  /api/schema/:
     get:
-      operationId: api_manutencao_computadores_list
+      operationId: api_schema_retrieve
+      description: |-
+        OpenApi3 schema for this API. Format can be selected via content negotiation.
+
+        - YAML: application/vnd.oai.openapi
+        - JSON: application/vnd.oai.openapi+json
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - yaml
+      - in: query
+        name: lang
+        schema:
+          type: string
+          enum:
+          - af
+          - ar
+          - ar-dz
+          - ast
+          - az
+          - be
+          - bg
+          - bn
+          - br
+          - bs
+          - ca
+          - ckb
+          - cs
+          - cy
+          - da
+          - de
+          - dsb
+          - el
+          - en
+          - en-au
+          - en-gb
+          - eo
+          - es
+          - es-ar
+          - es-co
+          - es-mx
+          - es-ni
+          - es-ve
+          - et
+          - eu
+          - fa
+          - fi
+          - fr
+          - fy
+          - ga
+          - gd
+          - gl
+          - he
+          - hi
+          - hr
+          - hsb
+          - hu
+          - hy
+          - ia
+          - id
+          - ig
+          - io
+          - is
+          - it
+          - ja
+          - ka
+          - kab
+          - kk
+          - km
+          - kn
+          - ko
+          - ky
+          - lb
+          - lt
+          - lv
+          - mk
+          - ml
+          - mn
+          - mr
+          - ms
+          - my
+          - nb
+          - ne
+          - nl
+          - nn
+          - os
+          - pa
+          - pl
+          - pt
+          - pt-br
+          - ro
+          - ru
+          - sk
+          - sl
+          - sq
+          - sr
+          - sr-latn
+          - sv
+          - sw
+          - ta
+          - te
+          - tg
+          - th
+          - tk
+          - tr
+          - tt
+          - udm
+          - ug
+          - uk
+          - ur
+          - uz
+          - vi
+          - zh-hans
+          - zh-hant
       tags:
       - api
       security:
       - jwtAuth: []
+      - {}
       responses:
         '200':
           content:
+            application/vnd.oai.openapi:
+              schema:
+                type: object
+                additionalProperties: {}
+            application/yaml:
+              schema:
+                type: object
+                additionalProperties: {}
+            application/vnd.oai.openapi+json:
+              schema:
+                type: object
+                additionalProperties: {}
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/ManutencaoComputador'
+                type: object
+                additionalProperties: {}
           description: ''
-    post:
-      operationId: api_manutencao_computadores_create
-      tags:
-      - api
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ManutencaoComputador'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/ManutencaoComputador'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/ManutencaoComputador'
-        required: true
-      security:
-      - jwtAuth: []
-      responses:
-        '201':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ManutencaoComputador'
-          description: ''
-  /api/manutencao/computadores/{id}/:
-    get:
-      operationId: api_manutencao_computadores_retrieve
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: string
-        required: true
-      tags:
-      - api
-      security:
-      - jwtAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ManutencaoComputador'
-          description: ''
-    put:
-      operationId: api_manutencao_computadores_update
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: string
-        required: true
-      tags:
-      - api
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ManutencaoComputador'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/ManutencaoComputador'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/ManutencaoComputador'
-        required: true
-      security:
-      - jwtAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ManutencaoComputador'
-          description: ''
-    patch:
-      operationId: api_manutencao_computadores_partial_update
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: string
-        required: true
-      tags:
-      - api
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PatchedManutencaoComputador'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/PatchedManutencaoComputador'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/PatchedManutencaoComputador'
-      security:
-      - jwtAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ManutencaoComputador'
-          description: ''
-    delete:
-      operationId: api_manutencao_computadores_destroy
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: string
-        required: true
-      tags:
-      - api
-      security:
-      - jwtAuth: []
-      responses:
-        '204':
-          description: No response body
-  /api/manutencao/equipamentos/:
-    get:
-      operationId: api_manutencao_equipamentos_list
-      tags:
-      - api
-      security:
-      - jwtAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/ManutencaoEquipamento'
-          description: ''
-    post:
-      operationId: api_manutencao_equipamentos_create
-      tags:
-      - api
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ManutencaoEquipamento'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/ManutencaoEquipamento'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/ManutencaoEquipamento'
-        required: true
-      security:
-      - jwtAuth: []
-      responses:
-        '201':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ManutencaoEquipamento'
-          description: ''
-  /api/manutencao/equipamentos/{id}/:
-    get:
-      operationId: api_manutencao_equipamentos_retrieve
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: string
-        required: true
-      tags:
-      - api
-      security:
-      - jwtAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ManutencaoEquipamento'
-          description: ''
-    put:
-      operationId: api_manutencao_equipamentos_update
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: string
-        required: true
-      tags:
-      - api
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ManutencaoEquipamento'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/ManutencaoEquipamento'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/ManutencaoEquipamento'
-        required: true
-      security:
-      - jwtAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ManutencaoEquipamento'
-          description: ''
-    patch:
-      operationId: api_manutencao_equipamentos_partial_update
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: string
-        required: true
-      tags:
-      - api
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PatchedManutencaoEquipamento'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/PatchedManutencaoEquipamento'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/PatchedManutencaoEquipamento'
-      security:
-      - jwtAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ManutencaoEquipamento'
-          description: ''
-    delete:
-      operationId: api_manutencao_equipamentos_destroy
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: string
-        required: true
-      tags:
-      - api
-      security:
-      - jwtAuth: []
-      responses:
-        '204':
-          description: No response body
   /api/token/:
     post:
       operationId: api_token_create
@@ -614,13 +581,72 @@ paths:
               schema:
                 $ref: '#/components/schemas/TokenRefresh'
           description: ''
+  /api/token/verify/:
+    post:
+      operationId: api_token_verify_create
+      description: |-
+        Takes a token and indicates if it is valid.  This view provides no
+        information about a token's fitness for a particular use.
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenVerify'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TokenVerify'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/TokenVerify'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenVerify'
+          description: ''
   /api/usuarios/:
     get:
       operationId: api_usuarios_list
+      parameters:
+      - in: query
+        name: email__icontains
+        schema:
+          type: string
+      - in: query
+        name: first_name__icontains
+        schema:
+          type: string
+      - in: query
+        name: last_name__icontains
+        schema:
+          type: string
+      - in: query
+        name: numero_de_telefone__icontains
+        schema:
+          type: string
+      - in: query
+        name: role
+        schema:
+          type: string
+          enum:
+          - admin
+          - tecnico
+        description: |-
+          * `admin` - Admin
+          * `tecnico` - Tecnico
+      - in: query
+        name: username__icontains
+        schema:
+          type: string
       tags:
       - api
       security:
       - jwtAuth: []
+      - {}
       responses:
         '200':
           content:
@@ -643,6 +669,7 @@ paths:
       - api
       security:
       - jwtAuth: []
+      - {}
       responses:
         '200':
           content:
@@ -674,6 +701,7 @@ paths:
         required: true
       security:
       - jwtAuth: []
+      - {}
       responses:
         '200':
           content:
@@ -704,6 +732,7 @@ paths:
               $ref: '#/components/schemas/PatchedUsuario'
       security:
       - jwtAuth: []
+      - {}
       responses:
         '200':
           content:
@@ -723,6 +752,7 @@ paths:
       - api
       security:
       - jwtAuth: []
+      - {}
       responses:
         '204':
           description: No response body
@@ -760,60 +790,86 @@ components:
       properties:
         numero_de_patrimonio:
           type: string
-        modelo_processador:
+        modelo:
           type: string
           maxLength: 100
-        modelo_placa_mae:
+        data_de_aquisicao:
           type: string
-          maxLength: 100
-        modelo_placa_video:
-          type: string
-          maxLength: 100
-        memoria_ram:
-          type: string
-          maxLength: 100
-        armazenamento:
-          type: string
-          maxLength: 100
-        modelo_fonte:
-          type: string
-          maxLength: 100
-        modelo_gabinete:
-          type: string
-          maxLength: 100
-        modelo_hd:
-          type: string
-          maxLength: 100
+          format: date
         localizacao:
           type: string
           maxLength: 100
-        data_aquisicao:
+        data_da_garantia:
           type: string
           format: date
-        data_ultima_atualizacao:
+          nullable: true
+        modelo_processador:
           type: string
-          format: date
-          readOnly: true
-        manutencoes:
-          type: array
-          items:
-            $ref: '#/components/schemas/ManutencaoComputador'
-          readOnly: true
+          nullable: true
+          maxLength: 100
+        memoria_ram:
+          type: string
+          nullable: true
+          maxLength: 100
+        modelo_hd:
+          type: string
+          nullable: true
+          maxLength: 100
+        modelo_ssd:
+          type: string
+          nullable: true
+          maxLength: 100
+        modelo_fonte:
+          type: string
+          nullable: true
+          maxLength: 100
+        modelo_placa_mae:
+          type: string
+          nullable: true
+          maxLength: 100
+        modelo_placa_video:
+          type: string
+          nullable: true
+          maxLength: 100
+        descricao:
+          type: string
+          nullable: true
       required:
-      - armazenamento
-      - data_aquisicao
-      - data_ultima_atualizacao
+      - data_de_aquisicao
       - localizacao
-      - manutencoes
-      - memoria_ram
-      - modelo_fonte
-      - modelo_gabinete
-      - modelo_hd
-      - modelo_placa_mae
-      - modelo_placa_video
-      - modelo_processador
+      - modelo
       - numero_de_patrimonio
     Equipamento:
+      type: object
+      properties:
+        numero_de_patrimonio:
+          type: string
+        equipamento:
+          type: string
+          maxLength: 100
+        modelo:
+          type: string
+          nullable: true
+          maxLength: 100
+        data_de_aquisicao:
+          type: string
+          format: date
+        data_da_garantia:
+          type: string
+          format: date
+          nullable: true
+        localizacao:
+          type: string
+          maxLength: 100
+        descricao:
+          type: string
+          nullable: true
+      required:
+      - data_de_aquisicao
+      - equipamento
+      - localizacao
+      - numero_de_patrimonio
+    PatchedComputador:
       type: object
       properties:
         numero_de_patrimonio:
@@ -821,63 +877,104 @@ components:
         modelo:
           type: string
           maxLength: 100
+        data_de_aquisicao:
+          type: string
+          format: date
         localizacao:
           type: string
           maxLength: 100
-        data_aquisicao:
+        data_da_garantia:
           type: string
           format: date
-        tipo:
+          nullable: true
+        modelo_processador:
+          type: string
+          nullable: true
+          maxLength: 100
+        memoria_ram:
+          type: string
+          nullable: true
+          maxLength: 100
+        modelo_hd:
+          type: string
+          nullable: true
+          maxLength: 100
+        modelo_ssd:
+          type: string
+          nullable: true
+          maxLength: 100
+        modelo_fonte:
+          type: string
+          nullable: true
+          maxLength: 100
+        modelo_placa_mae:
+          type: string
+          nullable: true
+          maxLength: 100
+        modelo_placa_video:
+          type: string
+          nullable: true
+          maxLength: 100
+        descricao:
+          type: string
+          nullable: true
+    PatchedEquipamento:
+      type: object
+      properties:
+        numero_de_patrimonio:
+          type: string
+        equipamento:
           type: string
           maxLength: 100
-        manutencoes:
-          type: array
-          items:
-            $ref: '#/components/schemas/ManutencaoEquipamento'
-          readOnly: true
-      required:
-      - data_aquisicao
-      - localizacao
-      - manutencoes
-      - modelo
-      - numero_de_patrimonio
-      - tipo
-    ManutencaoComputador:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        Computador:
+        modelo:
           type: string
-        data_manutencao:
+          nullable: true
+          maxLength: 100
+        data_de_aquisicao:
           type: string
           format: date
-        descricao:
-          type: string
-      required:
-      - Computador
-      - data_manutencao
-      - descricao
-      - id
-    ManutencaoEquipamento:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        Equipamento:
-          type: string
-        data_manutencao:
+        data_da_garantia:
           type: string
           format: date
+          nullable: true
+        localizacao:
+          type: string
+          maxLength: 100
         descricao:
           type: string
-      required:
-      - Equipamento
-      - data_manutencao
-      - descricao
-      - id
+          nullable: true
+    PatchedUsuario:
+      type: object
+      properties:
+        username:
+          type: string
+          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_
+            only.
+          pattern: ^[\w.@+-]+$
+          maxLength: 150
+        password:
+          type: string
+          writeOnly: true
+          maxLength: 128
+        role:
+          $ref: '#/components/schemas/RoleEnum'
+        email:
+          type: string
+          format: email
+          title: Email address
+          maxLength: 254
+        numero_de_telefone:
+          type: string
+          nullable: true
+          maxLength: 50
+    RoleEnum:
+      enum:
+      - admin
+      - tecnico
+      type: string
+      description: |-
+        * `admin` - Admin
+        * `tecnico` - Tecnico
     TokenObtainPair:
       type: object
       properties:
