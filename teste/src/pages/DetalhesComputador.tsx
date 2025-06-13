@@ -7,9 +7,9 @@ import DetalhesComputadorComponent from "../components/DetalhesComputadorCompone
 
 type props = {};
 
-function DetalhesEquipamentos({}: props) {
+function DetalhesComputador({}: props) {
 
-    const [equipamento, setEquipamento] = useState<any>(null);
+    const [computador, setComputador] = useState<any>(null);
 
     const url_params = useParams();
     const numeroDePatrimonio = url_params.numero_de_patrimonio ?? "";
@@ -24,7 +24,7 @@ function DetalhesEquipamentos({}: props) {
         api
             .get(`api/computadores/${numeroDePatrimonio}`)
             .then((response) => {
-                setEquipamento(response.data);
+                setComputador(response.data);
             })
             .catch((error) => {
                 console.error("Erro ao buscar detalhes do equipamento:", error);
@@ -34,15 +34,13 @@ function DetalhesEquipamentos({}: props) {
     return (
         <>
             <Navbar />
-            <div className="container">
-                <div className="equipment-detail">
-                    <main>
-                        <DetalhesComputadorComponent equipamento={equipamento}/>
-                    </main>
-                </div>
+            <div className="equipment-detail">
+                <main>
+                    <DetalhesComputadorComponent computador={computador}/>
+                </main>
             </div>
         </>
     );
 }
 
-export default DetalhesEquipamentos;
+export default DetalhesComputador;

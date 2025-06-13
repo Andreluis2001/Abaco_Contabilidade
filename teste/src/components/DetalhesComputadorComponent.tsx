@@ -1,27 +1,27 @@
 import "../styles/detalhes.css";
 
 type props = {
-    equipamento?: any;
+    computador?: any;
 };
 
-function DetalhesComponent({equipamento}: props) {
+function DetalhesComputadorComponent({computador}: props) {
 
-    const numeroDePatrimonio = equipamento?.numero_de_patrimonio || '';
-    const modelo = equipamento?.modelo || '';
-    const dataDeAquisicao = equipamento?.data_de_aquisicao || '';
-    const dataDaGarantia = equipamento?.data_da_garantia || '';
-    const localizacao = equipamento?.localizacao || '';
-    const status = equipamento?.computador_status || '';
-    const modeloProcessador = equipamento?.modelo_processador || '';
-    const memoriaRam = equipamento?.memoria_ram || '';
-    const modeloHd = equipamento?.modelo_hd || '';
-    const modeloSsd = equipamento?.modelo_ssd || '';
-    const modeloFonte = equipamento?.modelo_fonte || '';
-    const modeloPlacaMae = equipamento?.modelo_placa_mae || '';
-    const modeloPlacaVideo = equipamento?.modelo_placa_video || '';
-    const descricao = equipamento?.descricao || '';
+    const numeroDePatrimonio = computador?.numero_de_patrimonio || '';
+    const modelo = computador?.modelo || '';
+    const dataDeAquisicao = computador?.data_de_aquisicao || '';
+    const dataDaGarantia = computador?.data_da_garantia || '';
+    const localizacao = computador?.localizacao || '';
+    const status = computador?.computador_status || '';
+    const modeloProcessador = computador?.modelo_processador || '';
+    const memoriaRam = computador?.memoria_ram || '';
+    const modeloHd = computador?.modelo_hd || '';
+    const modeloSsd = computador?.modelo_ssd || '';
+    const modeloFonte = computador?.modelo_fonte || '';
+    const modeloPlacaMae = computador?.modelo_placa_mae || '';
+    const modeloPlacaVideo = computador?.modelo_placa_video || '';
+    const descricao = computador?.descricao || '';
 
-    if (!equipamento) {
+    if (!computador) {
         return <div>Carregando...</div>;
     }
 
@@ -122,4 +122,4 @@ function DetalhesComponent({equipamento}: props) {
     );
 }
 
-export default DetalhesComponent;
+export default DetalhesComputadorComponent;

@@ -1,20 +1,17 @@
-import "../styles/detalhes.css";
-
-type props = {
-    equipamento?: any;
+type Props = {
+    equip?: any;
 };
 
-function DetalhesComponent({equipamento}: props) {
+function DetalhesEquipamentoComponent({equip}: Props) {
+    const numeroDePatrimonio = equip?.numero_de_patrimonio || '';
+    const modelo = equip?.modelo || '';
+    const dataDeAquisicao = equip?.data_de_aquisicao || '';
+    const dataDaGarantia = equip?.data_da_garantia || '';
+    const localizacao = equip?.localizacao || '';
+    const status = equip?.computador_status || '';
+    const descricao = equip?.descricao || '';
 
-    const numeroDePatrimonio = equipamento?.numero_de_patrimonio || '';
-    const modelo = equipamento?.modelo || '';
-    const dataDeAquisicao = equipamento?.data_de_aquisicao || '';
-    const dataDaGarantia = equipamento?.data_da_garantia || '';
-    const localizacao = equipamento?.localizacao || '';
-    const status = equipamento?.computador_status || '';
-    const descricao = equipamento?.descricao || '';
-
-    if (!equipamento) {
+    if (!equip) {
         return <div>Carregando...</div>;
     }
 
@@ -83,4 +80,4 @@ function DetalhesComponent({equipamento}: props) {
     );
 }
 
-export default DetalhesComponent;
+export default DetalhesEquipamentoComponent;

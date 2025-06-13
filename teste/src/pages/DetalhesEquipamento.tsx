@@ -1,14 +1,13 @@
-import Navbar from "../components/Navbar";
-import "../styles/detalhes.css";
-import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
-import api from "../api";
-import DetalhesEquipamentosComponent from "../components/DetalhesEquipamentosComponent";
+import { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom';
+import api from '../api';
+import Navbar from '../components/Navbar';
+import DetalhesEquipamentoComponent from '../components/DetalhesEquipamentoComponent';
 
-type props = {};
+type Props = {};
 
-function DetalhesEquipamentos({}: props) {
-
+function DetalhesEquipamento({}: Props) {
+    
     const [equipamento, setEquipamento] = useState<any>(null);
 
     const url_params = useParams();
@@ -34,15 +33,13 @@ function DetalhesEquipamentos({}: props) {
     return (
         <>
             <Navbar />
-            <div className="container">
-                <div className="equipment-detail">
-                    <main>
-                        <DetalhesEquipamentosComponent equipamento={equipamento}/>
-                    </main>
-                </div>
+            <div className="equipment-detail">
+                <main>
+                    <DetalhesEquipamentoComponent equip={equipamento}/>
+                </main>
             </div>
         </>
     );
 }
 
-export default DetalhesEquipamentos;
+export default DetalhesEquipamento

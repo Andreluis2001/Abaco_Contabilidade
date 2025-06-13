@@ -6,8 +6,8 @@ import ListaEquipamentos from './pages/ListaEquipamentos';
 import ListaManutencoes from './pages/ListaManutencoes';
 import RegistroManutencoes from './pages/RegistroManutencoes';
 import ProtectedRoute from './components/ProtectedRoute';
-import DetalhesEquipamentos from './pages/DetalhesComputadores';
-import DetalhesComputadores from './pages/DetalhesComputadores';
+import DetalhesComputador from './pages/DetalhesComputador';
+import DetalhesEquipamento from './pages/DetalhesEquipamento';
 
 function App() {
   return (
@@ -57,17 +57,17 @@ function App() {
           path="/detalhes/computador/:numero_de_patrimonio" 
           element={
             <ProtectedRoute>
-              <DetalhesComputadores />
+              <DetalhesComputador />
             </ProtectedRoute>
           } 
         />
         <Route 
-          path="/detalhes/equipamento/:numero_de_patrimonio" 
+          path="/detalhes/equipamento/:numero_de_patrimonio"
           element={
             <ProtectedRoute>
-              <DetalhesEquipamentos />
+              <DetalhesEquipamento />
             </ProtectedRoute>
-          } 
+          }
         />
         <Route path="/login" element={<Login />} />
       </Routes>
