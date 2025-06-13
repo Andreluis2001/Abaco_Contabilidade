@@ -261,6 +261,10 @@ footer {
     padding: 10px;
 }
 
+.bi.bi-eye{
+    color: black;
+}
+
 /* Side panel styles */
 .side-panel {
   position: fixed;

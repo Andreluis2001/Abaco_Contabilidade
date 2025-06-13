@@ -5,6 +5,13 @@ services:
     ports:
       - "5174:5173"
     container_name: abaco_frontend
+    develop:
+      watch:
+        - action: rebuild
+          path: ./teste
+          target: /app/teste
+          ignore:
+            - node_modules
 
   abaco_database:
     image: postgres:latest
@@ -33,6 +40,13 @@ services:
     container_name: abaco_backend
     depends_on:
       - abaco_database
+    develop:
+      watch:
+        - action: rebuild
+          path: ./Backend
+          target: /app/Backend
+          ignore:
+            - requirements.txt
 
 volumes:
   postgres_data:

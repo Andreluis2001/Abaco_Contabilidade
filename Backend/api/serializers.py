@@ -16,7 +16,7 @@ class ComputadorSerializer(serializers.ModelSerializer):
         model = Computador
         fields = [
             "numero_de_patrimonio", "modelo", "data_de_aquisicao", "localizacao",
-            "data_da_garantia", "modelo_processador", "memoria_ram", "modelo_hd",
+            "data_da_garantia", "computador_status","modelo_processador", "memoria_ram", "modelo_hd",
             "modelo_ssd", "modelo_fonte", "modelo_placa_mae", "modelo_placa_video",
             "descricao"
         ]
@@ -27,7 +27,7 @@ class EquipamentoSerializer(serializers.ModelSerializer):
         model = Equipamento
         fields = [
             "numero_de_patrimonio", "equipamento", "modelo", "data_de_aquisicao",
-            "data_da_garantia", "localizacao", "descricao"
+            "data_da_garantia", "localizacao", "equipameto_status", "descricao"
         ]
     
         

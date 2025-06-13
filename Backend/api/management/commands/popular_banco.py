@@ -71,8 +71,6 @@ class Command(BaseCommand):
         ]
         
 
-        Computador.objects.bulk_create(computadores)
-        Equipamento.objects.bulk_create(equipamentos)
         Usuario.objects.bulk_create(usuarios)
 
         print("Banco de dados populado com sucesso!")
