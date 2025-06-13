@@ -34,9 +34,7 @@ function DetalhesEquipamento({}: Props) {
         <>
             <Navbar />
             <div className="equipment-detail">
-                <main>
-                    <DetalhesEquipamentoComponent equip={equipamento}/>
-                </main>
+                <DetalhesEquipamentoComponent equip={equipamento}/>
             </div>
         </>
     );

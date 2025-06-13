@@ -35,9 +35,7 @@ function DetalhesComputador({}: props) {
         <>
             <Navbar />
             <div className="equipment-detail">
-                <main>
-                    <DetalhesComputadorComponent computador={computador}/>
-                </main>
+                <DetalhesComputadorComponent computador={computador}/>
             </div>
         </>
     );
