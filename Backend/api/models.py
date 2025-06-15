@@ -23,7 +23,7 @@ class Usuario(AbstractUser):
 class Computador(models.Model):
     
     class status(models.TextChoices):
-        Funcionando = 'Em Funcionamento'
+        FUNCIONANDO = 'Em Funcionamento'
         MANUTENCAO = 'Em Manutencao'
         DESATIVADO = 'Desativado'
 
@@ -32,7 +32,7 @@ class Computador(models.Model):
     data_de_aquisicao = models.DateField()
     localizacao = models.CharField(max_length=100)
     data_da_garantia = models.DateField(blank=True, null=True)
-    computador_status = models.CharField(max_length=50, choices=status.choices, default=status.Funcionando)
+    computador_status = models.CharField(max_length=50, choices=status.choices, default=status.FUNCIONANDO)
     modelo_processador = models.CharField(max_length=100, blank=True, null=True)
     memoria_ram = models.CharField(max_length=100, blank=True, null=True)
     modelo_hd = models.CharField(max_length=100, blank=True, null=True)

@@ -1,18 +1,20 @@
-type Props = {
-    equip?: any;
+import "../styles/detalhes.css";
+
+type props = {
+    equipamento?: any;
 };
 
-function DetalhesEquipamentoComponent({ equip }: Props) {
-    const numeroDePatrimonio = equip?.numero_de_patrimonio || '';
-    const modelo = equip?.modelo || '';
-    const dataDeAquisicao = equip?.data_de_aquisicao || '';
-    const dataDaGarantia = equip?.data_da_garantia || '';
-    const localizacao = equip?.localizacao || '';
-    const status = equip?.computador_status || '';
-    const descricao = equip?.descricao || '';
-    const equipamentoTipo = equip?.equipamento || '';
+function DetalhesEquipamentoComponent({ equipamento }: props) {
+    const tipoEquipamento = equipamento?.equipamento || '';
+    const numeroDePatrimonio = equipamento?.numero_de_patrimonio || '';
+    const modelo = equipamento?.modelo || '';
+    const dataDeAquisicao = equipamento?.data_de_aquisicao || '';
+    const dataDaGarantia = equipamento?.data_da_garantia || '';
+    const localizacao = equipamento?.localizacao || '';
+    const status = equipamento?.computador_status || '';
+    const descricao = equipamento?.descricao || '';
 
-    if (!equip) {
+    if (!equipamento) {
         return <div>Carregando...</div>;
     }
 
@@ -31,7 +33,7 @@ function DetalhesEquipamentoComponent({ equip }: Props) {
                     <tbody>
                         <tr>
                             <td className="spec-label">Equipamento</td>
-                            <td className="spec-value">{equipamentoTipo}</td>
+                            <td className="spec-value">{tipoEquipamento}</td>
                         </tr>
                         <tr>
                             <td className="spec-label">Modelo</td>
@@ -67,15 +69,6 @@ function DetalhesEquipamentoComponent({ equip }: Props) {
                     <p><strong>15/09/2024:</strong> Troca de pasta térmica do processador</p>
                     <p><strong>03/06/2024:</strong> Instalação de memória RAM adicional (8GB → 16GB)</p>
                     <p><strong>20/03/2024:</strong> Manutenção preventiva - Verificação geral do sistema</p>
-                </div>
-
-                <div className="action-buttons">
-                    <button className="btn-edit">
-                        <i className="bi bi-pencil-square"></i> Editar Equipamento
-                    </button>
-                    <button className="btn-delete">
-                        <i className="bi bi-trash"></i> Excluir Equipamento
-                    </button>
                 </div>
             </div>
         </>

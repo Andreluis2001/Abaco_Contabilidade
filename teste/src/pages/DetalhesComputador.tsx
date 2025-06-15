@@ -1,6 +1,6 @@
 import Navbar from "../components/Navbar";
 import "../styles/detalhes.css";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import api from "../api";
 import DetalhesComputadorComponent from "../components/DetalhesComputadorComponent";
@@ -13,6 +13,8 @@ function DetalhesComputador({}: props) {
 
     const url_params = useParams();
     const numeroDePatrimonio = url_params.numero_de_patrimonio ?? "";
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (numeroDePatrimonio) {
@@ -31,6 +33,23 @@ function DetalhesComputador({}: props) {
             });
     };
 
+    const handleDelete = () => {
+        if (window.confirm('Tem certeza que deseja excluir este equipamento?')) {
+            api
+                .delete(`api/computadores/${numeroDePatrimonio}/`)
+                .then((response) => {
+                    if (response.status !== 204) {
+                        throw new Error('Erro ao excluir equipamento');
+                    }
+                    alert('Equipamento excluído com sucesso!');
+                    navigate('/lista/equipamentos');
+                })
+                .catch(error => {
+                    console.error('Erro ao excluir equipamento:', error);
+                });
+        }
+    }
+
     return (
         <>
             <Navbar />
@@ -41,11 +60,11 @@ function DetalhesComputador({}: props) {
                         to={`/detalhes/computador/editar/${numeroDePatrimonio}`}
                         state={{ computador }}
                         >
-                        <div className="btn-edit">
+                        <button className="btn-edit">
                             <i className="bi bi-pencil-square"></i> Editar Equipamento
-                        </div>
+                        </button>
                     </Link>
-                    <button className="btn-delete">
+                    <button className="btn-delete" onClick={handleDelete}>
                         <i className="bi bi-trash"></i> Excluir Equipamento
                     </button>
                 </div>

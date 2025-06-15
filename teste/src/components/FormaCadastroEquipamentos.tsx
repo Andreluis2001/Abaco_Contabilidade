@@ -1,7 +1,7 @@
 import React from 'react';
 import "../styles/style.css";
 import api from '../api';
-import { Navigate, useNavigate } from 'react-router-dom';
+import {useNavigate } from 'react-router-dom';
 
 type Props = {};
 

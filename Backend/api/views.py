@@ -23,6 +23,7 @@ class ComputadorListView(generics.ListCreateAPIView):
     queryset = Computador.objects.all()
     serializer_class = ComputadorSerializer
     filterset_class = ComputadorFilter
+    
 class ComputadorDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Computador.objects.all()
     serializer_class = ComputadorSerializer

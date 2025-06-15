@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import '../styles/edit.css';
+import api from '../api';
+import { useNavigate } from 'react-router-dom';
 
 type Props = {
     computador?: any
@@ -21,8 +23,40 @@ function EditarComputadorComponent({ computador }: Props) {
     const [modeloPlacaVideo, setModeloPlacaVideo] = useState<string>(computador?.modelo_placa_video || '');
     const [descricao, setDescricao] = useState<string>(computador?.descricao || '');
 
+    const navigate = useNavigate();
+
     if (!computador) {
         return <div>Carregando...</div>;
+    }
+
+    const handleSave = () => {
+
+        api
+            .patch(`api/computadores/${numeroDePatrimonio}/`, {
+                modelo: modelo,
+                data_de_aquisicao: dataDeAquisicao,
+                data_da_garantia: dataDaGarantia,
+                localizacao: localizacao,
+                computador_status: status,
+                modelo_processador: modeloProcessador,
+                memoria_ram: memoriaRam,
+                modelo_hd: modeloHd,
+                modelo_ssd: modeloSsd,
+                modelo_fonte: modeloFonte,
+                modelo_placa_mae: modeloPlacaMae,
+                modelo_placa_video: modeloPlacaVideo,
+                descricao: descricao
+            })
+            .then((response) => {
+                if (response.status !== 200) {
+                    throw new Error('Erro ao atualizar equipamento');
+                }
+                alert('Equipamento atualizado com sucesso!');   
+                navigate('/lista/equipamentos');
+            })
+            .catch(error => {
+                console.error('Erro ao atualizar equipamento:', error);
+            });
     }
 
     return (
@@ -169,6 +203,10 @@ function EditarComputadorComponent({ computador }: Props) {
                         />
                     </div>
                 </div>
+
+                <button className="btn-edit" onClick={handleSave}>
+                    <i className="bi bi-pencil-square"></i> Salvar Alterações
+                </button>
             </div>
         </>
     );

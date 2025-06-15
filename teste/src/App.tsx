@@ -9,6 +9,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import DetalhesComputador from './pages/DetalhesComputador';
 import DetalhesEquipamento from './pages/DetalhesEquipamento';
 import EditarComputador from './pages/EditarComputador';
+import EditarEquipamento from './pages/EditarEquipamento';
 
 function App() {
   return (
@@ -75,6 +76,14 @@ function App() {
           element={
             <ProtectedRoute>
               <EditarComputador />
+            </ProtectedRoute>
+          }
+        />
+        <Route 
+          path="/detalhes/equipamento/editar/:numero_de_patrimonio"
+          element={
+            <ProtectedRoute>
+              <EditarEquipamento />
             </ProtectedRoute>
           }
         />
