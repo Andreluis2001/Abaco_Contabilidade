@@ -40,4 +40,4 @@ function DetalhesEquipamento({}: Props) {
     );
 }
 
-export default DetalhesEquipamento
+export default DetalhesEquipamento;

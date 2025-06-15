@@ -8,6 +8,7 @@ import RegistroManutencoes from './pages/RegistroManutencoes';
 import ProtectedRoute from './components/ProtectedRoute';
 import DetalhesComputador from './pages/DetalhesComputador';
 import DetalhesEquipamento from './pages/DetalhesEquipamento';
+import EditarComputador from './pages/EditarComputador';
 
 function App() {
   return (
@@ -66,6 +67,14 @@ function App() {
           element={
             <ProtectedRoute>
               <DetalhesEquipamento />
+            </ProtectedRoute>
+          }
+        />
+        <Route 
+          path="/detalhes/computador/editar/:numero_de_patrimonio"
+          element={
+            <ProtectedRoute>
+              <EditarComputador />
             </ProtectedRoute>
           }
         />

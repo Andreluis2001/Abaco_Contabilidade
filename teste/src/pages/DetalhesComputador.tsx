@@ -1,6 +1,6 @@
 import Navbar from "../components/Navbar";
 import "../styles/detalhes.css";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import api from "../api";
 import DetalhesComputadorComponent from "../components/DetalhesComputadorComponent";
@@ -36,6 +36,19 @@ function DetalhesComputador({}: props) {
             <Navbar />
             <div className="equipment-detail">
                 <DetalhesComputadorComponent computador={computador}/>
+                <div className="action-buttons">
+                    <Link  
+                        to={`/detalhes/computador/editar/${numeroDePatrimonio}`}
+                        state={{ computador }}
+                        >
+                        <div className="btn-edit">
+                            <i className="bi bi-pencil-square"></i> Editar Equipamento
+                        </div>
+                    </Link>
+                    <button className="btn-delete">
+                        <i className="bi bi-trash"></i> Excluir Equipamento
+                    </button>
+                </div>
             </div>
         </>
     );
