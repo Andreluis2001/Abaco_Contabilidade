@@ -7,7 +7,9 @@ Sistema de controle patrimonial do escritório de contabilidade Ábaco Contabili
 Instruções para rodar frontend, backend e banco de dados:
 
 -----------------------------------------------------------------------------------
-Você talvez precisará habilitar o WSL no seu Windows 
+
+!!! Você talvez precisará habilitar o WSL no seu Windows !!! 
+
 -----------------------------------------------------------------------------------
 
 1 - Você precisa ter docker instalado (link para instalação: https://docs.docker.com/desktop/setup/install/windows-install/):
