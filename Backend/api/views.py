@@ -5,6 +5,7 @@ from .filters import ComputadorFilter, EquipamentoFilter, UsuarioFilter
 from django.views import View
 from django.http import HttpResponse
 import csv
+import pandas as pd
 
 class UsuarioListView(generics.ListAPIView):
     queryset = Usuario.objects.all()
@@ -67,6 +68,18 @@ class ExportComputadorCSVView(View):
 
         return response
     
+class ExportComputadorXLSXView(View):
+    def get(self, request, *args, **kwargs):
+        response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+        response['Content-Disposition'] = 'attachment; filename="computadores.xlsx"'
+
+        computadores = Computador.objects.all()
+
+        df = pd.DataFrame(list(computadores.values()))
+        df.to_excel(response, index=False, sheet_name='Computadores')
+
+        return response
+    
 class ExportEquipamentoCSVView(View):
     def get(self, request, *args, **kwargs):
         response = HttpResponse(content_type='text/csv')
@@ -90,6 +103,19 @@ class ExportEquipamentoCSVView(View):
             ])
 
         return response  
+    
+class ExportEquipamentoXLSXView(View):
+    def get(self, request, *args, **kwargs):
+        response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+        response['Content-Disposition'] = 'attachment; filename="equipamentos.xlsx"'
+
+        equipamentos = Equipamento.objects.all()
+
+        df = pd.DataFrame(list(equipamentos.values()))
+        df.to_excel(response, index=False, sheet_name='Equipamentos')
+
+        return response
+    
 class ExportAllCSVView(View):
     def get(self, request, *args, **kwargs):
         response = HttpResponse(content_type='text/csv')
@@ -144,5 +170,24 @@ class ExportAllCSVView(View):
                 '',  # Modelo Placa de Vídeo
                 equipamento.descricao
             ])
+
+        return response
+
+class ExportAllXLSXView(View):
+    def get(self, request, *args, **kwargs):
+        response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+        response['Content-Disposition'] = 'attachment; filename="all_data.xlsx"'
+
+        computadores = Computador.objects.all()
+        equipamentos = Equipamento.objects.all()
+
+        computador_df = pd.DataFrame(list(computadores.values()))
+        computador_df['Tipo'] = 'Computador'
+        
+        equipamento_df = pd.DataFrame(list(equipamentos.values()))
+        equipamento_df['Tipo'] = 'Equipamento'
+        
+        all_data_df = pd.concat([computador_df, equipamento_df], ignore_index=True)
+        all_data_df.to_excel(response, index=False, sheet_name='All Data')
 
         return response
