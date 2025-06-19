@@ -32,7 +32,7 @@ function LoginForm() {
     return (
         <form className="login-form" onSubmit={handleSubmit(handleFormSubmit)}>
             <label className="login-label-input">
-                <i className="fa-regular fa-envelope login-icon-modify"></i>
+                <i className="fa-regular fa-circle-user login-icon-modify" ></i>
                 <input 
                     {...register("username")} 
                     type="text" 
