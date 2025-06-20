@@ -1,15 +1,17 @@
 import Navbar from "../components/Navbar";
 import "../styles/detalhes.css";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Form, Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import api from "../api";
 import DetalhesComputadorComponent from "../components/DetalhesComputadorComponent";
+import FormaRegistroManutencao from "../components/FormaRegistroManutencao";
 
 type props = {};
 
 function DetalhesComputador({}: props) {
 
     const [computador, setComputador] = useState<any>(null);
+    const [isOpen, setIsOpen] = useState(false);
 
     const url_params = useParams();
     const numeroDePatrimonio = url_params.numero_de_patrimonio ?? "";
@@ -21,6 +23,10 @@ function DetalhesComputador({}: props) {
             getEquipamentoDetails();
         }
     }, []);
+
+    const toggleModal = () => {
+        setIsOpen(!isOpen);
+    }
 
     const getEquipamentoDetails = async () => {
         api
@@ -68,6 +74,10 @@ function DetalhesComputador({}: props) {
                         <i className="bi bi-trash"></i> Excluir Equipamento
                     </button>
                 </div>
+                <button className="btn btn-success" onClick={toggleModal}>Registrar Manutenção</button>
+                {isOpen && (
+                    <FormaRegistroManutencao />
+                )}
             </div>
         </>
     );

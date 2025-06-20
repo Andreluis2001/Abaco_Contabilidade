@@ -4,7 +4,6 @@ import CadastroEquipamentos from './pages/CadastroEquipamentos';
 import Login from './pages/LoginPage';
 import ListaEquipamentos from './pages/ListaEquipamentos';
 import ListaManutencoes from './pages/ListaManutencoes';
-import RegistroManutencoes from './pages/RegistroManutencoes';
 import ProtectedRoute from './components/ProtectedRoute';
 import DetalhesComputador from './pages/DetalhesComputador';
 import DetalhesEquipamento from './pages/DetalhesEquipamento';
@@ -44,14 +43,6 @@ function App() {
           element={
             <ProtectedRoute>
               <ListaManutencoes />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/registro/manutencoes"
-          element={
-            <ProtectedRoute>
-              <RegistroManutencoes />
             </ProtectedRoute>
           }
         />
