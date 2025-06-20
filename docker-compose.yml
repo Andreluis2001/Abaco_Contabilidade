@@ -1,15 +1,15 @@
 services:
   frontend:
     image: abaco_frontend:latest
-    build: ./teste
+    build: ./frontend
     ports:
       - "5174:5173"
     container_name: abaco_frontend
     develop:
       watch:
         - action: rebuild
-          path: ./teste
-          target: /app/teste
+          path: ./frontend
+          target: /app/frontend
           ignore:
             - node_modules
 
@@ -28,7 +28,7 @@ services:
 
   backend:
     image: abaco_backend:latest
-    build: ./Backend
+    build: ./backend
     environment:
       - DB_NAME=abaco_database
       - DB_USER=postgres
@@ -43,8 +43,8 @@ services:
     develop:
       watch:
         - action: rebuild
-          path: ./Backend
-          target: /app/Backend
+          path: ./backend
+          target: /app/backend
           ignore:
             - requirements.txt
 
