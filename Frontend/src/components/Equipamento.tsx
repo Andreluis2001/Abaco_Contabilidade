@@ -8,6 +8,7 @@ type Props = {
 
 function Equipamento({equip}: Props) {
 
+    const [status, ] = React.useState<string>(equip.status || 'Em Funcionamento');
     const [equipamento, ] = React.useState<string>(equip.equipamento || '');
     const [modelo, ] = React.useState<string>(equip.modelo || '');
     const [dataAquisicao, ] = React.useState<string>(equip.data_de_aquisicao || '');
@@ -19,7 +20,19 @@ function Equipamento({equip}: Props) {
         <>
             <tr>
                 <td>
-                    <input type="checkbox" className="checkbox-item" />
+                    <i
+                        className="bi bi-circle-fill"
+                        style={{
+                            color:
+                                status === 'Em Funcionamento'
+                                    ? 'green'
+                                    : status === 'Em Manutencao'
+                                    ? 'orange'
+                                    : status === 'Desativado'
+                                    ? 'red'
+                                    : 'gray'
+                        }}
+                    ></i>
                 </td>
                 <td>{equipamento}</td>
                 <td>{modelo}</td>

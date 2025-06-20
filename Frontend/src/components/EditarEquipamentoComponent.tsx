@@ -1,131 +1,146 @@
-import { useState } from 'react';
-import '../styles/edit.css';
+import '../styles/style.css';
 import api from '../api';
 import { useNavigate } from 'react-router-dom';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm, type SubmitHandler } from 'react-hook-form';
+import { z } from "zod";
+
+const schema = z.object({
+    equipamento: z.string().min(1, "Equipamento é obrigatório"),
+    modelo: z.string().min(1, "Modelo é obrigatório"),
+    aquisicao: z.string().min(1, "Data de Aquisição é obrigatória"),
+    garantia: z.string().optional(),
+    local: z.string().min(1, "Local é obrigatório"),
+    descricao: z.string().optional(),
+});
+
+type FormFields = z.infer<typeof schema>;
 
 type Props = {
-    equipamento?: any
+    equipamentoData?: any
 };
 
-function EditarEquipamentoComponent({ equipamento }: Props) {
-    const numeroDePatrimonio = equipamento?.numero_de_patrimonio || '';
-    const tipoEquipamento = equipamento?.tipo_equipamento || '';
-    const [modelo, setModelo] = useState<string>(equipamento?.modelo || '');
-    const [dataDeAquisicao, setDataDeAquisicao] = useState<string>(equipamento?.data_de_aquisicao || '');
-    const [dataDaGarantia, setDataDaGarantia] = useState<string>(equipamento?.data_da_garantia || '');
-    const [localizacao, setLocalizacao] = useState<string>(equipamento?.localizacao || '');
-    const [status, setStatus] = useState<string>(equipamento?.computador_status || '');
-    const [descricao, setDescricao] = useState<string>(equipamento?.descricao || '');
-
+function EditarEquipamentoComponent({ equipamentoData }: Props) {
     const navigate = useNavigate();
 
-    if (!equipamento) {
-        return <div>Carregando...</div>;
-    }
+    const {
+        register,
+        handleSubmit,
+        formState: { errors, isSubmitting },
+    } = useForm<FormFields>({
+        resolver: zodResolver(schema),
+        defaultValues: {
+            equipamento: equipamentoData?.equipamento || "",
+            modelo: equipamentoData?.modelo || "",
+            aquisicao: equipamentoData?.data_de_aquisicao ? equipamentoData.data_de_aquisicao.substring(0, 10) : "",
+            garantia: equipamentoData?.data_da_garantia ? equipamentoData.data_da_garantia.substring(0, 10) : "",
+            local: equipamentoData?.localizacao || "",
+            descricao: equipamentoData?.descricao || "",
+        }
+    });
 
-    const handleSave = () => {
-
-        api
-            .patch(`api/equipamentos/${numeroDePatrimonio}/`, {
-                modelo: modelo,
-                data_de_aquisicao: dataDeAquisicao,
-                data_da_garantia: dataDaGarantia,
-                localizacao: localizacao,
-                computador_status: status,
-                descricao: descricao
+    const onSubmit: SubmitHandler<FormFields> = async (data) => {
+        await api
+            .patch(`api/equipamentos/${equipamentoData.numero_de_patrimonio}/`, {
+                equipamento: data.equipamento,
+                modelo: data.modelo,
+                data_de_aquisicao: data.aquisicao,
+                data_da_garantia: data.garantia,
+                localizacao: data.local,
+                descricao: data.descricao
             })
             .then((response) => {
                 if (response.status !== 200) {
                     throw new Error('Erro ao atualizar equipamento');
                 }
-                alert('Equipamento atualizado com sucesso!');   
+                alert('Equipamento atualizado com sucesso!');
                 navigate('/lista/equipamentos');
             })
             .catch(error => {
                 console.error('Erro ao atualizar equipamento:', error);
             });
+    };
+
+    if (!equipamentoData) {
+        return <div>Carregando...</div>;
     }
 
     return (
         <>
-            <div className="equipment-detail">
-                <div className="equipment-header">
-                    <div className="equipment-icon">
-                        <i className="bi bi-pc-display"></i>
-                    </div>
-                    <div className="equipment-id">{numeroDePatrimonio}</div>
-                </div>
-
-                <div className="equipment-info">
-                    <div className="info-field">
-                        <div className="info-label">Equipamento</div>
-                        <div className="info-value">{tipoEquipamento}</div>
-                    </div>
-                    <div className="info-field">
-                        <div className="info-label">Modelo</div>
+            <form className="form" id="equipment-edit-form" onSubmit={handleSubmit(onSubmit)}>
+                <div className="form-row">
+                    <div>
+                        <label>Equipamento*</label>
                         <input
-                            className="info-value"
                             type="text"
-                            value={modelo}
-                            onChange={e => setModelo(e.target.value)}
+                            {...register("equipamento")}
+                            disabled
                         />
                     </div>
-                    <div className="info-field">
-                        <div className="info-label">Data da Aquisição</div>
-                        <input
-                            className="info-value"
-                            type="text"
-                            value={dataDeAquisicao}
-                            onChange={e => setDataDeAquisicao(e.target.value)}
-                        />
-                    </div>
-                    <div className="info-field">
-                        <div className="info-label">Data da Garantia</div>
-                        <input
-                            className="info-value"
-                            type="text"
-                            value={dataDaGarantia}
-                            onChange={e => setDataDaGarantia(e.target.value)}
-                        />
+                    <div>
+                        <label>Número de Patrimônio*</label>
+                        <input type="text" value={equipamentoData.numero_de_patrimonio} disabled />
                     </div>
                 </div>
-
-                <div className="equipment-info">
-                    <div className="info-field">
-                        <div className="info-label">Local</div>
+                <div className="form-row">
+                    <div>
+                        <label>Modelo*</label>
                         <input
-                            className="info-value"
                             type="text"
-                            value={localizacao}
-                            onChange={e => setLocalizacao(e.target.value)}
+                            {...register("modelo")}
                         />
+                        {errors.modelo && (
+                            <div className="error-message" style={{ color: "red", fontSize: "0.85em" }}>{errors.modelo.message}</div>
+                        )}
                     </div>
-                    <div className="info-field">
-                        <div className="info-label">Status</div>
+                    <div>
+                        <label>Data da Aquisição*</label>
                         <input
-                            className="info-value"
-                            type="text"
-                            value={status}
-                            onChange={e => setStatus(e.target.value)}
+                            type="date"
+                            {...register("aquisicao")}
                         />
+                        {errors.aquisicao && (
+                            <div className="error-message" style={{ color: "red", fontSize: "0.85em" }}>{errors.aquisicao.message}</div>
+                        )}
                     </div>
                 </div>
-
-                <div className="observations-section">
-                    <div className="info-field observations-field">
-                        <div className="info-label">Observações</div>
+                <div className="form-row">
+                    <div>
+                        <label>Data da Garantia</label>
+                        <input
+                            type="date"
+                            {...register("garantia")}
+                        />
+                        {errors.garantia && (
+                            <div className="error-message" style={{ color: "red", fontSize: "0.85em" }}>{errors.garantia.message}</div>
+                        )}
+                    </div>
+                    <div>
+                        <label>Local*</label>
+                        <input
+                            type="text"
+                            {...register("local")}
+                        />
+                        {errors.local && (
+                            <div className="error-message" style={{ color: "red", fontSize: "0.85em" }}>{errors.local.message}</div>
+                        )}
+                    </div>
+                </div>
+                <div className="form-row">
+                    <div className="full-width">
+                        <label>Observações</label>
                         <textarea
-                            className="info-value observations-value"
-                            value={descricao}
-                            onChange={e => setDescricao(e.target.value)}
+                            {...register("descricao")}
                         />
+                        {errors.descricao && (
+                            <div className="error-message" style={{ color: "red", fontSize: "0.85em" }}>{errors.descricao.message}</div>
+                        )}
                     </div>
                 </div>
-
-                <button className="btn-edit" onClick={handleSave}>
-                    <i className="bi bi-pencil-square"></i> Salvar Alterações
+                <button disabled={isSubmitting} type="submit">
+                    {isSubmitting ? <i className="fa-solid fa-spinner fa-spin"></i> : <><i className="bi bi-pencil-square"></i> Salvar Alterações</>}
                 </button>
-            </div>
+            </form>
         </>
     );
 }

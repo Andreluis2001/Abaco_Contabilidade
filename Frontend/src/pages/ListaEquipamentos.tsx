@@ -4,6 +4,7 @@ import Computador from "../components/Computador";
 import { useState, useEffect} from "react";
 import api from "../api";
 import "../styles/style.css";
+import { Link } from "react-router-dom";
 
 type Props = {};
 
@@ -46,26 +47,15 @@ function ListaEquipamentos({}: Props) {
         <div className="container">
           <main className="lista-container">
             <h1 className="lista-titulo">Lista de Equipamentos</h1>
-
-            <div className="barra-pesquisa">
-              <input
-                type="text"
-                id="barra-pesquisa"
-                placeholder="Pesquisar equipamentos..."
-                onInput={() => {}}
-              />
-            </div>
-
+            <Link to="/cadastro/equipamentos" className="btn">
+                <button className="btn-add"><i className="bi bi-person-plus-fill"></i> Novo Equipamento</button>
+            </Link>
+            <br />
+            <br />
             <table className="tabela-equipamentos">
               <thead>
                 <tr>
-                  <th>
-                    <input
-                      type="checkbox"
-                      id="selecionar-todos"
-                      onClick={() => {}}
-                    />
-                  </th>
+                  <th>Status</th>
                   <th>Equipamento</th>
                   <th>Modelo</th>
                   <th>Aquisição</th>

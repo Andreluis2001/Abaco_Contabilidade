@@ -59,30 +59,6 @@ function Home({}: Props) {
                   Ir para Manutenção
                 </Link>
               </div>
-
-              <div className="card-home">
-                <i
-                  className="bi bi-hammer"
-                  style={{ fontSize: "2.5rem", color: "#fb8c00" }}
-                ></i>
-                <h2>Registro de Manutenção</h2>
-                <p>Faça o registro de novas manutenções nos equipamentos.</p>
-                <Link to="/registro/manutencoes" className="btn">
-                  Registrar Manutenção
-                </Link>
-              </div>
-
-              <div className="card-home">
-                <i
-                  className="bi bi-pencil-square"
-                  style={{ fontSize: "2.5rem", color: "#3949ab" }}
-                ></i>
-                <h2>Cadastro de Equipamentos</h2>
-                <p>Cadastre novos equipamentos no sistema.</p>
-                <Link to="/cadastro/equipamentos" className="btn">
-                  Cadastrar Equipamento
-                </Link>
-              </div>
             </section>
           </main>
         </div>

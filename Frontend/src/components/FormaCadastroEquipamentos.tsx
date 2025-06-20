@@ -1,79 +1,87 @@
-import React from 'react';
 import "../styles/style.css";
 import api from '../api';
 import {useNavigate } from 'react-router-dom';
+import {zodResolver} from '@hookform/resolvers/zod';
+import { useForm, type SubmitHandler } from 'react-hook-form';
+import {z} from "zod";
 
-type Props = {};
+const schema = z.object({
+    equipamento: z.string().min(1, "Equipamento é obrigatório"),
+    modelo: z.string().min(1, "Modelo é obrigatório"),
+    patrimonio: z.string().min(1, "Número de Patrimônio é obrigatório"),
+    aquisicao: z.string().date("Data de Aquisição é obrigatória"),
+    garantia: z.string().date().optional(),
+    local: z.string().min(1, "Local é obrigatório"),
+    processador: z.string().optional(),
+    ram: z.string().optional(),
+    hd: z.string().optional(),
+    ssd: z.string().optional(),
+    fonte: z.string().optional(),
+    placaMae: z.string().optional(),
+    placaVideo: z.string().optional(),
+    descricao: z.string().optional(),
+});
 
-function FormaCadastroEquipamentos({}: Props) {
+type FormFields = z.infer<typeof schema>;
 
-    const [equipamento, setEquipamento] = React.useState('Computador');
-    const [modelo, setModelo] = React.useState('');
-    const [patrimonio, setPatrimonio] = React.useState('');
-    const [aquisicao, setAquisicao] = React.useState('');
-    const [garantia, setGarantia] = React.useState('');
-    const [local, setLocal] = React.useState('');
-    const [processador, setProcessador] = React.useState('');
-    const [ram, setRam] = React.useState('');
-    const [hd, setHd] = React.useState('');
-    const [ssd, setSsd] = React.useState('');
-    const [fonte, setFonte] = React.useState('');
-    const [placaMae, setPlacaMae] = React.useState('');
-    const [placaVideo, setPlacaVideo] = React.useState('');
-    const [descricao, setDescricao] = React.useState('');
+function FormaCadastroEquipamentos() {
+
+    const {register, handleSubmit, watch, formState: {errors, isSubmitting}} = useForm<FormFields>({
+        resolver: zodResolver(schema),
+    });
 
     const navigate = useNavigate();
 
-    const submitToComputadores = (e: any) => {
-        e.preventDefault();
+    const equipamento = watch("equipamento");
+
+    const submitToComputadores: SubmitHandler<FormFields> = async (data) => {
         api
             .post('api/computadores/', {
-                numero_de_patrimonio: patrimonio,
-                modelo,
-                data_de_aquisicao: aquisicao,
-                localizacao: local,
-                data_da_garantia: garantia,
-                modelo_processador: processador,
-                memoria_ram: ram,
-                modelo_hd: hd,
-                modelo_ssd: ssd,
-                modelo_fonte: fonte,
-                modelo_placa_mae: placaMae,
-                modelo_placa_video: placaVideo,
-                descricao
+                numero_de_patrimonio: data.patrimonio,
+                modelo: data.modelo,
+                data_de_aquisicao: data.aquisicao,
+                localizacao: data.local,
+                data_da_garantia: data.garantia,
+                modelo_processador: data.processador,
+                memoria_ram: data.ram,
+                modelo_hd: data.hd,
+                modelo_ssd: data.ssd,
+                modelo_fonte: data.fonte,
+                modelo_placa_mae: data.placaMae,
+                modelo_placa_video: data.placaVideo,
+                descricao: data.descricao
             })
             .then((response) => {
-            if (response.status === 201) {
-                alert('Computador cadastrado com sucesso!');
-                navigate('/lista/equipamentos');
-            } else {
-                alert('Erro ao cadastrar Computador. Tente novamente.');
-            }
+                if (response.status === 201) {
+                    alert('Computador cadastrado com sucesso!');
+                    navigate('/lista/equipamentos');
+                } else {
+                    alert('Erro ao cadastrar Computador. Tente novamente.');
+                }
             })
             .catch((error) => {
                 console.error('Erro ao cadastrar computador:', error);
             });
     }
 
-    const submitToEquipamentos = (e: any) => {
-        e.preventDefault();
+    const submitToEquipamentos: SubmitHandler<FormFields> = async (data) => {
         api
             .post('api/equipamentos/', {
-                numero_de_patrimonio: patrimonio,
-                equipamento,
-                modelo,
-                data_de_aquisicao: aquisicao,
-                localizacao: local,
-                data_da_garantia: garantia,
-                descricao
+                numero_de_patrimonio: data.patrimonio,
+                equipamento: data.equipamento,
+                modelo: data.modelo,
+                data_de_aquisicao: data.aquisicao,
+                localizacao: data.local,
+                data_da_garantia: data.garantia,
+                descricao: data.descricao
             })
             .then((response) => {
-            if (response.status === 201) {
-                alert("Equipamento cadastrado com sucesso!" );
-                navigate('/lista/equipamentos');            } 
-            else {
-                alert('Erro ao cadastrar equipamento. Tente novamente.');
-            }
+                if (response.status === 201) {
+                    alert("Equipamento cadastrado com sucesso!");
+                    navigate('/lista/equipamentos');
+                } else {
+                    alert('Erro ao cadastrar equipamento. Tente novamente.');
+                }
             })
             .catch((error) => {
                 console.error('Erro ao cadastrar computador:', error);
@@ -82,50 +90,58 @@ function FormaCadastroEquipamentos({}: Props) {
 
     return (
         <>
-            <form className="form" id="equipment-form" onSubmit={equipamento === 'Computador' ? submitToComputadores : submitToEquipamentos}>
+            <form className="form" id="equipment-form" onSubmit={equipamento === 'Computador' ? handleSubmit(submitToComputadores) : handleSubmit(submitToEquipamentos)}>
                 <div className="form-row">
                     <div>
                         <label>Equipamento*</label>
                         <select 
-                        id="equipamento" 
-                        value={equipamento} 
-                        onChange={(e) => (setEquipamento(e.target.value))} 
-                        required
+                            id="equipamento"
+                            {...register("equipamento")}
                         >
                             <option value="Computador" selected>Computador</option>
                             <option value="Impressora">Impressora</option>
                             <option value="Monitor">Monitor</option>
                         </select>
                     </div>
+                    {errors.equipamento && (
+                        <div className="error-message" style={{ color: "red", fontSize: "0.85em" }}>{errors.equipamento.message}</div>
+                    )}
+                </div>
+                <div className="form-row">
                     <div>
                         <label>Modelo*</label>
                         <input
                             type="text"
                             id="modelo"
-                            value={modelo}
-                            onChange={(e) => setModelo(e.target.value)}
-                            required
+                            {...register("modelo")}
                         />
+                        {errors.modelo && (
+                            <div className="error-message" style={{ color: "red", fontSize: "0.85em" }}>{errors.modelo.message}</div>
+                        )}
                     </div>
                     <div>
                         <label>Número de Patrimônio*</label>
                         <input
                             type="text"
                             id="patrimonio"
-                            value={patrimonio}
-                            onChange={(e) => setPatrimonio(e.target.value)}
-                            required
+                            {...register("patrimonio")}
                         />
+                        {errors.patrimonio && (
+                            <div className="error-message" style={{ color: "red", fontSize: "0.85em" }}>{errors.patrimonio.message}</div>
+                        )}
                     </div>
+                </div>
+                <div className="form-row">
                     <div>
                         <label>Data da Aquisição*</label>
                         <input
                             type="date"
                             id="aquisicao"
-                            value={aquisicao}
-                            onChange={(e) => setAquisicao(e.target.value)}
-                            required
+                            {...register("aquisicao")}
                         />
+                        {errors.aquisicao && (
+                            <div className="error-message" style={{ color: "red", fontSize: "0.85em" }}>{errors.aquisicao.message}</div>
+                        )}
                     </div>
                 </div>
                 <div className="form-row">
@@ -134,19 +150,22 @@ function FormaCadastroEquipamentos({}: Props) {
                         <input
                             type="date"
                             id="garantia"
-                            value={garantia}
-                            onChange={(e) => setGarantia(e.target.value)}
+                            {...register("garantia")}
                         />
+                        {errors.garantia && (
+                            <div className="error-message" style={{ color: "red", fontSize: "0.85em" }}>{errors.garantia.message}</div>
+                        )}
                     </div>
                     <div>
                         <label>Local*</label>
                         <input
                             type="text"
                             id="local"
-                            value={local}
-                            onChange={(e) => setLocal(e.target.value)}
-                            required
+                            {...register("local")}
                         />
+                        {errors.local && (
+                            <div className="error-message" style={{ color: "red", fontSize: "0.85em" }}>{errors.local.message}</div>
+                        )}
                     </div>
                 </div>
 
@@ -160,62 +179,73 @@ function FormaCadastroEquipamentos({}: Props) {
                         <input
                             type="text"
                             id="processador"
-                            value={processador}
-                            onChange={(e) => setProcessador(e.target.value)}
+                            {...register("processador")}
                         />
+                        {errors.processador && (
+                            <div className="error-message" style={{ color: "red", fontSize: "0.85em" }}>{errors.processador.message}</div>
+                        )}
                     </div>
                     <div>
                         <label>Memória RAM</label>
                         <input
                             type="text"
                             id="ram"
-                            value={ram}
-                            onChange={(e) => setRam(e.target.value)}
+                            {...register("ram")}
                         />
+                        {errors.ram && (
+                            <div className="error-message" style={{ color: "red", fontSize: "0.85em" }}>{errors.ram.message}</div>
+                        )}
                     </div>
                     <div>
                         <label>HD</label>
                         <input
                             type="text"
                             id="hd"
-                            value={hd}
-                            onChange={(e) => setHd(e.target.value)}
+                            {...register("hd")}
                         />
+                        {errors.hd && (
+                            <div className="error-message" style={{ color: "red", fontSize: "0.85em" }}>{errors.hd.message}</div>
+                        )}
                     </div>
                     <div>
                         <label>SSD</label>
                         <input
                             type="text"
                             id="ssd"
-                            value={ssd}
-                            onChange={(e) => setSsd(e.target.value)}
+                            {...register("ssd")}
                         />
+                        {errors.ssd && (
+                            <div className="error-message" style={{ color: "red", fontSize: "0.85em" }}>{errors.ssd.message}</div>
+                        )}
                     </div>
                     <div>
                         <label>Fonte</label>
                         <input
                             type="text"
                             id="fonte"
-                            value={fonte}
-                            onChange={(e) => setFonte(e.target.value)}
+                            {...register("fonte")}
                         />
+                        {errors.fonte && (
+                            <div className="error-message" style={{ color: "red", fontSize: "0.85em" }}>{errors.fonte.message}</div>
+                        )}
                     </div>
                     <div>
                         <label>Placa Mãe</label>
                         <input
                             type="text"
                             id="placa-mae"
-                            value={placaMae}
-                            onChange={(e) => setPlacaMae(e.target.value)}
+                            {...register("placaMae")}
                         />
+                        {errors.placaMae && (
+                            <div className="error-message" style={{ color: "red", fontSize: "0.85em" }}>{errors.placaMae.message}</div>
+                        )}
                     </div>
                     <div>
                         <label>Placa de Vídeo</label>
                         <input
                             type="text"
                             id="placa-video"
-                            value={placaVideo}
-                            onChange={(e) => setPlacaVideo(e.target.value)}
+                            {...register("placaVideo")}
                         />
                     </div>
                 </div>
@@ -226,13 +256,17 @@ function FormaCadastroEquipamentos({}: Props) {
                         <textarea
                             id="descricao"
                             placeholder="Informe a observação caso tenha."
-                            value={descricao}
-                            onChange={(e) => setDescricao(e.target.value)}
+                            {...register("descricao")}
                         ></textarea>
+                        {errors.descricao && (
+                            <div className="error-message" style={{ color: "red", fontSize: "0.85em" }}>{errors.descricao.message}</div>
+                        )}
                     </div>
                 </div>
 
-                <button type="submit">CADASTRAR</button>
+                <button disabled={isSubmitting} type="submit">
+                    {isSubmitting ? <i className="fa-solid fa-spinner fa-spin"></i> : "Cadastrar Equipamento"}
+                </button>
             </form>
         </>
     );

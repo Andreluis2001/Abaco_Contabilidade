@@ -1,213 +1,246 @@
-import { useState } from 'react';
-import '../styles/edit.css';
+import '../styles/style.css';
 import api from '../api';
 import { useNavigate } from 'react-router-dom';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm, type SubmitHandler } from 'react-hook-form';
+import { z } from "zod";
+
+const schema = z.object({
+    modelo: z.string().min(1, "Modelo é obrigatório"),
+    aquisicao: z.string().min(1, "Data de Aquisição é obrigatória"),
+    garantia: z.string().optional(),
+    local: z.string().min(1, "Local é obrigatório"),
+    status: z.string().optional(),
+    processador: z.string().optional(),
+    ram: z.string().optional(),
+    hd: z.string().optional(),
+    ssd: z.string().optional(),
+    fonte: z.string().optional(),
+    placaMae: z.string().optional(),
+    placaVideo: z.string().optional(),
+    descricao: z.string().optional(),
+});
+
+type FormFields = z.infer<typeof schema>;
 
 type Props = {
     computador?: any
 };
 
 function EditarComputadorComponent({ computador }: Props) {
-    const numeroDePatrimonio = computador?.numero_de_patrimonio || '';
-    const [modelo, setModelo] = useState<string>(computador?.modelo || '');
-    const [dataDeAquisicao, setDataDeAquisicao] = useState<string>(computador?.data_de_aquisicao || '');
-    const [dataDaGarantia, setDataDaGarantia] = useState<string>(computador?.data_da_garantia || '');
-    const [localizacao, setLocalizacao] = useState<string>(computador?.localizacao || '');
-    const [status, setStatus] = useState<string>(computador?.computador_status || '');
-    const [modeloProcessador, setModeloProcessador] = useState<string>(computador?.modelo_processador || '');
-    const [memoriaRam, setMemoriaRam] = useState<string>(computador?.memoria_ram || '');
-    const [modeloHd, setModeloHd] = useState<string>(computador?.modelo_hd || '');
-    const [modeloSsd, setModeloSsd] = useState<string>(computador?.modelo_ssd || '');
-    const [modeloFonte, setModeloFonte] = useState<string>(computador?.modelo_fonte || '');
-    const [modeloPlacaMae, setModeloPlacaMae] = useState<string>(computador?.modelo_placa_mae || '');
-    const [modeloPlacaVideo, setModeloPlacaVideo] = useState<string>(computador?.modelo_placa_video || '');
-    const [descricao, setDescricao] = useState<string>(computador?.descricao || '');
-
     const navigate = useNavigate();
 
-    if (!computador) {
-        return <div>Carregando...</div>;
-    }
+    const {
+        register,
+        handleSubmit,
+        formState: { errors, isSubmitting },
+    } = useForm<FormFields>({
+        resolver: zodResolver(schema),
+        defaultValues: {
+            modelo: computador?.modelo || "",
+            aquisicao: computador?.data_de_aquisicao ? computador.data_de_aquisicao.substring(0, 10) : "",
+            garantia: computador?.data_da_garantia ? computador.data_da_garantia.substring(0, 10) : "",
+            local: computador?.localizacao || "",
+            status: computador?.computador_status || "",
+            processador: computador?.modelo_processador || "",
+            ram: computador?.memoria_ram || "",
+            hd: computador?.modelo_hd || "",
+            ssd: computador?.modelo_ssd || "",
+            fonte: computador?.modelo_fonte || "",
+            placaMae: computador?.modelo_placa_mae || "",
+            placaVideo: computador?.modelo_placa_video || "",
+            descricao: computador?.descricao || "",
+        }
+    });
 
-    const handleSave = () => {
-
-        api
-            .patch(`api/computadores/${numeroDePatrimonio}/`, {
-                modelo: modelo,
-                data_de_aquisicao: dataDeAquisicao,
-                data_da_garantia: dataDaGarantia,
-                localizacao: localizacao,
-                computador_status: status,
-                modelo_processador: modeloProcessador,
-                memoria_ram: memoriaRam,
-                modelo_hd: modeloHd,
-                modelo_ssd: modeloSsd,
-                modelo_fonte: modeloFonte,
-                modelo_placa_mae: modeloPlacaMae,
-                modelo_placa_video: modeloPlacaVideo,
-                descricao: descricao
+    const onSubmit: SubmitHandler<FormFields> = async (data) => {
+        await api
+            .patch(`api/computadores/${computador.numero_de_patrimonio}/`, {
+                modelo: data.modelo,
+                data_de_aquisicao: data.aquisicao,
+                data_da_garantia: data.garantia,
+                localizacao: data.local,
+                computador_status: data.status,
+                modelo_processador: data.processador,
+                memoria_ram: data.ram,
+                modelo_hd: data.hd,
+                modelo_ssd: data.ssd,
+                modelo_fonte: data.fonte,
+                modelo_placa_mae: data.placaMae,
+                modelo_placa_video: data.placaVideo,
+                descricao: data.descricao
             })
             .then((response) => {
                 if (response.status !== 200) {
                     throw new Error('Erro ao atualizar equipamento');
                 }
-                alert('Equipamento atualizado com sucesso!');   
+                alert('Equipamento atualizado com sucesso!');
                 navigate('/lista/equipamentos');
             })
             .catch(error => {
                 console.error('Erro ao atualizar equipamento:', error);
             });
-    }
+    };
 
     return (
         <>
-            <div className="equipment-detail">
-                <div className="equipment-header">
-                    <div className="equipment-icon">
-                        <i className="bi bi-pc-display"></i>
+            <form className="form" id="equipment-edit-form" onSubmit={handleSubmit(onSubmit)}>
+                <div className="form-row">
+                    <div>
+                        <label>Equipamento*</label>
+                        <input type="text" value="Computador" disabled />
                     </div>
-                    <div className="equipment-id">{numeroDePatrimonio}</div>
-                </div>
-
-                <div className="equipment-info">
-                    <div className="info-field">
-                        <div className="info-label">Equipamento</div>
-                        <div className="info-value">Computador</div>
-                    </div>
-                    <div className="info-field">
-                        <div className="info-label">Modelo</div>
-                        <input
-                            className="info-value"
-                            type="text"
-                            value={modelo}
-                            onChange={e => setModelo(e.target.value)}
-                        />
-                    </div>
-                    <div className="info-field">
-                        <div className="info-label">Data da Aquisição</div>
-                        <input
-                            className="info-value"
-                            type="text"
-                            value={dataDeAquisicao}
-                            onChange={e => setDataDeAquisicao(e.target.value)}
-                        />
-                    </div>
-                    <div className="info-field">
-                        <div className="info-label">Data da Garantia</div>
-                        <input
-                            className="info-value"
-                            type="text"
-                            value={dataDaGarantia}
-                            onChange={e => setDataDaGarantia(e.target.value)}
-                        />
+                    <div>
+                        <label>Número de Patrimônio*</label>
+                        <input type="text" value={computador.numero_de_patrimonio} disabled />
                     </div>
                 </div>
-
-                <div className="equipment-info">
-                    <div className="info-field">
-                        <div className="info-label">Local</div>
+                <div className="form-row">
+                    <div>
+                        <label>Modelo*</label>
                         <input
-                            className="info-value"
                             type="text"
-                            value={localizacao}
-                            onChange={e => setLocalizacao(e.target.value)}
+                            {...register("modelo")}
                         />
+                        {errors.modelo && (
+                            <div className="error-message" style={{ color: "red", fontSize: "0.85em" }}>{errors.modelo.message}</div>
+                        )}
                     </div>
-                    <div className="info-field">
-                        <div className="info-label">Status</div>
+                    <div>
+                        <label>Data da Aquisição*</label>
                         <input
-                            className="info-value"
-                            type="text"
-                            value={status}
-                            onChange={e => setStatus(e.target.value)}
+                            type="date"
+                            {...register("aquisicao")}
                         />
-                    </div>
-                </div>
-
-                <div className="computer-specs">
-                    <div className="info-field">
-                        <div className="info-label">Processador</div>
-                        <input
-                            className="info-value"
-                            type="text"
-                            value={modeloProcessador}
-                            onChange={e => setModeloProcessador(e.target.value)}
-                        />
-                    </div>
-                    <div className="info-field">
-                        <div className="info-label">Memória RAM</div>
-                        <input
-                            className="info-value"
-                            type="text"
-                            value={memoriaRam}
-                            onChange={e => setMemoriaRam(e.target.value)}
-                        />
-                    </div>
-                    <div className="info-field">
-                        <div className="info-label">HD</div>
-                        <input
-                            className="info-value"
-                            type="text"
-                            value={modeloHd}
-                            onChange={e => setModeloHd(e.target.value)}
-                        />
-                    </div>
-                    <div className="info-field">
-                        <div className="info-label">SSD</div>
-                        <input
-                            className="info-value"
-                            type="text"
-                            value={modeloSsd}
-                            onChange={e => setModeloSsd(e.target.value)}
-                        />
+                        {errors.aquisicao && (
+                            <div className="error-message" style={{ color: "red", fontSize: "0.85em" }}>{errors.aquisicao.message}</div>
+                        )}
                     </div>
                 </div>
-
-                <div className="computer-specs">
-                    <div className="info-field">
-                        <div className="info-label">Fonte</div>
+                <div className="form-row">
+                    <div>
+                        <label>Data da Garantia</label>
                         <input
-                            className="info-value"
-                            type="text"
-                            value={modeloFonte}
-                            onChange={e => setModeloFonte(e.target.value)}
+                            type="date"
+                            {...register("garantia")}
                         />
+                        {errors.garantia && (
+                            <div className="error-message" style={{ color: "red", fontSize: "0.85em" }}>{errors.garantia.message}</div>
+                        )}
                     </div>
-                    <div className="info-field">
-                        <div className="info-label">Placa Mãe</div>
+                    <div>
+                        <label>Local*</label>
                         <input
-                            className="info-value"
                             type="text"
-                            value={modeloPlacaMae}
-                            onChange={e => setModeloPlacaMae(e.target.value)}
+                            {...register("local")}
                         />
-                    </div>
-                    <div className="info-field">
-                        <div className="info-label">Placa de Vídeo</div>
-                        <input
-                            className="info-value"
-                            type="text"
-                            value={modeloPlacaVideo}
-                            onChange={e => setModeloPlacaVideo(e.target.value)}
-                        />
+                        {errors.local && (
+                            <div className="error-message" style={{ color: "red", fontSize: "0.85em" }}>{errors.local.message}</div>
+                        )}
                     </div>
                 </div>
-
-                <div className="observations-section">
-                    <div className="info-field observations-field">
-                        <div className="info-label">Observações</div>
+                <div className="form-row">
+                    <div>
+                        <label>Status</label>
+                        <input
+                            type="text"
+                            {...register("status")}
+                        />
+                        {errors.status && (
+                            <div className="error-message" style={{ color: "red", fontSize: "0.85em" }}>{errors.status.message}</div>
+                        )}
+                    </div>
+                </div>
+                <div
+                    className="form-row"
+                    id="computador-campos"
+                >
+                    <div>
+                        <label>Processador</label>
+                        <input
+                            type="text"
+                            {...register("processador")}
+                        />
+                        {errors.processador && (
+                            <div className="error-message" style={{ color: "red", fontSize: "0.85em" }}>{errors.processador.message}</div>
+                        )}
+                    </div>
+                    <div>
+                        <label>Memória RAM</label>
+                        <input
+                            type="text"
+                            {...register("ram")}
+                        />
+                        {errors.ram && (
+                            <div className="error-message" style={{ color: "red", fontSize: "0.85em" }}>{errors.ram.message}</div>
+                        )}
+                    </div>
+                    <div>
+                        <label>HD</label>
+                        <input
+                            type="text"
+                            {...register("hd")}
+                        />
+                        {errors.hd && (
+                            <div className="error-message" style={{ color: "red", fontSize: "0.85em" }}>{errors.hd.message}</div>
+                        )}
+                    </div>
+                    <div>
+                        <label>SSD</label>
+                        <input
+                            type="text"
+                            {...register("ssd")}
+                        />
+                        {errors.ssd && (
+                            <div className="error-message" style={{ color: "red", fontSize: "0.85em" }}>{errors.ssd.message}</div>
+                        )}
+                    </div>
+                    <div>
+                        <label>Fonte</label>
+                        <input
+                            type="text"
+                            {...register("fonte")}
+                        />
+                        {errors.fonte && (
+                            <div className="error-message" style={{ color: "red", fontSize: "0.85em" }}>{errors.fonte.message}</div>
+                        )}
+                    </div>
+                    <div>
+                        <label>Placa Mãe</label>
+                        <input
+                            type="text"
+                            {...register("placaMae")}
+                        />
+                        {errors.placaMae && (
+                            <div className="error-message" style={{ color: "red", fontSize: "0.85em" }}>{errors.placaMae.message}</div>
+                        )}
+                    </div>
+                    <div>
+                        <label>Placa de Vídeo</label>
+                        <input
+                            type="text"
+                            {...register("placaVideo")}
+                        />
+                        {errors.placaVideo && (
+                            <div className="error-message" style={{ color: "red", fontSize: "0.85em" }}>{errors.placaVideo.message}</div>
+                        )}
+                    </div>
+                </div>
+                <div className="form-row">
+                    <div className="full-width">
+                        <label>Observações</label>
                         <textarea
-                            className="info-value observations-value"
-                            value={descricao}
-                            onChange={e => setDescricao(e.target.value)}
+                            {...register("descricao")}
                         />
+                        {errors.descricao && (
+                            <div className="error-message" style={{ color: "red", fontSize: "0.85em" }}>{errors.descricao.message}</div>
+                        )}
                     </div>
                 </div>
-
-                <button className="btn-edit" onClick={handleSave}>
-                    <i className="bi bi-pencil-square"></i> Salvar Alterações
+                <button disabled={isSubmitting} type="submit">
+                    {isSubmitting ? <i className="fa-solid fa-spinner fa-spin"></i> : <><i className="bi bi-pencil-square"></i> Salvar Alterações</>}
                 </button>
-            </div>
+            </form>
         </>
     );
 }
