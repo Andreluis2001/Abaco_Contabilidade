@@ -161,7 +161,6 @@ main {
   border-radius: 10px;
   width: 100%;
   max-width: 1200px;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
 }
 
 h1 {
@@ -668,4 +667,130 @@ body {
 
 .card-home .btn:hover {
   background-color: #1565c0;
+}
+
+.card-home .btn:hover {
+  background-color: #1565c0;
+}
+
+/* Info panels styles */
+.info-panels {
+  display: flex;
+  gap: 2rem;
+  margin-top: 3rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.info-panel {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 1.5rem;
+  flex: 1;
+  min-width: 300px;
+  max-width: 500px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.info-panel h3 {
+  margin-bottom: 1rem;
+  color: #333;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Inventory styles */
+.inventory-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.inventory-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+.inventory-item:last-child {
+  border-bottom: none;
+}
+
+.item-name {
+  color: #555;
+  font-weight: 500;
+}
+
+.item-count {
+  background-color: #1e88e5;
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 12px;
+  font-weight: bold;
+  font-size: 0.9rem;
+  min-width: 30px;
+  text-align: center;
+}
+
+/* Maintenance styles */
+.maintenance-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.maintenance-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+.maintenance-item:last-child {
+  border-bottom: none;
+}
+
+.maintenance-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.equipment-name {
+  color: #333;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.maintenance-date {
+  color: #666;
+  font-size: 0.85rem;
+}
+
+.status-badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.status-completed {
+  background-color: #e8f5e8;
+  color: #2e7d2e;
+}
+
+.status-pending {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.status-in-progress {
+  background-color: #d1ecf1;
+  color: #0c5460;
 }
