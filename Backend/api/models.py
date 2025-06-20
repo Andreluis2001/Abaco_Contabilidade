@@ -65,3 +65,38 @@ class Equipamento(models.Model):
     def __str__(self):
         return self.numero_de_patrimonio
     
+class ManutencaoComputador(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    computador = models.ForeignKey(Computador, on_delete=models.CASCADE)
+    tecnico = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    data_inicio = models.DateTimeField(auto_now_add=True)
+    data_fim = models.DateTimeField(blank=True, null=True)
+    descricao = models.TextField(blank=True, null=True)
+    
+    class Status(models.TextChoices):
+        PENDENTE = 'Pendente'
+        EM_ANDAMENTO = 'Em Andamento'
+        CONCLUIDO = 'Concluido'
+
+    status = models.CharField(max_length=50, choices=Status.choices, default=Status.PENDENTE)
+
+    def __str__(self):
+        return f'Manutencao {self.id} - {self.computador.numero_de_patrimonio}'
+    
+class ManutencaoEquipamento(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    equipamento = models.ForeignKey(Equipamento, on_delete=models.CASCADE)
+    tecnico = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    data_inicio = models.DateTimeField(auto_now_add=True)
+    data_fim = models.DateTimeField(blank=True, null=True)
+    descricao = models.TextField(blank=True, null=True)
+
+    class Status(models.TextChoices):
+        PENDENTE = 'Pendente'
+        EM_ANDAMENTO = 'Em Andamento'
+        CONCLUIDO = 'Concluido'
+
+    status = models.CharField(max_length=50, choices=Status.choices, default=Status.PENDENTE)
+
+    def __str__(self):
+        return f'Manutencao {self.id} - {self.equipamento.numero_de_patrimonio}'

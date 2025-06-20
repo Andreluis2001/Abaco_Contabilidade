@@ -1,6 +1,6 @@
 from rest_framework import generics
-from .models import  Computador, Equipamento, Usuario
-from .serializers import ComputadorSerializer, EquipamentoSerializer, UsuarioSerializer
+from .models import  Computador, Equipamento, ManutencaoComputador, ManutencaoEquipamento, Usuario
+from .serializers import ComputadorSerializer, EquipamentoSerializer, UsuarioSerializer, ManutencaoComputadorSerializer, ManutencaoEquipamentoSerializer
 from .filters import ComputadorFilter, EquipamentoFilter, UsuarioFilter
 from django.views import View
 from django.http import HttpResponse
@@ -37,6 +37,22 @@ class EquipamentoListCreateView(generics.ListCreateAPIView):
 class EquipamentoDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Equipamento.objects.all()
     serializer_class = EquipamentoSerializer
+
+class ManutencaoComputadorListCreateView(generics.ListCreateAPIView):
+    queryset = ManutencaoComputador.objects.all()
+    serializer_class = ManutencaoComputadorSerializer
+
+class ManutencaoComputadorDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = ManutencaoComputador.objects.all()
+    serializer_class = ManutencaoComputadorSerializer
+
+class ManutencaoEquipamentoListCreateView(generics.ListCreateAPIView):
+    queryset = ManutencaoEquipamento.objects.all()
+    serializer_class = ManutencaoEquipamentoSerializer
+    
+class ManutencaoEquipamentoDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = ManutencaoEquipamento.objects.all()
+    serializer_class = ManutencaoEquipamentoSerializer
 
 class ExportComputadorCSVView(View):
     def get(self, request, *args, **kwargs):
