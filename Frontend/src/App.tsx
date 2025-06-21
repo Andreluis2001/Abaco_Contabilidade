@@ -9,6 +9,7 @@ import DetalhesComputador from './pages/DetalhesComputador';
 import DetalhesEquipamento from './pages/DetalhesEquipamento';
 import EditarComputador from './pages/EditarComputador';
 import EditarEquipamento from './pages/EditarEquipamento';
+import ListaUsuarios from './pages/ListaUsuarios';
 
 function App() {
   return (
@@ -75,6 +76,14 @@ function App() {
           element={
             <ProtectedRoute>
               <EditarEquipamento />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/usuarios"
+          element={
+            <ProtectedRoute>
+              <ListaUsuarios />
             </ProtectedRoute>
           }
         />

@@ -1,4 +1,6 @@
+import { useState } from "react";
 import "../styles/detalhes.css";
+import FormaRegistroManutencao from "./FormaRegistroManutencao";
 
 type props = {
     equipamento?: any;
@@ -14,9 +16,11 @@ function DetalhesEquipamentoComponent({ equipamento }: props) {
     const status = equipamento?.computador_status || '';
     const descricao = equipamento?.descricao || '';
 
-    if (!equipamento) {
-        return <div>Carregando...</div>;
-    }
+    const [isOpen, setIsOpen] = useState(false);
+
+    const toggleModal = () => {
+        setIsOpen(!isOpen);
+    };
 
     return (
         <>
@@ -70,6 +74,13 @@ function DetalhesEquipamentoComponent({ equipamento }: props) {
                     <p><strong>03/06/2024:</strong> Instalação de memória RAM adicional (8GB → 16GB)</p>
                     <p><strong>20/03/2024:</strong> Manutenção preventiva - Verificação geral do sistema</p>
                 </div>
+                <br />
+                <button className="btn btn-success" onClick={toggleModal}>Registrar Manutençâo</button>
+                <br />
+                <br />
+                {isOpen && (
+                    <FormaRegistroManutencao tipo='equipamento' numero_de_patrimonio={numeroDePatrimonio}/>
+                )}
             </div>
         </>
     );

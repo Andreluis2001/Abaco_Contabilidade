@@ -1,4 +1,6 @@
+import { useState } from "react";
 import "../styles/detalhes.css";
+import FormaRegistroManutencao from "./FormaRegistroManutencao";
 
 type props = {
     computador?: any;
@@ -19,10 +21,13 @@ function DetalhesComputadorComponent({ computador }: props) {
     const modeloPlacaMae = computador?.modelo_placa_mae || '';
     const modeloPlacaVideo = computador?.modelo_placa_video || '';
     const descricao = computador?.descricao || '';
+    const manutencoes = computador?.manutencoes || [];
 
-    if (!computador) {
-        return <div>Carregando...</div>;
-    }
+    const [isOpen, setIsOpen] = useState(false);
+
+    const toggleModal = () => {
+        setIsOpen(!isOpen);
+    };
 
     return (
         <>
@@ -105,11 +110,20 @@ function DetalhesComputadorComponent({ computador }: props) {
 
                 <div className="section-title">Histórico de Manutenções</div>
                 <div className="maintenance-history">
-                    <p><strong>10/01/2025:</strong> Manutenção preventiva - Limpeza interna e atualização de drivers</p>
-                    <p><strong>15/09/2024:</strong> Troca de pasta térmica do processador</p>
-                    <p><strong>03/06/2024:</strong> Instalação de memória RAM adicional (8GB → 16GB)</p>
-                    <p><strong>20/03/2024:</strong> Manutenção preventiva - Verificação geral do sistema</p>
+                    {manutencoes.map((manutencao: any) => (
+                        <p key={manutencao.id}>
+                            <strong>{manutencao.data}:</strong> {manutencao.descricao}
+                        </p>
+                    ))}
+                    {manutencoes.length === 0 && <p>Nenhuma manutenção registrada.</p>}
                 </div>
+                <br />
+                <button className="btn btn-success" onClick={toggleModal}>Registrar Manutençâo</button>
+                <br />
+                <br />
+                {isOpen && (
+                    <FormaRegistroManutencao tipo='computador' numero_de_patrimonio={numeroDePatrimonio} />
+                )}
             </div>
         </>
     );

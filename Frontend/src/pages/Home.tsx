@@ -133,7 +133,7 @@ function Home({}: Props) {
                 ></i>
                 <h2>Usuários</h2>
                 <p>Gerencie os usuários que têm acesso ao sistema.</p>
-                <Link to="/" className="btn">
+                <Link to="/usuarios" className="btn">
                   Ir para Usuários
                 </Link>
               </div>

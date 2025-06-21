@@ -15,7 +15,7 @@ function EditarEquipamento({}: Props) {
     <>
         <Navbar />
         <div className="equipment-detail">
-            <EditarEquipamentoComponent equipamento={equipamento} />
+            <EditarEquipamentoComponent equipamentoData={equipamento} />
         </div>
     </>
   )

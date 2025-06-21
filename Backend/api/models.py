@@ -49,7 +49,7 @@ class Computador(models.Model):
 class Equipamento(models.Model):
 
     class status(models.TextChoices):
-        Funcionando = 'Em Funcionamento'
+        FUNCIONANDO = 'Em Funcionamento'
         MANUTENCAO = 'Em Manutencao'
         DESATIVADO = 'Desativado'
 
@@ -59,7 +59,7 @@ class Equipamento(models.Model):
     data_de_aquisicao = models.DateField()
     data_da_garantia = models.DateField(blank=True, null=True)
     localizacao = models.CharField(max_length=100)
-    equipameto_status = models.CharField(max_length=50, choices=status.choices, default=status.Funcionando)
+    equipameto_status = models.CharField(max_length=50, choices=status.choices, default=status.FUNCIONANDO)
     descricao = models.TextField(blank=True, null=True)
 
     def __str__(self):
@@ -67,9 +67,9 @@ class Equipamento(models.Model):
     
 class ManutencaoComputador(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    computador = models.ForeignKey(Computador, on_delete=models.CASCADE)
-    tecnico = models.ForeignKey(Usuario, on_delete=models.CASCADE)
-    data = models.DateTimeField(auto_now_add=True)
+    computador = models.ForeignKey(Computador, on_delete=models.CASCADE, related_name='manutencoes')
+    tecnico = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name='tecnico', null=True, blank=True)
+    data = models.DateField(auto_now_add=True)
     descricao = models.TextField(blank=True, null=True)
 
 
@@ -78,9 +78,9 @@ class ManutencaoComputador(models.Model):
     
 class ManutencaoEquipamento(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    equipamento = models.ForeignKey(Equipamento, on_delete=models.CASCADE)
-    tecnico = models.ForeignKey(Usuario, on_delete=models.CASCADE)
-    data = models.DateTimeField(auto_now_add=True)
+    equipamento = models.ForeignKey(Equipamento, on_delete=models.CASCADE, related_name='manutencoes')
+    tecnico = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name='tecnico_equipamento', blank=True, null=True)
+    data = models.DateField(auto_now_add=True)
     descricao = models.TextField(blank=True, null=True)
 
     def __str__(self):
