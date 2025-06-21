@@ -1,6 +1,5 @@
-import { useState } from "react";
 import "../styles/detalhes.css";
-import FormaRegistroManutencao from "./FormaRegistroManutencao";
+import { Link } from "react-router-dom";
 
 type props = {
     computador?: any;
@@ -22,12 +21,6 @@ function DetalhesComputadorComponent({ computador }: props) {
     const modeloPlacaVideo = computador?.modelo_placa_video || '';
     const descricao = computador?.descricao || '';
     const manutencoes = computador?.manutencoes || [];
-
-    const [isOpen, setIsOpen] = useState(false);
-
-    const toggleModal = () => {
-        setIsOpen(!isOpen);
-    };
 
     return (
         <>
@@ -118,12 +111,9 @@ function DetalhesComputadorComponent({ computador }: props) {
                     {manutencoes.length === 0 && <p>Nenhuma manutenção registrada.</p>}
                 </div>
                 <br />
-                <button className="btn btn-success" onClick={toggleModal}>Registrar Manutençâo</button>
-                <br />
-                <br />
-                {isOpen && (
-                    <FormaRegistroManutencao tipo='computador' numero_de_patrimonio={numeroDePatrimonio} />
-                )}
+                <Link to={`/registrar/manutencao/computador/${numeroDePatrimonio}`}>
+                    <button className="btn btn-primary">Registrar Manutenção</button>
+                </Link>
             </div>
         </>
     );

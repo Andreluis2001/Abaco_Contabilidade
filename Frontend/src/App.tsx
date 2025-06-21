@@ -9,7 +9,7 @@ import DetalhesComputador from './pages/DetalhesComputador';
 import DetalhesEquipamento from './pages/DetalhesEquipamento';
 import EditarComputador from './pages/EditarComputador';
 import EditarEquipamento from './pages/EditarEquipamento';
-import ListaUsuarios from './pages/ListaUsuarios';
+import RegistrarManutencao from './pages/RegistrarManutencaoComputadores';
 
 function App() {
   return (
@@ -79,11 +79,19 @@ function App() {
             </ProtectedRoute>
           }
         />
-        <Route
-          path="/usuarios"
+        <Route 
+          path="/registrar/manutencao/computador/:numeroDePatrimonio"
           element={
             <ProtectedRoute>
-              <ListaUsuarios />
+              <RegistrarManutencao />
+            </ProtectedRoute>
+          }
+        />
+        <Route 
+          path="/registrar/manutencao/equipamento/:numeroDePatrimonio"
+          element={
+            <ProtectedRoute>
+              <RegistrarManutencao />
             </ProtectedRoute>
           }
         />
