@@ -1,7 +1,7 @@
 from django.urls import path
 from .views import (ComputadorDetailView, ComputadorListView, EquipamentoDetailView, 
                     EquipamentoListCreateView, ManutencaoComputadorListCreateView, ManutencaoComputadorDetailView, ManutencaoEquipamentoListCreateView
-                    , ManutencaoEquipamentoDetailView, ReturnAllManutencoesView, GetCountInstancesView,ExportAllXLSXView, ExportComputadorXLSXView, ExportEquipamentoXLSXView, UsuarioDetailView, UsuarioListView, UsuariosCreateView, 
+                    , ManutencaoEquipamentoDetailView, ReturnAllManutencoesView, GetCountInstancesView, GetCountAllStatusView , ExportAllXLSXView, ExportComputadorXLSXView, ExportEquipamentoXLSXView, UsuarioDetailView, UsuarioListView, UsuariosCreateView, 
                     ExportComputadorCSVView, ExportEquipamentoCSVView, ExportAllCSVView)
 
 urlpatterns = [
@@ -17,6 +17,7 @@ urlpatterns = [
     path('manutencao/equipamentos/<str:pk>/', ManutencaoEquipamentoDetailView.as_view(), name='manutencao-equipamento-detail'),
     path('manutencao/todos/', ReturnAllManutencoesView.as_view(), name='return-all-manutencoes'),
     path('instances/count/', GetCountInstancesView.as_view(), name='get-count-instances'),
+    path('status/count/', GetCountAllStatusView.as_view(), name='get-count-all-status'),
     path('export/computadores/csv/', ExportComputadorCSVView.as_view(), name='export-computador-csv'),
     path('export/equipamentos/csv/', ExportEquipamentoCSVView.as_view(), name='export-equipamento-csv'),
     path('export/tudo/csv/', ExportAllCSVView.as_view(), name='export-all-csv'),

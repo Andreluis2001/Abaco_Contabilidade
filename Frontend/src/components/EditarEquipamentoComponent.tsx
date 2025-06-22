@@ -12,6 +12,7 @@ const schema = z.object({
     garantia: z.string().optional(),
     local: z.string().min(1, "Local é obrigatório"),
     descricao: z.string().optional(),
+    status: z.string().optional(),
 });
 
 type FormFields = z.infer<typeof schema>;
@@ -46,6 +47,7 @@ function EditarEquipamentoComponent({ equipamentoData }: Props) {
                 modelo: data.modelo,
                 data_de_aquisicao: data.aquisicao,
                 data_da_garantia: data.garantia,
+                equipamento_status: data.status,
                 localizacao: data.local,
                 descricao: data.descricao
             })
@@ -123,6 +125,18 @@ function EditarEquipamentoComponent({ equipamentoData }: Props) {
                         />
                         {errors.local && (
                             <div className="error-message" style={{ color: "red", fontSize: "0.85em" }}>{errors.local.message}</div>
+                        )}
+                    </div>
+                    <div>
+                        <label>Status*</label>
+                        <select {...register("status")}>
+                            <option value="">Selecione o status</option>
+                            <option value="Ativo">Ativo</option>
+                            <option value="Manutencao">Manutencao</option>
+                            <option value="Desativado">Desativado</option>
+                        </select>
+                        {errors.status && (
+                            <div className="error-message" style={{ color: "red", fontSize: "0.85em" }}>{errors.status.message}</div>
                         )}
                     </div>
                 </div>

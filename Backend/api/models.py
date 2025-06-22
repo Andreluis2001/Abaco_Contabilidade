@@ -23,8 +23,8 @@ class Usuario(AbstractUser):
 class Computador(models.Model):
     
     class status(models.TextChoices):
-        FUNCIONANDO = 'Em Funcionamento'
-        MANUTENCAO = 'Em Manutencao'
+        ATIVO = 'Ativo'
+        MANUTENCAO = 'Manutencao'
         DESATIVADO = 'Desativado'
 
     numero_de_patrimonio = models.CharField(primary_key=True, unique=True)
@@ -32,7 +32,7 @@ class Computador(models.Model):
     data_de_aquisicao = models.DateField()
     localizacao = models.CharField(max_length=100)
     data_da_garantia = models.DateField(blank=True, null=True)
-    computador_status = models.CharField(max_length=50, choices=status.choices, default=status.FUNCIONANDO)
+    computador_status = models.CharField(max_length=50, choices=status.choices, default=status.ATIVO)
     modelo_processador = models.CharField(max_length=100, blank=True, null=True)
     memoria_ram = models.CharField(max_length=100, blank=True, null=True)
     modelo_hd = models.CharField(max_length=100, blank=True, null=True)
@@ -49,8 +49,8 @@ class Computador(models.Model):
 class Equipamento(models.Model):
 
     class status(models.TextChoices):
-        FUNCIONANDO = 'Em Funcionamento'
-        MANUTENCAO = 'Em Manutencao'
+        ATIVO = 'Ativo'
+        MANUTENCAO = 'Manutencao'
         DESATIVADO = 'Desativado'
 
     numero_de_patrimonio = models.CharField(primary_key=True, unique=True)
@@ -59,7 +59,7 @@ class Equipamento(models.Model):
     data_de_aquisicao = models.DateField()
     data_da_garantia = models.DateField(blank=True, null=True)
     localizacao = models.CharField(max_length=100)
-    equipameto_status = models.CharField(max_length=50, choices=status.choices, default=status.FUNCIONANDO)
+    equipameto_status = models.CharField(max_length=50, choices=status.choices, default=status.ATIVO)
     descricao = models.TextField(blank=True, null=True)
 
     def __str__(self):

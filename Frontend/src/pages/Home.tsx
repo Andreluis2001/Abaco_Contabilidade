@@ -10,7 +10,6 @@ import {
 } from "chart.js";
 import { useEffect, useState } from "react";
 import api from "../api";
-import { set } from "zod/v4-mini";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -21,10 +20,12 @@ function Home({}: Props) {
   const [manutencoes, setManutencoes] = useState<any[]>([]);
   const [countComputadorInstances, setCountComputadorInstances] = useState<any>();
   const [countEquipamentoInstances, setCountEquipamentoInstances] = useState<any>({});
+  const [countAllStatus, setCountAllStatus] = useState<any>({});
 
   useEffect(() => {
     getManutencoes();
     getCountInstances();
+    getCountAllStatus();
   }, []);
 
   const getManutencoes = async () => {
@@ -44,11 +45,19 @@ function Home({}: Props) {
       .then((response) => {
         setCountComputadorInstances(response.data.computador_count);
         setCountEquipamentoInstances(response.data.equipamento_count);
-        console.log("Contagem de instâncias:", response.data);
-        console.log("Contagem de equipamentos:", response.data.equipamento_count);
       })
       .catch((error) => {
         console.error("Erro ao buscar contagem de instâncias:", error);
+      });
+  }
+
+  const getCountAllStatus = async () => {
+    api
+      .get("api/status/count/")
+      .then((response) => {
+        setCountAllStatus(response.data);})
+      .catch((error) => {
+        console.error("Erro ao buscar contagem de status:", error);
       });
   }
 
@@ -74,10 +83,12 @@ function Home({}: Props) {
                   <span>Computador</span>
                   <span className="count">{countComputadorInstances}</span>
                 </div>
-                <div className="inventory-item">
-                  <span>Impressora</span>
-                  <span className="count">8</span>
-                </div>
+                {Object.entries(countEquipamentoInstances).map(([key, value]) => (
+                  <div className="inventory-item" key={key}>
+                    <span>{key.charAt(0).toUpperCase() + key.slice(1)}</span>
+                    <span className="count">{String(value)}</span>
+                  </div>
+                ))}
               </div>
             </div>
             <div className="card chart-card">
@@ -90,18 +101,20 @@ function Home({}: Props) {
               <div className="chart-container">
                 <Doughnut
                   data={{
-                  labels: ["Computadores", "Impressoras", "Notebooks", "Monitores", "Roteadores"],
+                  labels: ["Em Funcionamento", "Em Manutenção", "Desativado"],
                   datasets: [
                     {
-                    data: [15, 8, 12, 23, 6],
-                    backgroundColor: [
-                      "#1e88e5",
-                      "#43a047",
-                      "#f4511e",
-                      "#8e24aa",
-                      "#ffb300"
-                    ],
-                    hoverOffset: 4,
+                      data: [
+                        countAllStatus.total_ativos || 0,
+                        countAllStatus.total_manutencao || 0,
+                        countAllStatus.total_desativados || 0  
+                      ],
+                      backgroundColor: [
+                        "#1e88e5",
+                        "#43a047",
+                        "#f4511e"
+                      ],
+                      hoverOffset: 4,
                     },
                   ],
                   }}
@@ -130,7 +143,7 @@ function Home({}: Props) {
                       <h4>{manutencao.equipamento_id || manutencao.computador_id}</h4>
                       <span className="date">{new Date(manutencao.data).toLocaleDateString()}</span>
                     </div>
-                    <span className={`status status-${manutencao.status}`}>
+                    <span className={`status status-${manutencao.tipo_manutencao}`}>
                       {manutencao.tipo_manutencao.toUpperCase()}
                     </span>
                   </div>

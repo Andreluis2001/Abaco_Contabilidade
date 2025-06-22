@@ -12,7 +12,7 @@ function DetalhesEquipamentoComponent({ equipamento }: props) {
     const dataDeAquisicao = equipamento?.data_de_aquisicao || '';
     const dataDaGarantia = equipamento?.data_da_garantia || '';
     const localizacao = equipamento?.localizacao || '';
-    const status = equipamento?.computador_status || '';
+    const status = equipamento?.equipamento_status || '';
     const descricao = equipamento?.descricao || '';
     const manutencoes = equipamento?.manutencoes || [];
 

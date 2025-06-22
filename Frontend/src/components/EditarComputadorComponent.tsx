@@ -139,18 +139,18 @@ function EditarComputadorComponent({ computador }: Props) {
                         )}
                     </div>
                 </div>
-                <div className="form-row">
                     <div>
                         <label>Status</label>
-                        <input
-                            type="text"
-                            {...register("status")}
-                        />
+                        <select {...register("status")}>
+                            <option value="">Selecione o status</option>
+                            <option value="Ativo">Ativo</option>
+                            <option value="Manutencao">Manutencao</option>
+                            <option value="Desativado">Desativado</option>
+                        </select>
                         {errors.status && (
                             <div className="error-message" style={{ color: "red", fontSize: "0.85em" }}>{errors.status.message}</div>
                         )}
                     </div>
-                </div>
                 <div
                     className="form-row"
                     id="computador-campos"

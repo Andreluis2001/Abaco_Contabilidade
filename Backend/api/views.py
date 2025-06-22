@@ -76,6 +76,30 @@ class GetCountInstancesView(View):
         }
 
         return JsonResponse(data)
+    
+class GetCountAllStatusView(View):
+    def get(self, request, *args, **kwargs):
+        computador_status_count = Computador.objects.values('computador_status').annotate(count=Count('computador_status'))
+        equipamento_status_count = Equipamento.objects.values('equipameto_status').annotate(count=Count('equipameto_status'))
+
+        computador_ativo_count = sum(item['count'] for item in computador_status_count if item['computador_status'] == 'Ativo')
+        computador_manutencao_count = sum(item['count'] for item in computador_status_count if item['computador_status'] == 'Manutencao')
+        computador_desativado_count = sum(item['count'] for item in computador_status_count if item['computador_status'] == 'Desativado')
+
+        equipamento_ativo_count = sum(item['count'] for item in equipamento_status_count if item['equipameto_status'] == 'Ativo')
+        equipamento_manutencao_count = sum(item['count'] for item in equipamento_status_count if item['equipameto_status'] == 'Manutencao')
+        equipamento_desativado_count = sum(item['count'] for item in equipamento_status_count if item['equipameto_status'] == 'Desativado')
+
+        total_ativos = computador_ativo_count + equipamento_ativo_count
+        total_manutencao = computador_manutencao_count + equipamento_manutencao_count
+        total_desativados = computador_desativado_count + equipamento_desativado_count
+        data = {
+            'total_ativos': total_ativos,
+            'total_manutencao': total_manutencao,
+            'total_desativados': total_desativados
+        }
+
+        return JsonResponse(data)
 
 class ExportComputadorCSVView(View):
     def get(self, request, *args, **kwargs):
