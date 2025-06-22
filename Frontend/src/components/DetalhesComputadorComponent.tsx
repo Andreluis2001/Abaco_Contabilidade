@@ -105,7 +105,7 @@ function DetalhesComputadorComponent({ computador }: props) {
                 <div className="maintenance-history">
                     {manutencoes.map((manutencao: any) => (
                         <p key={manutencao.id}>
-                            <strong>{manutencao.data}:</strong> {manutencao.descricao}
+                            <strong>{manutencao.data}:</strong> {manutencao.descricao} → Motivo: <strong>{manutencao.tipo_manutencao}</strong>
                         </p>
                     ))}
                     {manutencoes.length === 0 && <p>Nenhuma manutenção registrada.</p>}

@@ -66,10 +66,16 @@ class Equipamento(models.Model):
         return self.numero_de_patrimonio
     
 class ManutencaoComputador(models.Model):
+
+    class tipo_de_manutencao(models.TextChoices):
+        PREVENTIVA = 'Preventiva'
+        CORRETIVA = 'Corretiva'
+        ATUALIZACAO = 'Atualizacao'
+    
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     computador = models.ForeignKey(Computador, on_delete=models.CASCADE, related_name='manutencoes')
-    tecnico = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name='tecnico', null=True, blank=True)
     data = models.DateField(auto_now_add=True)
+    tipo_manutencao = models.CharField(max_length=100, choices=tipo_de_manutencao.choices, default=tipo_de_manutencao.PREVENTIVA)
     descricao = models.TextField(blank=True, null=True)
 
 
@@ -77,10 +83,16 @@ class ManutencaoComputador(models.Model):
         return f'Manutencao {self.id} - {self.computador.numero_de_patrimonio}'
     
 class ManutencaoEquipamento(models.Model):
+
+    class tipo_de_manutencao(models.TextChoices):
+        PREVENTIVA = 'Preventiva'
+        CORRETIVA = 'Corretiva'
+        ATUALIZACAO = 'Atualizacao'
+
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     equipamento = models.ForeignKey(Equipamento, on_delete=models.CASCADE, related_name='manutencoes')
-    tecnico = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name='tecnico_equipamento', blank=True, null=True)
     data = models.DateField(auto_now_add=True)
+    tipo_manutencao = models.CharField(max_length=100, choices=tipo_de_manutencao.choices, default=tipo_de_manutencao.PREVENTIVA)
     descricao = models.TextField(blank=True, null=True)
 
     def __str__(self):

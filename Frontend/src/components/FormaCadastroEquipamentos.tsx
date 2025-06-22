@@ -98,9 +98,12 @@ function FormaCadastroEquipamentos() {
                             id="equipamento"
                             {...register("equipamento")}
                         >
-                            <option value="Computador" selected>Computador</option>
+                            <option value="Computador">Computador</option>
                             <option value="Impressora">Impressora</option>
                             <option value="Monitor">Monitor</option>
+                            <option value="Projetor">Projetor</option>
+                            <option value="Scanner">Scanner</option>
+                            <option value="Roteador">Roteador</option>
                         </select>
                     </div>
                     {errors.equipamento && (

@@ -3,7 +3,6 @@ import Home from './pages/Home';
 import CadastroEquipamentos from './pages/CadastroEquipamentos';
 import Login from './pages/LoginPage';
 import ListaEquipamentos from './pages/ListaEquipamentos';
-import ListaManutencoes from './pages/ListaManutencoes';
 import ProtectedRoute from './components/ProtectedRoute';
 import DetalhesComputador from './pages/DetalhesComputador';
 import DetalhesEquipamento from './pages/DetalhesEquipamento';
@@ -37,14 +36,6 @@ function App() {
           element={
             <ProtectedRoute>
               <ListaEquipamentos />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/lista/manutencoes"
-          element={
-            <ProtectedRoute>
-              <ListaManutencoes />
             </ProtectedRoute>
           }
         />

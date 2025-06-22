@@ -64,8 +64,8 @@ function DetalhesEquipamentoComponent({ equipamento }: props) {
                 <div className="section-title">Histórico de Manutenções</div>
                 <div className="maintenance-history">
                     {manutencoes.map((manutencao: any) => (
-                        <p key={manutencao.id}>
-                            <strong>{manutencao.data}:</strong> {manutencao.descricao}
+                       <p key={manutencao.id}>
+                            <strong>{manutencao.data}:</strong> {manutencao.descricao} → Motivo: <strong>{manutencao.tipo_manutencao}</strong>
                         </p>
                     ))}
                     {manutencoes.length === 0 && <p>Nenhuma manutenção registrada.</p>}

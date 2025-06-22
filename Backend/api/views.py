@@ -3,7 +3,8 @@ from .models import  Computador, Equipamento, ManutencaoComputador, ManutencaoEq
 from .serializers import ComputadorSerializer, EquipamentoSerializer, UsuarioSerializer, ManutencaoComputadorSerializer, ManutencaoEquipamentoSerializer
 from .filters import ComputadorFilter, EquipamentoFilter, UsuarioFilter
 from django.views import View
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
+from django.db.models import Count
 import csv
 import pandas as pd
 
@@ -53,6 +54,28 @@ class ManutencaoEquipamentoListCreateView(generics.ListCreateAPIView):
 class ManutencaoEquipamentoDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = ManutencaoEquipamento.objects.all()
     serializer_class = ManutencaoEquipamentoSerializer
+
+class ReturnAllManutencoesView(View):
+    def get(self, request, *args, **kwargs):
+
+        manutencoes_computadores = ManutencaoComputador.objects.all()
+        manutencoes_equipamentos = ManutencaoEquipamento.objects.all()
+
+        data = list(manutencoes_computadores.values()) + list(manutencoes_equipamentos.values())
+
+        return JsonResponse(data, safe=False)
+    
+class GetCountInstancesView(View):
+    def get(self, request, *args, **kwargs):
+        computador_count = Computador.objects.count()
+        equipamento_count = Equipamento.objects.values('equipamento').annotate(count=Count('equipamento'))
+
+        data = {
+            'computador_count': computador_count,
+            'equipamento_count': {item['equipamento']: item['count'] for item in equipamento_count}
+        }
+
+        return JsonResponse(data)
 
 class ExportComputadorCSVView(View):
     def get(self, request, *args, **kwargs):

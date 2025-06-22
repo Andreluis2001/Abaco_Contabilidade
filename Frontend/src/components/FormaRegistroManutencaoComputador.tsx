@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 const schema = z.object({
     data_de_manutencao: z.string().date("A data de realização da manutenção é obrigatória"),
+    motivo: z.string({ required_error: "O motivo da manutenção é obrigatório" }),
     descricao: z.string({ required_error: "A descrição da manutenção é obrigatória" }).max(500, "A descrição não pode exceder 500 caracteres"),
 });
 
@@ -28,6 +29,7 @@ function FormaRegistroManutencaoComputador({numero_de_patrimonio}: Props) {
         api
             .post('api/manutencao/computadores/', {
                 computador: numero_de_patrimonio,
+                tipo_manutencao: data.motivo,
                 descricao: data.descricao
             })
             .then((response) => {
@@ -57,6 +59,17 @@ function FormaRegistroManutencaoComputador({numero_de_patrimonio}: Props) {
                         {errors.data_de_manutencao && (
                             <div className="error-message" style={{ color: "red", fontSize: "0.85em" }}>{errors.data_de_manutencao.message}</div>
                         )}
+                    </div>
+                    <div>
+                        <label>Motivo da Manutenção</label>
+                        <select 
+                            id="motivo"
+                            {...register("motivo")}
+                        >
+                            <option value="Preventiva">Preventiva</option>
+                            <option value="Corretiva">Corretiva</option>
+                            <option value="Atualizacao">Atualização</option>
+                        </select>
                     </div>
                 </div>
                 <div className="form-row">

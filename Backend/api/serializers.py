@@ -6,7 +6,7 @@ class ManutencaoComputadorSerializer(serializers.ModelSerializer):
     class Meta:
         model = ManutencaoComputador
         fields = [
-            "id", "computador", "data", "descricao"
+            "id", "computador", "tipo_manutencao", "data", "descricao"
         ]
 
 class ManutencaoEquipamentoSerializer(serializers.ModelSerializer):
@@ -14,7 +14,7 @@ class ManutencaoEquipamentoSerializer(serializers.ModelSerializer):
     class Meta:
         model = ManutencaoEquipamento
         fields = [
-            "id", "equipamento", "data", "descricao"
+            "id", "equipamento", "tipo_manutencao", "data", "descricao"
         ]
         
 class ComputadorSerializer(serializers.ModelSerializer):

@@ -258,17 +258,17 @@
     letter-spacing: 0.025em;
 }
 
-.status-completed {
+.status-Preventiva {
     background: #dcfce7;
     color: #166534;
 }
 
-.status-pending {
+.status-Corretiva {
     background: #fef3c7;
     color: #92400e;
 }
 
-.status-in-progress {
+.status-Atualizacao {
     background: #dbeafe;
     color: #1e40af;
 }
