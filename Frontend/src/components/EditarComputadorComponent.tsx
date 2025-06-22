@@ -138,7 +138,6 @@ function EditarComputadorComponent({ computador }: Props) {
                             <div className="error-message" style={{ color: "red", fontSize: "0.85em" }}>{errors.local.message}</div>
                         )}
                     </div>
-                </div>
                     <div>
                         <label>Status</label>
                         <select {...register("status")}>
@@ -151,6 +150,7 @@ function EditarComputadorComponent({ computador }: Props) {
                             <div className="error-message" style={{ color: "red", fontSize: "0.85em" }}>{errors.status.message}</div>
                         )}
                     </div>
+                </div>
                 <div
                     className="form-row"
                     id="computador-campos"
@@ -165,6 +165,11 @@ function EditarComputadorComponent({ computador }: Props) {
                             <div className="error-message" style={{ color: "red", fontSize: "0.85em" }}>{errors.processador.message}</div>
                         )}
                     </div>
+                </div>
+                <div 
+                    className="form-row" 
+                    id="computador-campos"
+                >
                     <div>
                         <label>Memória RAM</label>
                         <input
@@ -195,6 +200,11 @@ function EditarComputadorComponent({ computador }: Props) {
                             <div className="error-message" style={{ color: "red", fontSize: "0.85em" }}>{errors.ssd.message}</div>
                         )}
                     </div>
+                </div>
+                <div 
+                    className="form-row" 
+                    id="computador-campos"
+                >
                     <div>
                         <label>Fonte</label>
                         <input
