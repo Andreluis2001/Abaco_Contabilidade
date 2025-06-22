@@ -1,8 +1,9 @@
 import "../styles/style.css";
-import {zodResolver} from '@hookform/resolvers/zod';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, type SubmitHandler } from 'react-hook-form';
-import {z} from "zod";
+import { z } from "zod";
 import api from "../api";
+import { useNavigate } from "react-router-dom";
 
 const schema = z.object({
     data_de_manutencao: z.string().date("A data de realização da manutenção é obrigatória"),
@@ -12,33 +13,16 @@ const schema = z.object({
 type FormFields = z.infer<typeof schema>;
 
 type Props = {
-    tipo: 'computador' | 'equipamento';
     numero_de_patrimonio: string;
 }
 
-function FormaRegistroManutencao({tipo, numero_de_patrimonio}: Props) {
+function FormaRegistroManutencaoEquipamento({ numero_de_patrimonio }: Props) {
 
-    const {register, handleSubmit, formState: {errors, isSubmitting}} = useForm<FormFields>({
+    const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<FormFields>({
         resolver: zodResolver(schema),
     });
 
-    const submitToManutencaoComputadores: SubmitHandler<FormFields> = async (data) => {
-        api
-            .post('api/manutencao/computadores/', {
-                computador: numero_de_patrimonio,
-                descricao: data.descricao
-            })
-            .then((response) => {
-                if (response.status === 201) {
-                    alert('Manutenção cadastrada com sucesso!');
-                } else {
-                    alert('Erro ao cadastrar Manutenção. Tente novamente.');
-                }
-            })
-            .catch((error) => {
-                console.error('Erro ao cadastrar manutenção:', error);
-            });
-    };
+    const navigate = useNavigate();
 
     const submitToManutencaoEquipamentos: SubmitHandler<FormFields> = async (data) => {
         api
@@ -48,25 +32,26 @@ function FormaRegistroManutencao({tipo, numero_de_patrimonio}: Props) {
             })
             .then((response) => {
                 if (response.status === 201) {
-                    alert('Manutenção de equipamento cadastrada com sucesso!');
+                    alert('Manutenção cadastrada com sucesso!');
+                    navigate(-1);
                 } else {
-                    alert('Erro ao cadastrar manutenção de equipamento. Tente novamente.');
+                    alert('Erro ao cadastrar Manutenção. Tente novamente.');
                 }
             })
             .catch((error) => {
-                console.error('Erro ao cadastrar manutenção de equipamento:', error);
+                console.error('Erro ao cadastrar manutenção:', error);
             });
     };
-            
+
     return (
         <>
-            <form className="form" id="equipment-form" onSubmit={handleSubmit(tipo === 'computador' ? submitToManutencaoComputadores : submitToManutencaoEquipamentos)}>
+            <form className="form" id="equipment-form" onSubmit={handleSubmit(submitToManutencaoEquipamentos)}>
                 <div className="form-row">
                     <div>
                         <label>Data de Manutenção*</label>
                         <input
                             type="date"
-                            id="data_de_aquisicao"
+                            id="data_de_manutencao"
                             {...register("data_de_manutencao")}
                         />
                         {errors.data_de_manutencao && (
@@ -96,4 +81,4 @@ function FormaRegistroManutencao({tipo, numero_de_patrimonio}: Props) {
     );
 }
 
-export default FormaRegistroManutencao;
+export default FormaRegistroManutencaoEquipamento;

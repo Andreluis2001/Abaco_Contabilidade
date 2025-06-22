@@ -9,7 +9,8 @@ import DetalhesComputador from './pages/DetalhesComputador';
 import DetalhesEquipamento from './pages/DetalhesEquipamento';
 import EditarComputador from './pages/EditarComputador';
 import EditarEquipamento from './pages/EditarEquipamento';
-import RegistrarManutencao from './pages/RegistrarManutencaoComputadores';
+import RegistrarManutencaoComputadores from './pages/RegistrarManutencaoComputadores';
+import RegistrarManutencaoEquipamentos from './pages/RegistrarManutencaoEquipamentos';
 
 function App() {
   return (
@@ -83,7 +84,7 @@ function App() {
           path="/registrar/manutencao/computador/:numeroDePatrimonio"
           element={
             <ProtectedRoute>
-              <RegistrarManutencao />
+              <RegistrarManutencaoComputadores />
             </ProtectedRoute>
           }
         />
@@ -91,7 +92,7 @@ function App() {
           path="/registrar/manutencao/equipamento/:numeroDePatrimonio"
           element={
             <ProtectedRoute>
-              <RegistrarManutencao />
+              <RegistrarManutencaoEquipamentos />
             </ProtectedRoute>
           }
         />
