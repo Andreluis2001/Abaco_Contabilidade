@@ -6,6 +6,9 @@ import { useForm, type SubmitHandler } from 'react-hook-form';
 import {z} from "zod";
 
 const schema = z.object({
+    username: z.string()
+        .min(1, "O nome de usuário é obrigatório")
+        .regex(/^\S+$/, "O nome de usuário não pode conter espaços"),
     nome: z.string().min(1, "O nome é obrigatório"),
     email: z.string().email("Email inválido").min(1, "O email é obrigatório"),
     senha: z.string().min(6, "A senha deve ter pelo menos 6 caracteres"),
@@ -26,7 +29,8 @@ function FormaCadastroUsuarios() {
     const submitToUsuarios: SubmitHandler<FormFields> = async (data) => {
         api
             .post('api/usuarios/create/', {
-                username: data.nome,
+                username: data.username,
+                nome_completo: data.nome,
                 email: data.email,
                 password: data.senha,
                 role: data.cargo
@@ -49,12 +53,25 @@ function FormaCadastroUsuarios() {
             <form className="form" id="user-form" onSubmit={handleSubmit(submitToUsuarios)}>
                 <div className="form-row">
                     <div className="full-width">
+                        <label>Nome De Usuário*</label>
+                        <input
+                            type="text"
+                            id="full-name"
+                            placeholder="Este é nome que será usado para login e será visível no site"
+                            {...register("username")}
+                        />
+                        {errors.username && (
+                            <div className="error-message" style={{ color: "red", fontSize: "0.85em" }}>{errors.username.message}</div>
+                        )}
+                    </div>
+                </div>
+                <div className="form-row">
+                    <div className="full-width">
                         <label>Nome Completo*</label>
                         <input
                             type="text"
                             id="full-name"
                             placeholder="Digite seu nome completo"
-                            required
                             {...register("nome")}
                         />
                         {errors.nome && (
@@ -69,7 +86,6 @@ function FormaCadastroUsuarios() {
                             type="email"
                             id="email"
                             placeholder="Digite seu email"
-                            required
                             {...register("email")}
                         />
                         {errors.email && (
@@ -82,7 +98,6 @@ function FormaCadastroUsuarios() {
                         <label>Cargo*</label>
                         <select
                             id="cargo"
-                            required
                             {...register("cargo")}
                         >
                             <option value="">Selecione o cargo</option>
@@ -101,7 +116,6 @@ function FormaCadastroUsuarios() {
                             type="password"
                             id="password"
                             placeholder="Digite sua senha"
-                            required
                             {...register("senha")}
                         />
                         {errors.senha && (

@@ -8,6 +8,7 @@ class Usuario(AbstractUser):
         ADMIN = 'admin'
         TECNICO = 'tecnico'
 
+    nome_completo = models.CharField(max_length=100, default='', blank=True)
     role = models.CharField(max_length=100, choices=Roles.choices, default=Roles.TECNICO)
 
     def save(self, *args, **kwargs):
