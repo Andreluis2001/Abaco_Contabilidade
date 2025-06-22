@@ -1,7 +1,7 @@
 import "../styles/style.css";
 import logo from "../images/logo-abaco.png"; 
 import { useState } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate, useLocation } from "react-router-dom";
 
 type Props = {
 
@@ -9,6 +9,9 @@ type Props = {
 
 function Navbar({ }: Props) {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+    const location = useLocation();
+    const curentPath = location.pathname;
 
     const handleClick = () => {
         setIsSidebarOpen(!isSidebarOpen);
@@ -26,8 +29,13 @@ function Navbar({ }: Props) {
                     <Link to="/">
                         <img src={logo} alt="Logo Ábaco" className="logo-navbar" />
                     </Link>
-                    
                 </div>
+                { curentPath !== '/' ? (
+                    <nav>
+                        <Link to={'/lista/equipamentos'}><i className="bi bi-list"></i> Lista de Equipamentos</Link>
+                        <Link to={'/lista/usuarios'}><i className="bi bi-people-fill"></i> Usuários</Link>
+                    </nav>
+                ): null}
                 <div className="user" id="user-btn" onClick={handleClick}>
                     <i className="bi bi-person-circle"></i> Matheus
                 </div>

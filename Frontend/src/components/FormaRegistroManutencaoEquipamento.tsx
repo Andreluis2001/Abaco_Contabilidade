@@ -30,7 +30,8 @@ function FormaRegistroManutencaoEquipamento({ numero_de_patrimonio }: Props) {
             .post('api/manutencao/equipamentos/', {
                 equipamento: numero_de_patrimonio,
                 tipo_manutencao: data.motivo,
-                descricao: data.descricao
+                descricao: data.descricao,
+                data: data.data_de_manutencao
             })
             .then((response) => {
                 if (response.status === 201) {

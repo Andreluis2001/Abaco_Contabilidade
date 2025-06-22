@@ -73,7 +73,7 @@ class ManutencaoComputador(models.Model):
     
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     computador = models.ForeignKey(Computador, on_delete=models.CASCADE, related_name='manutencoes')
-    data = models.DateField(auto_now_add=True)
+    data = models.DateField()
     tipo_manutencao = models.CharField(max_length=100, choices=tipo_de_manutencao.choices, default=tipo_de_manutencao.PREVENTIVA)
     descricao = models.TextField(blank=True, null=True)
 
@@ -90,7 +90,7 @@ class ManutencaoEquipamento(models.Model):
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     equipamento = models.ForeignKey(Equipamento, on_delete=models.CASCADE, related_name='manutencoes')
-    data = models.DateField(auto_now_add=True)
+    data = models.DateField()
     tipo_manutencao = models.CharField(max_length=100, choices=tipo_de_manutencao.choices, default=tipo_de_manutencao.PREVENTIVA)
     descricao = models.TextField(blank=True, null=True)
 

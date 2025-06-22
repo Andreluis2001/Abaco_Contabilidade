@@ -30,7 +30,8 @@ function FormaRegistroManutencaoComputador({numero_de_patrimonio}: Props) {
             .post('api/manutencao/computadores/', {
                 computador: numero_de_patrimonio,
                 tipo_manutencao: data.motivo,
-                descricao: data.descricao
+                descricao: data.descricao,
+                data: data.data_de_manutencao,
             })
             .then((response) => {
                 if (response.status === 201) {
@@ -53,7 +54,7 @@ function FormaRegistroManutencaoComputador({numero_de_patrimonio}: Props) {
                         <label>Data de Manutenção*</label>
                         <input
                             type="date"
-                            id="data_de_aquisicao"
+                            id="data_de_manutencao"
                             {...register("data_de_manutencao")}
                         />
                         {errors.data_de_manutencao && (

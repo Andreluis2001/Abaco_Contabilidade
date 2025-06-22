@@ -10,7 +10,7 @@ const schema = z.object({
     modelo: z.string().min(1, "Modelo é obrigatório"),
     patrimonio: z.string().min(1, "Número de Patrimônio é obrigatório"),
     aquisicao: z.string().date("Data de Aquisição é obrigatória"),
-    garantia: z.string().date().optional(),
+    garantia: z.string().date().optional().nullable(),
     local: z.string().min(1, "Local é obrigatório"),
     processador: z.string().optional(),
     ram: z.string().optional(),
@@ -28,6 +28,9 @@ function FormaCadastroEquipamentos() {
 
     const {register, handleSubmit, watch, formState: {errors, isSubmitting}} = useForm<FormFields>({
         resolver: zodResolver(schema),
+        defaultValues:{
+            garantia: new Date().toISOString().split('T')[0],
+        }
     });
 
     const navigate = useNavigate();
