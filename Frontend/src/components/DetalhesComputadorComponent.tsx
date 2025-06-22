@@ -6,20 +6,20 @@ type props = {
 };
 
 function DetalhesComputadorComponent({ computador }: props) {
-    const numeroDePatrimonio = computador?.numero_de_patrimonio || '';
-    const modelo = computador?.modelo || '';
-    const dataDeAquisicao = computador?.data_de_aquisicao || '';
-    const dataDaGarantia = computador?.data_da_garantia || '';
-    const localizacao = computador?.localizacao || '';
-    const status = computador?.computador_status || '';
-    const modeloProcessador = computador?.modelo_processador || '';
-    const memoriaRam = computador?.memoria_ram || '';
-    const modeloHd = computador?.modelo_hd || '';
-    const modeloSsd = computador?.modelo_ssd || '';
-    const modeloFonte = computador?.modelo_fonte || '';
-    const modeloPlacaMae = computador?.modelo_placa_mae || '';
-    const modeloPlacaVideo = computador?.modelo_placa_video || '';
-    const descricao = computador?.descricao || '';
+    const numeroDePatrimonio = computador?.numero_de_patrimonio || '-';
+    const modelo = computador?.modelo || '-';
+    const dataDeAquisicao = computador?.data_de_aquisicao || '-';
+    const dataDaGarantia = computador?.data_da_garantia || '-';
+    const localizacao = computador?.localizacao || '-';
+    const status = computador?.computador_status || '-';
+    const modeloProcessador = computador?.modelo_processador || '-';
+    const memoriaRam = computador?.memoria_ram || '-';
+    const modeloHd = computador?.modelo_hd || '-';
+    const modeloSsd = computador?.modelo_ssd || '-';
+    const modeloFonte = computador?.modelo_fonte || '-';
+    const modeloPlacaMae = computador?.modelo_placa_mae || '-';
+    const modeloPlacaVideo = computador?.modelo_placa_video || '-';
+    const descricao = computador?.descricao || '-';
     const manutencoes = computador?.manutencoes || [];
 
     return (

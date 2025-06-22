@@ -37,6 +37,7 @@ function EditarEquipamentoComponent({ equipamentoData }: Props) {
             garantia: equipamentoData?.data_da_garantia ? equipamentoData.data_da_garantia.substring(0, 10) : "",
             local: equipamentoData?.localizacao || "",
             descricao: equipamentoData?.descricao || "",
+            status: equipamentoData?.equipamento_status || "",
         }
     });
 

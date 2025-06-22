@@ -59,7 +59,7 @@ class Equipamento(models.Model):
     data_de_aquisicao = models.DateField()
     data_da_garantia = models.DateField(blank=True, null=True)
     localizacao = models.CharField(max_length=100)
-    equipameto_status = models.CharField(max_length=50, choices=status.choices, default=status.ATIVO)
+    equipamento_status = models.CharField(max_length=50, choices=status.choices, default=status.ATIVO)
     descricao = models.TextField(blank=True, null=True)
 
     def __str__(self):

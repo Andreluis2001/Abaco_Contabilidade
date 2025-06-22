@@ -6,14 +6,14 @@ type props = {
 };
 
 function DetalhesEquipamentoComponent({ equipamento }: props) {
-    const tipoEquipamento = equipamento?.equipamento || '';
-    const numeroDePatrimonio = equipamento?.numero_de_patrimonio || '';
-    const modelo = equipamento?.modelo || '';
-    const dataDeAquisicao = equipamento?.data_de_aquisicao || '';
-    const dataDaGarantia = equipamento?.data_da_garantia || '';
-    const localizacao = equipamento?.localizacao || '';
-    const status = equipamento?.equipamento_status || '';
-    const descricao = equipamento?.descricao || '';
+    const tipoEquipamento = equipamento?.equipamento || '-';
+    const numeroDePatrimonio = equipamento?.numero_de_patrimonio || '-';
+    const modelo = equipamento?.modelo || '-';
+    const dataDeAquisicao = equipamento?.data_de_aquisicao || '-';
+    const dataDaGarantia = equipamento?.data_da_garantia || '-';
+    const localizacao = equipamento?.localizacao || '-';
+    const status = equipamento?.equipamento_status || '-';
+    const descricao = equipamento?.descricao || '-';
     const manutencoes = equipamento?.manutencoes || [];
 
     return (

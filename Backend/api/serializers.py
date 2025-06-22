@@ -38,7 +38,7 @@ class EquipamentoSerializer(serializers.ModelSerializer):
         model = Equipamento
         fields = [
             "numero_de_patrimonio", "equipamento", "modelo", "data_de_aquisicao",
-            "data_da_garantia", "localizacao", "equipameto_status", "descricao", "manutencoes"
+            "data_da_garantia", "localizacao", "equipamento_status", "descricao", "manutencoes"
         ]
 
 class UsuarioSerializer(serializers.ModelSerializer):
