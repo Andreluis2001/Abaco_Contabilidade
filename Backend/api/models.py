@@ -9,7 +9,6 @@ class Usuario(AbstractUser):
         TECNICO = 'tecnico'
 
     role = models.CharField(max_length=100, choices=Roles.choices, default=Roles.TECNICO)
-    numero_de_telefone = models.CharField(max_length=50, blank=True, null=True)
 
     def save(self, *args, **kwargs):
         if not self.pk:

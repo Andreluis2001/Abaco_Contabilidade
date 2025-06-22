@@ -10,6 +10,10 @@ import EditarComputador from './pages/EditarComputador';
 import EditarEquipamento from './pages/EditarEquipamento';
 import RegistrarManutencaoComputadores from './pages/RegistrarManutencaoComputadores';
 import RegistrarManutencaoEquipamentos from './pages/RegistrarManutencaoEquipamentos';
+import ListaUsuarios from './pages/ListaUsuarios';
+import CadastroUsuarios from './pages/CadastroUsuarios';
+import DetalhesUsuario from './pages/DetalhesUsuario';
+import EditarUsuario from './pages/EditarUsuario';
 
 function App() {
   return (
@@ -32,10 +36,26 @@ function App() {
           }
         />
         <Route
+          path="/cadastro/usuarios"
+          element={
+            <ProtectedRoute>
+              <CadastroUsuarios />
+            </ProtectedRoute>
+          }
+        />
+        <Route
           path="/lista/equipamentos"
           element={
             <ProtectedRoute>
               <ListaEquipamentos />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/lista/usuarios"
+          element={
+            <ProtectedRoute>
+              <ListaUsuarios />
             </ProtectedRoute>
           }
         />
@@ -56,6 +76,14 @@ function App() {
           }
         />
         <Route 
+          path="/detalhes/usuario/:id"
+          element={
+            <ProtectedRoute>
+              <DetalhesUsuario />
+            </ProtectedRoute>
+          }
+        />
+        <Route 
           path="/detalhes/computador/editar/:numero_de_patrimonio"
           element={
             <ProtectedRoute>
@@ -68,6 +96,14 @@ function App() {
           element={
             <ProtectedRoute>
               <EditarEquipamento />
+            </ProtectedRoute>
+          }
+        />
+        <Route 
+          path="/detalhes/usuario/editar/:id"
+          element={
+            <ProtectedRoute>
+              <EditarUsuario />
             </ProtectedRoute>
           }
         />

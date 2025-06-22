@@ -1,18 +1,6 @@
 import django_filters
 from api.models import Computador, Equipamento, Usuario
 
-class UsuarioFilter(django_filters.FilterSet):
-    class Meta:
-        model = Usuario
-        fields = {
-            'username': ['icontains'],
-            'email': ['icontains'],
-            'first_name': ['icontains'],
-            'last_name': ['icontains'],
-            'role': ['exact'],
-            'numero_de_telefone': ['icontains'],
-        }
-
 class ComputadorFilter(django_filters.FilterSet):
     class Meta:
         model = Computador

@@ -43,10 +43,8 @@ class EquipamentoSerializer(serializers.ModelSerializer):
 
 class UsuarioSerializer(serializers.ModelSerializer):
 
-    manutencoes_computador = ManutencaoComputadorSerializer(many=True, read_only=True)
-    manutencoes_equipamento = ManutencaoEquipamentoSerializer(many=True, read_only=True)
 
     class Meta:
         model = Usuario
-        fields = ["username", "password", "role", "email", "numero_de_telefone", "manutencoes_computador", "manutencoes_equipamento"]
+        fields = ["id", "username", "password", "role", "email"]
         extra_kwargs = {"password": {"write_only": True}}

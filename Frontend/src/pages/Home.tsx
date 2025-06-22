@@ -164,7 +164,7 @@ function Home({}: Props) {
               <i className="bi bi-people-fill" style={{ fontSize: "2.5rem", color: "#43a047" }}></i>
               <h3>Usuários</h3>
               <p>Gerencie os usuários cadastrados no sistema.</p>
-              <Link to={""}>
+              <Link to={"/lista/usuarios"}>
                 <button className="btn btn-primary">Ir para Usuários</button>
               </Link>
             </div>

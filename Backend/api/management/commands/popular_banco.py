@@ -66,7 +66,6 @@ class Command(BaseCommand):
                 email="user@example.com",
                 password="pbkdf2_sha256$1000000$zjBK7sJSbqGsz8YIozcV71$RqfdA3cpUMmQTbQP94G7BeAf9H3BEfyfdgQtzS/HkHo=",
                 role=Usuario.Roles.ADMIN,
-                numero_de_telefone="1234567890"
             ),
         ]
         

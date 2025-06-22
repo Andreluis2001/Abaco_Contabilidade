@@ -1,7 +1,7 @@
 from rest_framework import generics
 from .models import  Computador, Equipamento, ManutencaoComputador, ManutencaoEquipamento, Usuario
 from .serializers import ComputadorSerializer, EquipamentoSerializer, UsuarioSerializer, ManutencaoComputadorSerializer, ManutencaoEquipamentoSerializer
-from .filters import ComputadorFilter, EquipamentoFilter, UsuarioFilter
+from .filters import ComputadorFilter, EquipamentoFilter
 from django.views import View
 from django.http import HttpResponse, JsonResponse
 from django.db.models import Count
@@ -11,7 +11,6 @@ import pandas as pd
 class UsuarioListView(generics.ListAPIView):
     queryset = Usuario.objects.all()
     serializer_class = UsuarioSerializer
-    filterset_class = UsuarioFilter
 
 class UsuariosCreateView(generics.CreateAPIView):
     queryset = Usuario.objects.all()
@@ -20,6 +19,16 @@ class UsuariosCreateView(generics.CreateAPIView):
 class UsuarioDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Usuario.objects.all()
     serializer_class = UsuarioSerializer
+
+class GetCurrentUsuarioView(View):
+    def get(self, request, *args, **kwargs):
+        user_data = {
+            'username': request.user.username,
+            'email': request.user.email,
+            'role': request.user.role,
+            'numero_de_telefone': request.user.numero_de_telefone
+        }
+        return JsonResponse(user_data)
 
 class ComputadorListView(generics.ListCreateAPIView):
     queryset = Computador.objects.all()
