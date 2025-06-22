@@ -57,7 +57,7 @@ function EditarEquipamentoComponent({ equipamentoData }: Props) {
                     throw new Error('Erro ao atualizar equipamento');
                 }
                 alert('Equipamento atualizado com sucesso!');
-                navigate('/lista/equipamentos');
+                navigate(-1);
             })
             .catch(error => {
                 console.error('Erro ao atualizar equipamento:', error);

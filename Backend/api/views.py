@@ -67,12 +67,13 @@ class ManutencaoEquipamentoDetailView(generics.RetrieveUpdateDestroyAPIView):
 class ReturnAllManutencoesView(View):
     def get(self, request, *args, **kwargs):
 
-        manutencoes_computadores = ManutencaoComputador.objects.all()
-        manutencoes_equipamentos = ManutencaoEquipamento.objects.all()
+        manutencoes_computadores = ManutencaoComputador.objects.all().order_by('-data')[:4]
+        manutencoes_equipamentos = ManutencaoEquipamento.objects.all().order_by('-data')[:4]
 
         data = list(manutencoes_computadores.values()) + list(manutencoes_equipamentos.values())
+        sorted_data = sorted(data, key=lambda x: x['data'], reverse=True)[:4]
 
-        return JsonResponse(data, safe=False)
+        return JsonResponse(sorted_data, safe=False)
     
 class GetCountInstancesView(View):
     def get(self, request, *args, **kwargs):

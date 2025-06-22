@@ -48,7 +48,7 @@ function EditarUsuarioComponent({ usuario }: Props) {
                     throw new Error('Erro ao atualizar usuário');
                 }
                 alert('Usuário atualizado com sucesso!');
-                navigate('/lista/usuarios');
+                navigate(-1);
             })
             .catch(error => {
                 console.error('Erro ao atualizar usuário:', error);

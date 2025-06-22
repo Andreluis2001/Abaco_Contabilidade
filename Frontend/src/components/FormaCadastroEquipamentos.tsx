@@ -13,9 +13,9 @@ const schema = z.object({
     garantia: z.string().date().optional().nullable(),
     local: z.string().min(1, "Local é obrigatório"),
     processador: z.string().optional(),
-    ram: z.string().optional(),
-    hd: z.string().optional(),
-    ssd: z.string().optional(),
+    ram: z.number().optional(),
+    hd: z.number().optional(),
+    ssd: z.number().optional(),
     fonte: z.string().optional(),
     placaMae: z.string().optional(),
     placaVideo: z.string().optional(),
@@ -192,33 +192,33 @@ function FormaCadastroEquipamentos() {
                         )}
                     </div>
                     <div>
-                        <label>Memória RAM</label>
+                        <label>Memória RAM (em Gb)</label>
                         <input
-                            type="text"
+                            type="number"
                             id="ram"
-                            {...register("ram")}
+                            {...register("ram", { valueAsNumber: true })}
                         />
                         {errors.ram && (
                             <div className="error-message" style={{ color: "red", fontSize: "0.85em" }}>{errors.ram.message}</div>
                         )}
                     </div>
                     <div>
-                        <label>HD</label>
+                        <label>HD (em Gb)</label>
                         <input
-                            type="text"
+                            type="number"
                             id="hd"
-                            {...register("hd")}
+                            {...register("hd", { valueAsNumber: true })}
                         />
                         {errors.hd && (
                             <div className="error-message" style={{ color: "red", fontSize: "0.85em" }}>{errors.hd.message}</div>
                         )}
                     </div>
                     <div>
-                        <label>SSD</label>
+                        <label>SSD (em Gb)</label>
                         <input
-                            type="text"
+                            type="number"
                             id="ssd"
-                            {...register("ssd")}
+                            {...register("ssd", { valueAsNumber: true })}
                         />
                         {errors.ssd && (
                             <div className="error-message" style={{ color: "red", fontSize: "0.85em" }}>{errors.ssd.message}</div>
