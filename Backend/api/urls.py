@@ -1,13 +1,15 @@
 from django.urls import path
 from .views import (ComputadorDetailView, ComputadorListView, EquipamentoDetailView, 
                     EquipamentoListCreateView, ManutencaoComputadorListCreateView, ManutencaoComputadorDetailView, ManutencaoEquipamentoListCreateView
-                    , ManutencaoEquipamentoDetailView, ReturnAllManutencoesView, GetCountInstancesView, GetCountAllStatusView , ExportAllXLSXView, ExportComputadorXLSXView, ExportEquipamentoXLSXView, UsuarioDetailView, UsuarioListView, UsuariosCreateView, 
-                    GetCurrentUsuarioView, ExportComputadorCSVView, ExportEquipamentoCSVView, ExportAllCSVView)
+                    , ManutencaoEquipamentoDetailView, ReturnAllManutencoesView, GetCountInstancesView, GetCountAllStatusView , ExportAllXLSXView, ExportComputadorXLSXView, ExportEquipamentoXLSXView,
+                    GetCurrentUsuarioView, UsuarioDetailView, UsuarioListView, UsuariosCreateView, 
+                    ExportComputadorCSVView, ExportEquipamentoCSVView, ExportAllCSVView)
 
 urlpatterns = [
     path('usuarios/', UsuarioListView.as_view(), name='usuario-list'),
-    path('usuarios/create/', UsuariosCreateView.as_view()),    path('usuarios/<str:pk>/', UsuarioDetailView.as_view(), name='usuario-detail'),
-    path('usuarios/current/', GetCurrentUsuarioView.as_view(), name='current-usuario'),
+    path('usuarios/create/', UsuariosCreateView.as_view()), 
+    path('usuarios/<str:pk>/', UsuarioDetailView.as_view(), name='usuario-detail'),
+    path('usuarios/current/', GetCurrentUsuarioView.as_view(), name='usuario-current'),
     path('computadores/', ComputadorListView.as_view(), name='computador-list-create'),
     path('computadores/<str:pk>/', ComputadorDetailView.as_view(), name='computador-detail'),
     path('equipamentos/', EquipamentoListCreateView.as_view(), name='equipamento-list-create'),

@@ -22,13 +22,9 @@ class UsuarioDetailView(generics.RetrieveUpdateDestroyAPIView):
 
 class GetCurrentUsuarioView(View):
     def get(self, request, *args, **kwargs):
-        user_data = {
-            'username': request.user.username,
-            'email': request.user.email,
-            'role': request.user.role,
-            'numero_de_telefone': request.user.numero_de_telefone
-        }
-        return JsonResponse(user_data)
+        usuario = request.user
+        serializer = UsuarioSerializer(usuario)
+        return JsonResponse(serializer.data)
 
 class ComputadorListView(generics.ListCreateAPIView):
     queryset = Computador.objects.all()
