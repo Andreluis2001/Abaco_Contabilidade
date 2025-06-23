@@ -1,9 +1,10 @@
 from django.urls import path
 from .views import (ComputadorDetailView, ComputadorListView, EquipamentoDetailView, 
                     EquipamentoListCreateView, ManutencaoComputadorListCreateView, ManutencaoComputadorDetailView, ManutencaoEquipamentoListCreateView
-                    , ManutencaoEquipamentoDetailView, ReturnAllManutencoesView, GetCountInstancesView, GetCountAllStatusView , ExportAllXLSXView, ExportComputadorXLSXView, ExportEquipamentoXLSXView,
+                    , ManutencaoEquipamentoDetailView, ReturnAllManutencoesView, GetCountInstancesView, GetCountAllStatusView , ExportComputadorXLSXView, ExportEquipamentoXLSXView,
                     GetCurrentUsuarioView, UsuarioDetailView, UsuarioListView, UsuariosCreateView, 
-                    ExportComputadorCSVView, ExportEquipamentoCSVView, ExportAllCSVView)
+                    ExportComputadorCSVView, ExportEquipamentoCSVView, ExportManutencaoComputadorCSVView, ExportManutencaoEquipamentoCSVView, 
+                    ExportManutencaoComputadorXLSXView, ExportManutencaoEquipamentoXLSXView)
 
 urlpatterns = [
     path('usuarios/', UsuarioListView.as_view(), name='usuario-list'),
@@ -23,8 +24,10 @@ urlpatterns = [
     path('status/count/', GetCountAllStatusView.as_view(), name='get-count-all-status'),
     path('export/computadores/csv/', ExportComputadorCSVView.as_view(), name='export-computador-csv'),
     path('export/equipamentos/csv/', ExportEquipamentoCSVView.as_view(), name='export-equipamento-csv'),
-    path('export/tudo/csv/', ExportAllCSVView.as_view(), name='export-all-csv'),
     path('export/computadores/xlsx/', ExportComputadorXLSXView.as_view(), name='export-computador-xlsx'),
     path('export/equipamentos/xlsx/', ExportEquipamentoXLSXView.as_view(), name='export-equipamento-xslx'),
-    path('export/tudo/xlsx/', ExportAllXLSXView.as_view(), name='export-all-xlsx'),
+    path('export/manutencao/computadores/csv/', ExportManutencaoComputadorCSVView.as_view(), name='export-manutencao-computador-csv'),
+    path('export/manutencao/equipamentos/csv/', ExportManutencaoEquipamentoCSVView.as_view(), name='export-manutencao-equipamento-csv'),
+    path('export/manutencao/computadores/xlsx/', ExportManutencaoComputadorXLSXView.as_view(), name='export-manutencao-computador-xlsx'),
+    path('export/manutencao/equipamentos/xlsx/', ExportManutencaoEquipamentoXLSXView.as_view(), name='export-manutencao-equipamento-xlsx'),
 ]

@@ -185,78 +185,69 @@ class ExportEquipamentoXLSXView(View):
 
         return response
     
-class ExportAllCSVView(View):
+    
+class ExportManutencaoComputadorCSVView(View):
     def get(self, request, *args, **kwargs):
         response = HttpResponse(content_type='text/csv')
-        response['Content-Disposition'] = 'attachment; filename="all_data.csv"'
+        response['Content-Disposition'] = 'attachment; filename="manutencao_computadores.csv"'
 
         writer = csv.writer(response)
-        
-        computador_headers = Computador._meta.get_fields()
-
-        headers = [
-            field.name for field in computador_headers
-        ]
-
-        headers = ['Tipo'] + headers
-
+        unformatted_headers = ManutencaoComputador._meta.get_fields()
+        headers = [field.name for field in unformatted_headers]
         writer.writerow(headers)
 
-        computadores = Computador.objects.all()
-        for computador in computadores:
+        manutencoes = ManutencaoComputador.objects.all()
+        for manutencao in manutencoes:
             writer.writerow([
-                'Computador',
-                computador.numero_de_patrimonio,
-                computador.modelo,
-                computador.data_de_aquisicao,
-                computador.localizacao,
-                computador.data_da_garantia,
-                computador.modelo_processador,
-                computador.memoria_ram,
-                computador.modelo_hd,
-                computador.modelo_ssd,
-                computador.modelo_fonte,
-                computador.modelo_placa_mae,
-                computador.modelo_placa_video,
-                computador.descricao
-            ])
-
-        equipamentos = Equipamento.objects.all()
-        for equipamento in equipamentos:
-            writer.writerow([
-                'Equipamento',
-                equipamento.numero_de_patrimonio,
-                equipamento.equipamento,
-                equipamento.data_de_aquisicao,
-                equipamento.localizacao,
-                equipamento.data_da_garantia,
-                '',  # Modelo Processador
-                '',  # Memoria RAM
-                '',  # Modelo HD
-                '',  # Modelo SSD
-                '',  # Modelo Fonte
-                '',  # Modelo Placa Mãe
-                '',  # Modelo Placa de Vídeo
-                equipamento.descricao
+                manutencao.computador.numero_de_patrimonio,
+                manutencao.data,
+                manutencao.descricao,
+                manutencao.usuario.username,
             ])
 
         return response
 
-class ExportAllXLSXView(View):
+class ExportManutencaoComputadorXLSXView(View):
     def get(self, request, *args, **kwargs):
         response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
-        response['Content-Disposition'] = 'attachment; filename="all_data.xlsx"'
+        response['Content-Disposition'] = 'attachment; filename="manutencao_computadores.xlsx"'
 
-        computadores = Computador.objects.all()
-        equipamentos = Equipamento.objects.all()
+        manutencoes = ManutencaoComputador.objects.all()
 
-        computador_df = pd.DataFrame(list(computadores.values()))
-        computador_df['Tipo'] = 'Computador'
-        
-        equipamento_df = pd.DataFrame(list(equipamentos.values()))
-        equipamento_df['Tipo'] = 'Equipamento'
-        
-        all_data_df = pd.concat([computador_df, equipamento_df], ignore_index=True)
-        all_data_df.to_excel(response, index=False, sheet_name='All Data')
+        df = pd.DataFrame(list(manutencoes.values()))
+        df.to_excel(response, index=False, sheet_name='Manutencao Computadores')
+
+        return response
+    
+class ExportManutencaoEquipamentoCSVView(View):
+    def get(self, request, *args, **kwargs):
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename="manutencao_equipamentos.csv"'
+
+        writer = csv.writer(response)
+        unformatted_headers = ManutencaoEquipamento._meta.get_fields()
+        headers = [field.name for field in unformatted_headers]
+        writer.writerow(headers)
+
+        manutencoes = ManutencaoEquipamento.objects.all()
+        for manutencao in manutencoes:
+            writer.writerow([
+                manutencao.equipamento.numero_de_patrimonio,
+                manutencao.data,
+                manutencao.descricao,
+                manutencao.usuario.username,
+            ])
+
+        return response
+
+class ExportManutencaoEquipamentoXLSXView(View):
+    def get(self, request, *args, **kwargs):
+        response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+        response['Content-Disposition'] = 'attachment; filename="manutencao_equipamentos.xlsx"'
+
+        manutencoes = ManutencaoEquipamento.objects.all()
+
+        df = pd.DataFrame(list(manutencoes.values()))
+        df.to_excel(response, index=False, sheet_name='Manutencao Equipamentos')
 
         return response

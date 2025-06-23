@@ -172,7 +172,7 @@ function Home({}: Props) {
               <i className="bi bi-file-earmark-spreadsheet-fill" style={{ fontSize: "2.5rem", color: "#f4511e" }}></i>
               <h3>Gerar Relatórios</h3>
               <p>Gere relatórios de máquinas e equipamentos com suas respectivas manutenções.</p>
-              <Link to={""}>
+              <Link to={"/gerar-relatorio"}>
                 <button className="btn btn-primary">Ir para relatórios.</button>
               </Link>
             </div>

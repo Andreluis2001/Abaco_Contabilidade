@@ -14,6 +14,7 @@ import ListaUsuarios from './pages/ListaUsuarios';
 import CadastroUsuarios from './pages/CadastroUsuarios';
 import DetalhesUsuario from './pages/DetalhesUsuario';
 import EditarUsuario from './pages/EditarUsuario';
+import GerarRelatorio from './pages/GerarRelatorio';
 
 function App() {
   return (
@@ -120,6 +121,14 @@ function App() {
           element={
             <ProtectedRoute>
               <RegistrarManutencaoEquipamentos />
+            </ProtectedRoute>
+          }
+        />
+        <Route 
+          path="/gerar-relatorio"
+          element={
+            <ProtectedRoute>
+              <GerarRelatorio />
             </ProtectedRoute>
           }
         />
