@@ -75,8 +75,8 @@ function ListaEquipamentos({}: Props) {
                 ))}
               </tbody>
             </table>
-            <button className="btn-delete" onClick={() => navigate(-1)}>
-                <i className="bi bi-trash"></i> ← Voltar
+            <button className="btn-delete" onClick={() => navigate("/")}>
+                <i className="bi bi-arrow-left"></i> Voltar
             </button>
           </main>
         </div>

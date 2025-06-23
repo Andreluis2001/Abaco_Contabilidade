@@ -2,6 +2,7 @@ import { useState } from "react";
 import api from "../api"
 import { Link} from "react-router-dom";
 import "../styles/relatorio.css";
+import Navbar from "../components/Navbar";
 
 function GerarRelatorio() {
 
@@ -103,6 +104,7 @@ function GerarRelatorio() {
 
     return (
         <>
+            <Navbar />
             <div className="content">
                 <div className="container">
                     <main>

@@ -65,8 +65,10 @@ function Navbar() {
                 </div>
                 { curentPath !== '/' ? (
                     <nav>
+                        <Link to={'/'}><i className="bi bi-house-fill"></i> Início</Link>
                         <Link to={'/lista/equipamentos'}><i className="bi bi-list"></i> Lista de Equipamentos</Link>
                         <Link to={'/lista/usuarios'}><i className="bi bi-people-fill"></i> Usuários</Link>
+                        <Link to={'/gerar-relatorio'}><i className="bi bi-file-earmark-text"></i> Gerar Relatórios</Link>
                     </nav>
                 ): null}
                 <div className="user" id="user-btn" onClick={handleClick}>
