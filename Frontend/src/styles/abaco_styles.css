@@ -147,15 +147,13 @@
 }
 
 /* Inventory Card */
-.inventory-card {
-    max-height: 600px;
-    overflow-y: auto;
-}
 
 .inventory-list {
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
+    max-height: 400px;
+    overflow-y: auto;
 }
 
 .inventory-item {

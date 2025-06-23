@@ -47,7 +47,7 @@ function ListaEquipamentos({}: Props) {
       <div className="content">
         <Navbar />
         <div className="container">
-          <main className="lista-container">
+            <main className="lista-container" style={{ maxWidth: "1200px", width: "100%" }}>
             <h1 className="lista-titulo">Lista de Equipamentos</h1>
             <Link to="/cadastro/equipamentos" className="btn">
                 <button className="btn-add"><i className="bi bi-person-plus-fill"></i> Novo Equipamento</button>
