@@ -56,6 +56,9 @@ function DetalhesEquipamento({}: props) {
             <div className="equipment-detail">
                 <DetalhesEquipamentoComponent equipamento={equipamento}/>
                 <div className="action-buttons">
+                    <button className="btn-delete" onClick={() => navigate(-1)}>
+                        <i className="bi bi-trash"></i> ← Voltar
+                    </button>
                     <Link  
                         to={`/detalhes/equipamento/editar/${numeroDePatrimonio}`}
                         state={{ equipamento }}

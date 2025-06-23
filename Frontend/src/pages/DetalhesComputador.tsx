@@ -56,6 +56,9 @@ function DetalhesComputador({}: props) {
             <div className="equipment-detail">
                 <DetalhesComputadorComponent computador={computador}/>
                 <div className="action-buttons">
+                    <button className="btn-delete" onClick={() => navigate(-1)}>
+                        <i className="bi bi-trash"></i> ← Voltar
+                    </button>
                     <Link  
                         to={`/detalhes/computador/editar/${numeroDePatrimonio}`}
                         state={{ computador }}

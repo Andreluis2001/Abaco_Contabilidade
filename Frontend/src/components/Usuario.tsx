@@ -8,7 +8,6 @@ type Props = {
 
 function Computador({usuario}: Props) {
 
-    const [status, ] = React.useState<string>(usuario.status || 'Contratado');
     const [nome, ] = React.useState<string>(usuario.username || '-');
     const [email, ] = React.useState<string>(usuario.email || '-');
     const [cargo, ] = React.useState<string>(usuario.role || '-');
@@ -22,12 +21,10 @@ function Computador({usuario}: Props) {
                         className="bi bi-circle-fill"
                         style={{
                             color:
-                                status === 'Contratado'
-                                    ? 'green'
-                                    : status === 'Em Manutencao'
-                                    ? 'orange'
-                                    : status === 'Desativado'
-                                    ? 'red'
+                                cargo === 'admin'
+                                    ? 'yellow'
+                                    : cargo === 'tecnico'
+                                    ? 'blue'
                                     : 'gray'
                         }}
                     ></i>

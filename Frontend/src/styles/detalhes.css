@@ -276,6 +276,7 @@ button#disconnect-btn a {
 
 .action-buttons {
     display: flex;
+    justify-content: flex-start;
     gap: 15px;
     margin-top: 30px;
     padding-top: 20px;
