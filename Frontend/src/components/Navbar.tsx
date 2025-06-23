@@ -1,17 +1,50 @@
 import "../styles/style.css";
 import logo from "../images/logo-abaco.png"; 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, Navigate, useLocation } from "react-router-dom";
+import api from "../api";
+import { jwtDecode } from "jwt-decode";
 
-type Props = {
-
-}
-
-function Navbar({ }: Props) {
+function Navbar() {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const [user_id, setUserId] = useState<number | null>(null);
+    const [userName, setUserName] = useState<string | null>(null);
 
     const location = useLocation();
     const curentPath = location.pathname;
+
+    useEffect(() => {
+        getCurrentUser();
+    }, []);
+
+    const getCurrentUser_id = async (): Promise<number | null> => {
+        const token = localStorage.getItem('access');
+
+        if (token) {
+            try {
+                const decodedToken: any = jwtDecode(token);
+                setUserId(decodedToken.user_id);
+                return decodedToken.user_id;
+            } catch (error) {
+                console.error("Erro ao decodificar o token:", error);
+                return null;
+            }
+        } else {
+            console.error("Token não encontrado no localStorage.");
+            return null;
+        }
+    }
+
+    const getCurrentUser = async () => {
+        const id = await getCurrentUser_id();
+        if (id !== null) {
+            api
+                .get(`api/usuarios/${id}`)
+                .then((response) => {
+                    setUserName(response.data.username);
+                });
+        }
+    };
 
     const handleClick = () => {
         setIsSidebarOpen(!isSidebarOpen);
@@ -37,13 +70,13 @@ function Navbar({ }: Props) {
                     </nav>
                 ): null}
                 <div className="user" id="user-btn" onClick={handleClick}>
-                    <i className="bi bi-person-circle"></i> Matheus
+                    <i className="bi bi-person-circle"></i> {userName}
                 </div>
             </header>
 
             <div className={isSidebarOpen ? 'side-panel active' : 'side-panel'} id="side-panel">
                 <div className="side-panel-content">
-                    <h2>Usuário: Matheus</h2>
+                    <h2>Usuário: {userName}</h2>
                     <button id="disconnect-btn" onClick={logOut}>
                     <i className="bi bi-person-circle"></i>
                     <Link to="/login">Desconectar</Link>

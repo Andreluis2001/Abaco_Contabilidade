@@ -20,12 +20,6 @@ class UsuarioDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Usuario.objects.all()
     serializer_class = UsuarioSerializer
 
-class GetCurrentUsuarioView(View):
-    def get(self, request, *args, **kwargs):
-        usuario = request.user
-        serializer = UsuarioSerializer(usuario)
-        return JsonResponse(serializer.data)
-
 class ComputadorListView(generics.ListCreateAPIView):
     queryset = Computador.objects.all()
     serializer_class = ComputadorSerializer
