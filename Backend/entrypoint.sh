@@ -4,6 +4,6 @@ sleep 5
 
 python manage.py migrate
 
-python manage.py popular_banco
+python manage.py adicionar_usuario
 
 exec "$@"

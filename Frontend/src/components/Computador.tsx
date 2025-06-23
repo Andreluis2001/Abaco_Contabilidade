@@ -8,7 +8,7 @@ type Props = {
 
 function Computador({computador}: Props) {
 
-    const [status, ] = React.useState<string>(computador.status || 'Em Funcionamento');
+    const [computador_status, ] = React.useState<string>(computador.computador_status || 'Em Funcionamento');
     const [equipamento, ] = React.useState<string>('Computador');
     const [modelo, ] = React.useState<string>(computador.modelo || '');
     const [dataAquisicao, ] = React.useState<string>(computador.data_de_aquisicao || '');
@@ -23,11 +23,11 @@ function Computador({computador}: Props) {
                         className="bi bi-circle-fill"
                         style={{
                             color:
-                                status === 'Em Funcionamento'
+                                computador_status === 'Ativo'
                                     ? 'green'
-                                    : status === 'Em Manutencao'
+                                    : computador_status === 'Manutencao'
                                     ? 'orange'
-                                    : status === 'Desativado'
+                                    : computador_status === 'Desativado'
                                     ? 'red'
                                     : 'gray'
                         }}
