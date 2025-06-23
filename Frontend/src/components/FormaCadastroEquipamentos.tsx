@@ -13,9 +13,9 @@ const schema = z.object({
     garantia: z.string().date().optional().nullable(),
     local: z.string().min(1, "Local é obrigatório"),
     processador: z.string().optional(),
-    ram: z.number().optional(),
-    hd: z.number().optional(),
-    ssd: z.number().optional(),
+    ram: z.number().optional().nullable(),
+    hd: z.number().optional().nullable(),
+    ssd: z.number().optional().nullable(),
     fonte: z.string().optional(),
     placaMae: z.string().optional(),
     placaVideo: z.string().optional(),
@@ -30,6 +30,9 @@ function FormaCadastroEquipamentos() {
         resolver: zodResolver(schema),
         defaultValues:{
             garantia: new Date().toISOString().split('T')[0],
+            ram: 0,
+            hd: 0,
+            ssd: 0,
         }
     });
 
