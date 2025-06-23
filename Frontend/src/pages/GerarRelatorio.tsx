@@ -9,41 +9,96 @@ function GerarRelatorio() {
 
 
     const gerarRelatorioComputadores = async (formato: string) => {
-        console.log("Gerando relatório de computadores no formato:", formato);
-        api
-            .get(`api/export/computadores/${formato}/`)
-            .catch((error) => {
-                console.error("Erro ao gerar relatorio:", error);
-            });
+        const response = api.get(`api/export/computadores/${formato}/`, 
+            {
+                responseType: 'blob',
+            }
+        );
+
+        const blob = new Blob([(await response).data], { 
+            type: formato === 'csv' ? 'text/csv' : 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+        });
+        const url = window.URL.createObjectURL(blob);
+
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', `relatorio_computadores.${formato}`);
+        document.body.appendChild(link);
+
+        link.click();
+
+        document.body.removeChild(link);
+        window.URL.revokeObjectURL(url);
         
     }
 
     const gerarRelatorioEquipamentos = async (formato: string) => {
-        console.log("Gerando relatório de equipamentos no formato:", formato);
-        api
-            .get(`api/export/equipamentos/${formato}/`)
-            .catch((error) => {
-                console.error("Erro ao gerar relatorio:", error);
-            });
-        
+        const response = api.get(`api/export/equipamentos/${formato}/`, 
+            {
+                responseType: 'blob',
+            }
+        );
+
+        const blob = new Blob([(await response).data], { 
+            type: formato === 'csv' ? 'text/csv' : 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+        });
+        const url = window.URL.createObjectURL(blob);
+
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', `relatorio_equipamentos.${formato}`);
+        document.body.appendChild(link);
+
+        link.click();
+
+        document.body.removeChild(link);
+        window.URL.revokeObjectURL(url);
     }
 
     const gerarRelatorioManutencoesComputadores = async (formato: string) => {
-        api
-            .get(`api/export/manutencao/computadores/${formato}/`)
-            .catch((error) => {
-                console.error("Erro ao gerar relatorio:", error);
-            });
-        
+        const response = api.get(`api/export/manutencao/computadores/${formato}/`, 
+            {
+                responseType: 'blob',
+            }
+        );
+
+        const blob = new Blob([(await response).data], { 
+            type: formato === 'csv' ? 'text/csv' : 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+        });
+        const url = window.URL.createObjectURL(blob);
+
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', `relatorio_manutencoes_computadores.${formato}`);
+        document.body.appendChild(link);
+
+        link.click();
+
+        document.body.removeChild(link);
+        window.URL.revokeObjectURL(url);
     }
 
     const gerarRelatorioManutencoesEquipamentos = async (formato: string) => {
-        api
-            .get(`api/export/manutencao/equipamentos/${formato}/`)
-            .catch((error) => {
-                console.error("Erro ao gerar relatorio:", error);
-            });
-        
+        const response = api.get(`api/export/manutencao/equipamentos/${formato}/`, 
+            {
+                responseType: 'blob',
+            }
+        );
+
+        const blob = new Blob([(await response).data], { 
+            type: formato === 'csv' ? 'text/csv' : 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+        });
+        const url = window.URL.createObjectURL(blob);
+
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', `relatorio_manutencoes_equipamentos.${formato}`);
+        document.body.appendChild(link);
+
+        link.click();
+
+        document.body.removeChild(link);
+        window.URL.revokeObjectURL(url);
     }
 
     return (
