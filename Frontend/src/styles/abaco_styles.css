@@ -147,6 +147,11 @@
 }
 
 /* Inventory Card */
+.inventory-card {
+    max-height: 600px;
+    overflow-y: auto;
+}
+
 .inventory-list {
     display: flex;
     flex-direction: column;
