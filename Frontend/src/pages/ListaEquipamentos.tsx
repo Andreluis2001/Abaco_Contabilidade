@@ -4,13 +4,15 @@ import Computador from "../components/Computador";
 import { useState, useEffect} from "react";
 import api from "../api";
 import "../styles/style.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 type Props = {};
 
 function ListaEquipamentos({}: Props) {
   const [equipamentos, setEquipamentos] = useState<any[]>([]);
   const [computadores, setComputadores] = useState<any[]>([]);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     getComputadores();
@@ -73,6 +75,9 @@ function ListaEquipamentos({}: Props) {
                 ))}
               </tbody>
             </table>
+            <button className="btn-delete" onClick={() => navigate(-1)}>
+                <i className="bi bi-trash"></i> ← Voltar
+            </button>
           </main>
         </div>
       </div>

@@ -55,6 +55,9 @@ function DetalhesUsuario({}: Props) {
             <div className="equipment-detail">
                 <DetalhesUsuarioComponent usuario={usuario} />
                 <div className="action-buttons">
+                    <button className="btn-delete" onClick={() => navigate(-1)}>
+                        <i className="bi bi-trash"></i> ← Voltar
+                    </button>
                     <Link  
                         to={`/detalhes/usuario/editar/${usuarioId}`}
                         state={{ usuario }}
