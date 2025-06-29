@@ -10,6 +10,7 @@ import {
 } from "chart.js";
 import { useEffect, useState } from "react";
 import api from "../api";
+import { jwtDecode } from "jwt-decode";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -21,11 +22,14 @@ function Home({}: Props) {
   const [countComputadorInstances, setCountComputadorInstances] = useState<any>();
   const [countEquipamentoInstances, setCountEquipamentoInstances] = useState<any>({});
   const [countAllStatus, setCountAllStatus] = useState<any>({});
+  const [isAdmin, setIsAdmin] = useState<boolean | null>(null);
+  const [userId, setUserId] = useState<number | null>(null);
 
   useEffect(() => {
     getManutencoes();
     getCountInstances();
     getCountAllStatus();
+    getCurrentUser();
   }, []);
 
   const getManutencoes = async () => {
@@ -60,6 +64,42 @@ function Home({}: Props) {
         console.error("Erro ao buscar contagem de status:", error);
       });
   }
+
+  const getCurrentUser_id = async (): Promise<number | null> => {
+        const token = localStorage.getItem('access');
+
+        if (token) {
+            try {
+                const decodedToken: any = jwtDecode(token);
+                setUserId(decodedToken.user_id);
+                return decodedToken.user_id;
+            } catch (error) {
+                console.error("Erro ao decodificar o token:", error);
+                return null;
+            }
+        } else {
+            console.error("Token não encontrado no localStorage.");
+            return null;
+        }
+    }
+
+    const getCurrentUser = async () => {
+        const id = await getCurrentUser_id();
+        let cargo: string | null = null;
+        if (id !== null) {
+            api
+                .get(`api/usuarios/${id}`)
+                .then((response) => {
+                    cargo = response.data.role;
+                    if (cargo === 'admin') {
+                        setIsAdmin(true);
+                    }
+                    else {
+                        setIsAdmin(false);
+                    }
+                });
+        }
+    };
 
   return (
     <>
@@ -160,14 +200,17 @@ function Home({}: Props) {
                 <button className="btn btn-primary">Ir para Equipamentos</button>
               </Link>
             </div>
-            <div className="action-card">
-              <i className="bi bi-people-fill" style={{ fontSize: "2.5rem", color: "#43a047" }}></i>
-              <h3>Usuários</h3>
-              <p>Gerencie os usuários cadastrados no sistema.</p>
-              <Link to={"/lista/usuarios"}>
-                <button className="btn btn-primary">Ir para Usuários</button>
-              </Link>
-            </div>
+            {isAdmin ? (
+                <div className="action-card">
+                  <i className="bi bi-people-fill" style={{ fontSize: "2.5rem", color: "#43a047" }}></i>
+                  <h3>Usuários</h3>
+                  <p>Gerencie os usuários cadastrados no sistema.</p>
+                  <Link to={"/lista/usuarios"}>
+                    <button className="btn btn-primary">Ir para Usuários</button>
+                  </Link>
+                </div>
+              ): (null)
+            }
             <div className="action-card">
               <i className="bi bi-file-earmark-spreadsheet-fill" style={{ fontSize: "2.5rem", color: "#f4511e" }}></i>
               <h3>Gerar Relatórios</h3>

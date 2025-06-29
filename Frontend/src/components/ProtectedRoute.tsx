@@ -12,7 +12,6 @@ function ProtectedRoute({ children }: Props) {
     const [isAuthorized, setIsAuthorized] = useState<boolean | null>(null);
 
     useEffect(() => {
-        console.log('Verificando autorização...');
         authenticate().catch(() => setIsAuthorized(false));
     }, []);
 
@@ -30,7 +29,6 @@ function ProtectedRoute({ children }: Props) {
         const now = Date.now() / 1000;
 
         if (tokenExpiration && tokenExpiration < now) {
-            console.log('Token expirado, tentando atualizar...');
             await refreshToken();
         } else {
             setIsAuthorized(true);
@@ -41,7 +39,6 @@ function ProtectedRoute({ children }: Props) {
         const refreshToken = localStorage.getItem(REFRESH_TOKEN);
 
         try {
-            console.log('Tentando atualizar o token com:', { refreshToken });
             const response = await api.post('api/token/refresh/', { 
                 refresh: refreshToken, 
             });
@@ -54,7 +51,6 @@ function ProtectedRoute({ children }: Props) {
             }
         } catch (error) {
             setIsAuthorized(false);
-            console.error('Error refreshing token:', error);
         }
     }
 

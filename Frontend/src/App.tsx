@@ -15,6 +15,7 @@ import CadastroUsuarios from './pages/CadastroUsuarios';
 import DetalhesUsuario from './pages/DetalhesUsuario';
 import EditarUsuario from './pages/EditarUsuario';
 import GerarRelatorio from './pages/GerarRelatorio';
+import AdminOnlyRoute from './components/AdminOnlyRoute';
 
 function App() {
   return (

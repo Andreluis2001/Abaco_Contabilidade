@@ -1,4 +1,4 @@
-from rest_framework import generics
+from rest_framework import generics, filters
 from .models import  Computador, Equipamento, ManutencaoComputador, ManutencaoEquipamento, Usuario
 from .serializers import ComputadorSerializer, EquipamentoSerializer, UsuarioSerializer, ManutencaoComputadorSerializer, ManutencaoEquipamentoSerializer
 from .filters import ComputadorFilter, EquipamentoFilter
@@ -24,6 +24,8 @@ class ComputadorListView(generics.ListCreateAPIView):
     queryset = Computador.objects.all()
     serializer_class = ComputadorSerializer
     filterset_class = ComputadorFilter
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['=numero_de_patrimonio', 'modelo', 'localizacao']
     
 class ComputadorDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Computador.objects.all()
@@ -33,6 +35,8 @@ class EquipamentoListCreateView(generics.ListCreateAPIView):
     queryset = Equipamento.objects.all()
     serializer_class = EquipamentoSerializer
     filterset_class = EquipamentoFilter
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['=numero_de_patrimonio', 'equipamento', 'localizacao']
 
 class EquipamentoDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Equipamento.objects.all()

@@ -11,6 +11,7 @@ type Props = {};
 function ListaEquipamentos({}: Props) {
   const [equipamentos, setEquipamentos] = useState<any[]>([]);
   const [computadores, setComputadores] = useState<any[]>([]);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const navigate = useNavigate();
 
@@ -21,7 +22,7 @@ function ListaEquipamentos({}: Props) {
 
   const getEquipamentos = async () => {
     api
-      .get("api/equipamentos")
+      .get(`api/equipamentos/?search=${searchQuery}`)
       .then((response) => {
         setEquipamentos(response.data);
       })
@@ -32,7 +33,7 @@ function ListaEquipamentos({}: Props) {
 
   const getComputadores = async () => {
     api
-      .get("api/computadores")
+      .get(`api/computadores/?search=${searchQuery}`)
       .then((response) => {
         setComputadores(response.data);
       })
@@ -54,6 +55,22 @@ function ListaEquipamentos({}: Props) {
             </Link>
             <br />
             <br />
+            <div className="barra-pesquisa">
+              <input 
+                type="text" 
+                id="barra-pesquisa" 
+                placeholder="Pesquisar equipamentos (numero de patrimônio, modelo ou local)..."
+                value ={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+              <button 
+                onClick={() => {
+                                getComputadores();
+                                getEquipamentos();
+                              }}>
+                  Buscar
+              </button>
+            </div>
             <table className="tabela-equipamentos">
               <thead>
                 <tr>
