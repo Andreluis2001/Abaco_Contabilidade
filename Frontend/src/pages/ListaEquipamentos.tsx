@@ -59,7 +59,7 @@ function ListaEquipamentos({}: Props) {
               <input 
                 type="text" 
                 id="barra-pesquisa" 
-                placeholder="Pesquisar equipamentos (numero de patrimônio, modelo ou local)..."
+                placeholder="Pesquisar equipamento..."
                 value ={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
