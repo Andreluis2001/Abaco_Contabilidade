@@ -200,7 +200,6 @@ class ExportManutencaoComputadorCSVView(View):
                 manutencao.computador.numero_de_patrimonio,
                 manutencao.data,
                 manutencao.descricao,
-                manutencao.usuario.username,
             ])
 
         return response
@@ -233,7 +232,6 @@ class ExportManutencaoEquipamentoCSVView(View):
                 manutencao.equipamento.numero_de_patrimonio,
                 manutencao.data,
                 manutencao.descricao,
-                manutencao.usuario.username,
             ])
 
         return response
